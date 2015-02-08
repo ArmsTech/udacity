@@ -203,5 +203,5 @@ def open_movies_page(movies):
 
         output_file.write(MAIN_PAGE_HEAD + rendered_content)
 
-    url = os.path.abspath(output_file.name)
-    webbrowser.open_new_tab('file://' + url)
+    local_url = ''.join(['file://', os.path.abspath(output_file.name)])
+    webbrowser.open_new_tab(local_url)
