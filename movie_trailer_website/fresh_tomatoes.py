@@ -195,15 +195,13 @@ def open_movies_page(movies):
     :returns: None
 
     """
-    output_file = open('fresh_tomatoes.html', 'w')
+    with open('fresh_tomatoes.html', 'w') as output_file:
+        # Replace the placeholder for the movie tiles with the actual
+        # dynamically generated content
+        rendered_content = MAIN_PAGE_CONTENT.format(
+            movie_tiles=create_movie_tiles_content(movies))
 
-    # Replace the placeholder for the movie tiles with the actual
-    # dynamically generated content
-    rendered_content = MAIN_PAGE_CONTENT.format(
-        movie_tiles=create_movie_tiles_content(movies))
-
-    output_file.write(MAIN_PAGE_HEAD + rendered_content)
-    output_file.close()
+        output_file.write(MAIN_PAGE_HEAD + rendered_content)
 
     url = os.path.abspath(output_file.name)
     webbrowser.open_new_tab('file://' + url)
