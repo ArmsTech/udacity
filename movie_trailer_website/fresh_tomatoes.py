@@ -3,7 +3,7 @@ import re
 import webbrowser
 
 # Styles and scripting for the page
-main_page_head = '''
+MAIN_PAGE_HEAD = '''
 <head>
     <meta charset="utf-8">
     <title>Fresh Tomatoes!</title>
@@ -94,7 +94,7 @@ main_page_head = '''
 '''
 
 # The main page layout and title bar
-main_page_content = '''
+MAIN_PAGE_CONTENT = '''
 <!DOCTYPE html>
 <html lang="en">
   <body>
@@ -129,7 +129,7 @@ main_page_content = '''
 '''
 
 # A single movie entry html template
-movie_tile_content = '''
+MOVIE_TILE_CONTENT = '''
 <div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="{trailer_youtube_id}" data-toggle="modal" data-target="#trailer">
     <h1 class="movie-title">{movie_title}</h1>
     <img src="{poster_image_url}" width="220" height="342">
@@ -162,7 +162,7 @@ def create_movie_tiles_content(movies):
         trailer_youtube_id = youtube_id_match.group(0) if youtube_id_match else None
 
         # Append the tile for the movie with its content filled in
-        content += movie_tile_content.format(
+        content += MOVIE_TILE_CONTENT.format(
             movie_title=movie.title,
             movie_genre=movie.genre,
             poster_image_url=movie.poster_image_url,
@@ -177,10 +177,10 @@ def open_movies_page(movies):
     output_file = open('fresh_tomatoes.html', 'w')
 
     # Replace the placeholder for the movie tiles with the actual dynamically generated content
-    rendered_content = main_page_content.format(movie_tiles=create_movie_tiles_content(movies))
+    rendered_content = MAIN_PAGE_CONTENT.format(movie_tiles=create_movie_tiles_content(movies))
 
     # Output the file
-    output_file.write(main_page_head + rendered_content)
+    output_file.write(MAIN_PAGE_HEAD + rendered_content)
     output_file.close()
 
     # open the output file in the browser
