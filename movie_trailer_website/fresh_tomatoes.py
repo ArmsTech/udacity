@@ -1,3 +1,5 @@
+"""Render Fresh Tomatoes webpage content."""
+
 import os
 import re
 import webbrowser
@@ -154,8 +156,14 @@ MOVIE_TILE_CONTENT = '''
 
 
 def create_movie_tiles_content(movies):
-    # The HTML content for this section of the page
-    content = ''
+    """Create movie tiles for the Fresh Tomatoes webpage.
+
+    :param list movies: a list of movie_trailer_website.Movie objects
+    :returns: HTML content for Fresh Tomatoes main page
+    :rtype: str
+
+    """
+    html_content = ''
     for movie in movies:
         # Extract the youtube ID from the url
         youtube_id_match = re.search(
@@ -169,7 +177,7 @@ def create_movie_tiles_content(movies):
             youtube_id_match.group(0) if youtube_id_match else None)
 
         # Append the tile for the movie with its content filled in
-        content += MOVIE_TILE_CONTENT.format(
+        html_content += MOVIE_TILE_CONTENT.format(
             movie_title=movie.title,
             movie_genre=movie.genre,
             poster_image_url=movie.poster_image_url,
@@ -177,11 +185,16 @@ def create_movie_tiles_content(movies):
             movie_box_office=movie.box_office_earnings,
             movie_theater_date=movie.date_in_theaters
         )
-    return content
+    return html_content
 
 
 def open_movies_page(movies):
-    # Create or overwrite the output file
+    """Open Fresh Tomatoes movies webpage.
+
+    :param list movies: a list of movie_trailer_website.Movie objects
+    :returns: None
+
+    """
     output_file = open('fresh_tomatoes.html', 'w')
 
     # Replace the placeholder for the movie tiles with the actual
@@ -189,10 +202,8 @@ def open_movies_page(movies):
     rendered_content = MAIN_PAGE_CONTENT.format(
         movie_tiles=create_movie_tiles_content(movies))
 
-    # Output the file
     output_file.write(MAIN_PAGE_HEAD + rendered_content)
     output_file.close()
 
-    # open the output file in the browser
     url = os.path.abspath(output_file.name)
-    webbrowser.open('file://' + url, new=2)  # open in a new tab, if possible
+    webbrowser.open_new_tab('file://' + url)
