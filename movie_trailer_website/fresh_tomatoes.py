@@ -155,6 +155,10 @@ MOVIE_TILE_CONTENT = '''
 '''
 
 
+YOUTUBE_URL_RE = re.compile(r'(?<=v=)[^&#]+')
+YOUTUBE_SHORTURL_RE = re.compile(r'(?<=be/)[^&#]+')
+
+
 def create_movie_tiles_content(movies):
     """Create movie tiles for the Fresh Tomatoes webpage.
 
@@ -166,12 +170,11 @@ def create_movie_tiles_content(movies):
     html_content = ''
     for movie in movies:
         # Extract the youtube ID from the url
-        youtube_id_match = re.search(
-            r'(?<=v=)[^&#]+', movie.trailer_youtube_url)
+        youtube_id_match = re.search(YOUTUBE_URL_RE, movie.trailer_youtube_url)
 
         youtube_id_match = (
             youtube_id_match or
-            re.search(r'(?<=be/)[^&#]+', movie.trailer_youtube_url))
+            re.search(YOUTUBE_SHORTURL_RE, movie.trailer_youtube_url))
 
         trailer_youtube_id = (
             youtube_id_match.group(0) if youtube_id_match else None)
