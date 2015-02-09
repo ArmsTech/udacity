@@ -13,9 +13,10 @@ This project is intended to demonstrate an understanding of core programming
 concepts, the Python programming language, and the typical role of a
 web server (accept a request, execute code, and generate a response).
 
-Please note that the scope of this project did not include data storage. In
-a real-world environment movies would be stored in a more suitable way
-(e.g. database).
+Please note that the scope of this project did not include persistent data
+storage. In a real-world environment movies would be stored in a more suitable
+way (e.g. database). Also, in a real-world setup templates would be used to
+render HTML rather than manipulating HTML included in a Python module.
 
 Quick Start
 -----------
