@@ -64,8 +64,23 @@ def delete_all_from_table(table):
 
 
 def deleteMatches():
-    """Remove all the match records from the database."""
+    """Delete all the match records from the database.
+
+    :returns: count of rows deleted from match table
+    :rtype: int
+
+    """
     return delete_all_from_table('match')
+
+
+def deletePlayers():
+    """Delete all the player records from the database.
+
+    :returns: count of rows deleted from player table
+    :rtype: int
+
+    """
+    return delete_all_from_table('player')
 
 
 def countPlayers():
