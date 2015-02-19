@@ -1,22 +1,53 @@
-#!/usr/bin/env python
-# 
-# tournament.py -- implementation of a Swiss-system tournament
-#
+"""Implementation of a Swiss-system tournament."""
 
 import psycopg2
 
 
 def connect():
-    """Connect to the PostgreSQL database.  Returns a database connection."""
+    """Connect to the PostgreSQL tournament database.
+
+    :returns: tournament database connection
+    :rtype: psycopg2.connection
+
+    """
     return psycopg2.connect("dbname=tournament")
 
 
-def deleteMatches():
-    """Remove all the match records from the database."""
+def run_query(query, query_args=(), query_type='SELECT'):
+    """Run a query against the tournament database.
 
+    The query result will depend on the query type, although the result will
+    always be contained in a dict or None. The scope of this project is small
+    enough that opening and closing connections per query is acceptable.
 
-def deletePlayers():
-    """Remove all the player records from the database."""
+    param str query: query string to run
+    param tuple query_args: query args to pass to execute
+    param query_type: query type to run (SELECT | UPDATE | DELETE | INSERT)
+    :returns: query result; result type depends on query type
+    :rtype: dict | None
+
+    """
+    query_type = query_type.upper()
+
+    with connect() as connection:
+        with connection.cursor() as cursor:
+            cursor.execute(query, query_args)
+
+            if query_type == 'SELECT':
+                result = cursor.fetchall()
+            elif query_type in ('UPDATE', 'DELETE'):
+                result = cursor.rowcount
+            elif query_type == 'INSERT':
+                try:
+                    # Requires RETURNING be used
+                    result, = cursor.fetchone()
+                except psycopg2.ProgrammingError:
+                    result = None
+            else:
+                raise ValueError(
+                    "Query type %s is not supported." % query_type)
+
+    return {'result': result}
 
 
 def countPlayers():
