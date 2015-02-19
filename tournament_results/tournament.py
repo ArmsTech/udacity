@@ -84,7 +84,15 @@ def deletePlayers():
 
 
 def countPlayers():
-    """Returns the number of players currently registered."""
+    """Count of all players currently registered.
+
+    :returns: count of all registered players
+    :rtype: int
+
+    """
+    query = "SELECT count(id) FROM player;"
+    players = run_query(query)
+    return players['result'][0][0]
 
 
 def registerPlayer(name):
