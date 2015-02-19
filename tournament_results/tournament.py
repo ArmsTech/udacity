@@ -50,6 +50,24 @@ def run_query(query, query_args=(), query_type='SELECT'):
     return {'result': result}
 
 
+def delete_all_from_table(table):
+    """Delete all rows from a table.
+
+    :param str table: name of the table to delete all rows from
+    :returns: count of rows deleted
+    :rtype: int
+
+    """
+    query = "DELETE FROM %s;" % table
+    deleted = run_query(query, query_type='DELETE')
+    return deleted['result']
+
+
+def deleteMatches():
+    """Remove all the match records from the database."""
+    return delete_all_from_table('match')
+
+
 def countPlayers():
     """Returns the number of players currently registered."""
 
