@@ -108,6 +108,23 @@ def registerPlayer(name):
     return inserted['result']
 
 
+def register_tournament(name, players):
+    """Add a tournament to the tournament database.
+
+    :param str name: name of tournament to register
+    :param int players: number of tournament entrants
+    :returns: id of the registered tournament
+    :rtype: int
+
+    """
+    query = ("INSERT INTO tournament (name, players) "
+             "VALUES (%s, %s) "
+             "RETURNING id;")
+    inserted = run_query(
+        query, query_args=(name, players), query_type='INSERT')
+    return inserted['result']
+
+
 def playerStandings():
     """Get a list of the players and their win records, sorted by wins.
 
