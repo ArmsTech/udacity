@@ -96,14 +96,16 @@ def countPlayers():
 
 
 def registerPlayer(name):
-    """Adds a player to the tournament database.
-  
-    The database assigns a unique serial id number for the player.  (This
-    should be handled by your SQL database schema, not in your Python code.)
-  
-    Args:
-      name: the player's full name (need not be unique).
+    """Add a player to the tournament database.
+
+    :param str name: name of player to register
+    :returns: id of the registered player
+    :rtype: int
+
     """
+    query = "INSERT INTO player (name) VALUES (%s) RETURNING id;"
+    inserted = run_query(query, query_args=(name,), query_type='INSERT')
+    return inserted['result']
 
 
 def playerStandings():
