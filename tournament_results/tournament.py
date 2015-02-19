@@ -109,18 +109,20 @@ def registerPlayer(name):
 
 
 def playerStandings():
-    """Returns a list of the players and their win records, sorted by wins.
+    """Get a list of the players and their win records, sorted by wins.
 
-    The first entry in the list should be the player in first place, or a player
-    tied for first place if there is currently a tie.
+    :returns: list of players and win records
+    :rtype: list
 
-    Returns:
-      A list of tuples, each of which contains (id, name, wins, matches):
-        id: the player's unique id (assigned by the database)
-        name: the player's full name (as registered)
-        wins: the number of matches the player has won
-        matches: the number of matches the player has played
+    Return format:
+        [(15, 'Bruno Walton', 2, 0), (16, "Boots O'Neal", 1, 0), ...]
+
     """
+    query = ("SELECT id, name, wins, matches "
+             "FROM player "
+             "ORDER BY wins DESC;")
+    standings = run_query(query)
+    return standings['result']
 
 
 def reportMatch(winner, loser):
