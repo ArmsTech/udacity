@@ -19,8 +19,8 @@ CREATE TABLE tournament (
 );
 
 CREATE TABLE entrant (
-    player_id integer REFERENCES player (id),
-    tournament_id integer REFERENCES tournament (id),
+    player_id integer REFERENCES player (id) ON DELETE CASCADE,
+    tournament_id integer REFERENCES tournament (id) ON DELETE CASCADE,
     bye boolean NOT NULL DEFAULT FALSE,
     PRIMARY KEY (player_id, tournament_id)
 );
@@ -35,6 +35,6 @@ CREATE TABLE match (
     tournament_id integer,
     result_id integer REFERENCES result (id),
     FOREIGN KEY (player_id, tournament_id)
-        REFERENCES entrant (player_id, tournament_id),
+        REFERENCES entrant (player_id, tournament_id) ON DELETE CASCADE,
     PRIMARY KEY (id, player_id)
 );
