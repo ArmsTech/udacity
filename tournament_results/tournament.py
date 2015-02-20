@@ -162,6 +162,27 @@ def playerStandings():
     return standings['result']
 
 
+def player_standings_by_tournament(tournament):
+    """Get a list of the players and their win records by tournament.
+
+    :param int tournament: id of tournament to get standings for
+    :returns: list of players and win records
+    :rtype: list
+
+    Return format:
+        [(15, 'Bruno Walton', 2, 0), (16, "Boots O'Neal", 1, 0), ...]
+
+    """
+    query = ("SELECT id, name, wins, matches "
+             "FROM player p, entrant e "
+             "WHERE p.id = e.player_id "
+             "AND tournament_id = %s "
+             "ORDER BY wins DESC;")
+    standings = run_query(query, query_args=(tournament,))
+    return standings['result']
+
+
+
 def reportMatch(winner, loser, tournament):
     """Report the outcome of a single match between two players.
 
