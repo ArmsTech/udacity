@@ -38,8 +38,28 @@ def testRegister():
     print "4. After registering a player, countPlayers() returns 1."
 
 
+def test_register_tournament():
+    tournament = register_tournament('My Tournament', 4)
+    if not isinstance(tournament, int):
+        raise ValueError("Tournament was not registered.")
+    print "4.a Tournament registered."
+
+
+def test_register_player_in_tournament():
+    deleteMatches()
+    deletePlayers()
+    player = registerPlayer("Chandra Nalaar")
+    tournament = register_tournament('My Tournament', 4)
+    registered = register_player_in_tournament(player, tournament)
+    if registered != 1:
+        raise ValueError("Player was not registered in tournament.")
+    print "4.b Player registered in tournament."
+
+
+
 def testRegisterCountDelete():
     deleteMatches()
+    delete_all_from_table('entrant')
     deletePlayers()
     registerPlayer("Markov Chaney")
     registerPlayer("Joe Malik")
@@ -133,6 +153,8 @@ if __name__ == '__main__':
     testRegisterCountDelete()
     testStandingsBeforeMatches()
     testReportMatches()
+    test_register_tournament()
+    test_register_player_in_tournament()
     testPairings()
     print "Success!  All tests pass!"
 
