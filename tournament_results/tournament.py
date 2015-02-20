@@ -2,6 +2,10 @@
 
 import psycopg2
 
+WIN = 1
+LOSS = 2
+TIE = 3
+
 
 def connect():
     """Connect to the PostgreSQL tournament database.
@@ -158,15 +162,50 @@ def playerStandings():
     return standings['result']
 
 
-def reportMatch(winner, loser):
-    """Records the outcome of a single match between two players.
+def reportMatch(winner, loser, tournament):
+    """Report the outcome of a single match between two players.
 
-    Args:
-      winner:  the id number of the player who won
-      loser:  the id number of the player who lost
+    :param int winner: id of the winner
+    :param int loser: id of the loser
+    :param int tournament: id of the tournament the match was played in
+    :returns: id of the reported match
+    :rtype: int
+
     """
- 
- 
+    # Add winner
+    query = ("INSERT INTO match "
+             "(player_id, tournament_id, result_id) "
+             "VALUES (%s, %s, %s) "
+             "RETURNING id;")
+    inserted = run_query(
+        query,
+        query_args=(winner, tournament, WIN), query_type='INSERT')
+
+    match_id = inserted['result']
+
+    # Add loser
+    query = ("INSERT INTO match "
+             "(id, player_id, tournament_id, result_id) "
+             "VALUES (%s, %s, %s, %s);")
+    run_query(
+        query,
+        query_args=(match_id, loser, tournament, LOSS), query_type='INSERT')
+
+    # Update matches played for both players
+    query = ("UPDATE player "
+             "SET matches = matches + 1 "
+             "WHERE id IN (%s, %s);")
+    run_query(query, query_args=(winner, loser), query_type='UPDATE')
+
+    # Update wins for winner
+    query = ("UPDATE player "
+             "SET wins = wins + 1 "
+             "WHERE id = %s;")
+    run_query(query, query_args=(winner,), query_type='UPDATE')
+
+    return match_id
+
+
 def swissPairings():
     """Returns a list of pairs of players for the next round of a match.
   
