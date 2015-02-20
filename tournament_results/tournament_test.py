@@ -59,7 +59,6 @@ def test_register_player_in_tournament():
 
 def testRegisterCountDelete():
     deleteMatches()
-    delete_all_from_table('entrant')
     deletePlayers()
     registerPlayer("Markov Chaney")
     registerPlayer("Joe Malik")
@@ -102,14 +101,15 @@ def testStandingsBeforeMatches():
 def testReportMatches():
     deleteMatches()
     deletePlayers()
-    registerPlayer("Bruno Walton")
-    registerPlayer("Boots O'Neal")
-    registerPlayer("Cathy Burton")
-    registerPlayer("Diane Grant")
+    tournament = register_tournament("Test Tournament", 4)
+    register_player_in_tournament(registerPlayer("Bruno Walton"), tournament)
+    register_player_in_tournament(registerPlayer("Boots O'Neal"), tournament)
+    register_player_in_tournament(registerPlayer("Cathy Burton"), tournament)
+    register_player_in_tournament(registerPlayer("Diane Grant"), tournament)
     standings = playerStandings()
     [id1, id2, id3, id4] = [row[0] for row in standings]
-    reportMatch(id1, id2)
-    reportMatch(id3, id4)
+    reportMatch(id1, id2, tournament)
+    reportMatch(id3, id4, tournament)
     standings = playerStandings()
     for (i, n, w, m) in standings:
         if m != 1:
