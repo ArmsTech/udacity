@@ -35,14 +35,14 @@ def run_query(query, query_args=(), query_type='SELECT'):
 
             if query_type == 'SELECT':
                 result = cursor.fetchall()
-            elif query_type in ('UPDATE', 'DELETE'):
-                result = cursor.rowcount
-            elif query_type == 'INSERT':
+            elif query_type == 'INSERT' and 'RETURNING' in query:
                 try:
                     # Requires RETURNING be used
                     result, = cursor.fetchone()
                 except psycopg2.ProgrammingError:
                     result = None
+            elif query_type in ('UPDATE', 'DELETE', 'INSERT'):
+                result = cursor.rowcount
             else:
                 raise ValueError(
                     "Query type %s is not supported." % query_type)
@@ -122,6 +122,22 @@ def register_tournament(name, players):
              "RETURNING id;")
     inserted = run_query(
         query, query_args=(name, players), query_type='INSERT')
+    return inserted['result']
+
+
+def register_player_in_tournament(player, tournament):
+    """Register a player in a tournament as an entrant.
+
+    :param int player: id of the player to register
+    :param int tournament: id of the tournament to register player in
+    :returns: rowcount of the player inserted, 0 | 1
+    :rtype: int
+
+    """
+    query = ("INSERT INTO entrant (player_id, tournament_id) "
+             "VALUES (%s, %s);")
+    inserted = run_query(
+        query, query_args=(player, tournament), query_type='INSERT')
     return inserted['result']
 
 
