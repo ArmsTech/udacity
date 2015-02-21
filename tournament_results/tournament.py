@@ -67,7 +67,7 @@ def delete_all_from_table(table):
     return deleted['result']
 
 
-def deleteMatches():
+def delete_matches():
     """Delete all the match records from the database.
 
     :returns: count of rows deleted from match table
@@ -77,7 +77,7 @@ def deleteMatches():
     return delete_all_from_table('match')
 
 
-def deletePlayers():
+def delete_players():
     """Delete all the player records from the database.
 
     :returns: count of rows deleted from player table
@@ -87,7 +87,7 @@ def deletePlayers():
     return delete_all_from_table('player')
 
 
-def countPlayers():
+def count_players():
     """Count of all players currently registered.
 
     :returns: count of all registered players
@@ -99,7 +99,7 @@ def countPlayers():
     return players['result'][0][0]
 
 
-def registerPlayer(name):
+def register_player(name):
     """Add a player to the tournament database.
 
     :param str name: name of player to register
@@ -145,7 +145,7 @@ def register_player_in_tournament(player, tournament):
     return inserted['result']
 
 
-def playerStandings():
+def player_standings():
     """Get a list of the players and their win records, sorted by wins.
 
     :returns: list of players and win records
@@ -182,7 +182,7 @@ def player_standings_by_tournament(tournament):
     return standings['result']
 
 
-def reportMatch(winner, loser, tournament):
+def report_match(winner, loser, tournament):
     """Report the outcome of a single match between two players.
 
     :param int winner: id of the winner
@@ -226,7 +226,7 @@ def reportMatch(winner, loser, tournament):
     return match_id
 
 
-def swissPairings(tournament):
+def swiss_pairings(tournament):
     """Pair players for the next round in a swiss-style tournament.
 
     Players are paired with an opponent with a equal or nearly-equal win
