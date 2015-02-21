@@ -4,7 +4,7 @@ import os
 import unittest
 import subprocess
 
-from tournament import *
+import tournament
 
 SQL_FILE_PATH = os.path.realpath(
     os.path.join(
@@ -41,40 +41,41 @@ class TestTournament(unittest.TestCase):
 
     def test_delete_matches(self):
         """Test matches can be deleted."""
-        tournament = register_tournament("Test Delete Matches", 2)
+        tournament_id = tournament.register_tournament(
+            "Test Delete Matches", 2)
 
-        player1 = register_player("Twilight Sparkle")
-        player2 = register_player("Fluttershy")
+        player1_id = tournament.register_player("Twilight Sparkle")
+        player2_id = tournament.register_player("Fluttershy")
 
-        register_player_in_tournament(player1, tournament)
-        register_player_in_tournament(player2, tournament)
+        tournament.register_player_in_tournament(player1_id, tournament_id)
+        tournament.register_player_in_tournament(player2_id, tournament_id)
 
-        report_match(player1, player2, tournament)
+        tournament.report_match(player1_id, player2_id, tournament_id)
 
-        matches_deleted = delete_matches()
+        matches_deleted = tournament.delete_matches()
         self.assertEqual(matches_deleted, 2)
         print "* Old matches can be deleted."
 
     def test_delete_players(self):
         """Test players can be deleted."""
-        register_player("Twilight Sparkle")
-        register_player("Fluttershy")
+        tournament.register_player("Twilight Sparkle")
+        tournament.register_player("Fluttershy")
 
-        players_deleted = delete_players()
+        players_deleted = tournament.delete_players()
         self.assertEqual(players_deleted, 2)
         print "* Player records can be deleted."
 
     def test_count(self):
         """Test players can be counted."""
-        register_player("Twilight Sparkle")
-        register_player("Fluttershy")
-        counted_players = count_players()
+        tournament.register_player("Twilight Sparkle")
+        tournament.register_player("Fluttershy")
+        counted_players = tournament.count_players()
 
         # We should have two players that we just registered
         self.assertEqual(counted_players, 2)
 
-        delete_players()
-        counted_players = count_players()
+        tournament.delete_players()
+        counted_players = tournament.count_players()
 
         # count_players() should return numeric zero, not string '0'
         self.assertNotIsInstance(counted_players, str)
@@ -85,8 +86,8 @@ class TestTournament(unittest.TestCase):
 
     def test_register(self):
         """Test players can be registered."""
-        register_player("Chandra Nalaar")
-        counted_players = count_players()
+        tournament.register_player("Chandra Nalaar")
+        counted_players = tournament.count_players()
 
         # After one player registers, count_players() should be 1
         self.assertEqual(counted_players, 1)
@@ -94,42 +95,43 @@ class TestTournament(unittest.TestCase):
 
     def test_register_tournament(self):
         """Test tournaments can be registered."""
-        tournament = register_tournament('Test Tournament', 4)
+        tournament_id = tournament.register_tournament('Test Tournament', 4)
 
-        self.assertIsInstance(tournament, int)
+        self.assertIsInstance(tournament_id, int)
         print "* Tournament registered."
 
     def test_register_player_in_tournament(self):
         """Test players can be registered in tournaments."""
-        player = register_player("Chandra Nalaar")
-        tournament = register_tournament('My Tournament', 4)
-        registered = register_player_in_tournament(player, tournament)
+        player_id = tournament.register_player("Chandra Nalaar")
+        tournament_id = tournament.register_tournament('My Tournament', 4)
+        registered = tournament.register_player_in_tournament(
+            player_id, tournament_id)
 
         self.assertEqual(registered, 1)
         print "* Player registered in tournament."
 
     def test_register_count_delete(self):
         """Test players can be registered and deleted."""
-        register_player("Markov Chaney")
-        register_player("Joe Malik")
-        register_player("Mao Tsu-hsi")
-        register_player("Atlanta Hope")
+        tournament.register_player("Markov Chaney")
+        tournament.register_player("Joe Malik")
+        tournament.register_player("Mao Tsu-hsi")
+        tournament.register_player("Atlanta Hope")
 
-        counted_players = count_players()
+        counted_players = tournament.count_players()
         # After registering four players, count_players should be 4
         self.assertEqual(counted_players, 4)
 
-        delete_players()
-        counted_players = count_players()
+        tournament.delete_players()
+        counted_players = tournament.count_players()
         # After deleting, count_players should return zero
         self.assertEqual(counted_players, 0)
         print "* Players can be registered and deleted."
 
     def test_standings_before_matches(self):
         """Test players standings before matches."""
-        register_player("Melpomene Murray")
-        register_player("Randy Schwartz")
-        standings = player_standings()
+        tournament.register_player("Melpomene Murray")
+        tournament.register_player("Randy Schwartz")
+        standings = tournament.player_standings()
 
         # Players should appear in player_standings before playing in matches
         # Only registered players should appear in standings
@@ -152,18 +154,20 @@ class TestTournament(unittest.TestCase):
 
     def test_report_matches(self):
         """Test reporting matches."""
-        tournament = register_tournament("Test Matches Tournament", 4)
-        players = (
+        tournament_id = tournament.register_tournament(
+            "Test Matches Tournament", 4)
+        player_names = (
             "Bruno Walton", "Boots O'Neal", "Cathy Burton", "Diane Grant")
-        for player in players:
-            register_player_in_tournament(register_player(player), tournament)
+        for player_name in player_names:
+            tournament.register_player_in_tournament(
+                tournament.register_player(player_name), tournament_id)
 
-        standings = player_standings_by_tournament(tournament)
+        standings = tournament.player_standings_by_tournament(tournament_id)
         player1, player2, player3, player4 = [row[0] for row in standings]
-        report_match(player1, player2, tournament)
-        report_match(player3, player4, tournament)
+        tournament.report_match(player1, player2, tournament_id)
+        tournament.report_match(player3, player4, tournament_id)
 
-        standings = player_standings()
+        standings = tournament.player_standings()
         for id, name, wins, matches in standings:
             # Each player should have one match recorded
             self.assertEqual(matches, 1)
@@ -177,16 +181,19 @@ class TestTournament(unittest.TestCase):
 
     def test_pairings(self):
         """Test pairing players."""
-        tournament = register_tournament("Test Pairings Tournament", 4)
-        players = ("Twilight Sparkle", "Fluttershy", "Applejack", "Pinkie Pie")
-        for player in players:
-            register_player_in_tournament(register_player(player), tournament)
+        tournament_id = tournament.register_tournament(
+            "Test Pairings Tournament", 4)
+        player_names = (
+            "Twilight Sparkle", "Fluttershy", "Applejack", "Pinkie Pie")
+        for player_name in player_names:
+            tournament.register_player_in_tournament(
+                tournament.register_player(player_name), tournament_id)
 
-        standings = player_standings_by_tournament(tournament)
+        standings = tournament.player_standings_by_tournament(tournament_id)
         player1, player2, player3, player4 = [row[0] for row in standings]
-        report_match(player1, player2, tournament)
-        report_match(player3, player4, tournament)
-        pairings = swiss_pairings(tournament)
+        tournament.report_match(player1, player2, tournament_id)
+        tournament.report_match(player3, player4, tournament_id)
+        pairings = tournament.swiss_pairings(tournament_id)
 
         # For four players, swiss_pairings should return two pairs
         self.assertEqual(len(pairings), 2)
