@@ -182,7 +182,6 @@ def player_standings_by_tournament(tournament):
     return standings['result']
 
 
-
 def reportMatch(winner, loser, tournament):
     """Report the outcome of a single match between two players.
 
@@ -227,20 +226,32 @@ def reportMatch(winner, loser, tournament):
     return match_id
 
 
-def swissPairings():
-    """Returns a list of pairs of players for the next round of a match.
-  
-    Assuming that there are an even number of players registered, each player
-    appears exactly once in the pairings.  Each player is paired with another
-    player with an equal or nearly-equal win record, that is, a player adjacent
-    to him or her in the standings.
-  
-    Returns:
-      A list of tuples, each of which contains (id1, name1, id2, name2)
-        id1: the first player's unique id
-        name1: the first player's name
-        id2: the second player's unique id
-        name2: the second player's name
+def swissPairings(tournament):
+    """Pair players for the next round in a swiss-style tournament.
+
+    Players are paired with an opponent with a equal or nearly-equal win
+    record. A player cannot play the same opponent twice.
+
+    :param int tournament: id of the tournament to pair the next round for
+    :returns: tuples containing pairings in the format --
+        (id1, name1, id2, name2)
+    :rtype: list
+
     """
+    standings = player_standings_by_tournament(tournament)
 
+    players, opponents = [], []
+    for index, standing in enumerate(standings):
+        id, name = standing[:2]
 
+        if index % 2 == 0:
+            players.append((id, name))
+        else:
+            opponents.append((id, name))
+
+    pairings = []
+    for matchup in zip(players, opponents):
+        player, opponent = matchup
+        pairings.append(player + opponent)
+
+    return pairings
