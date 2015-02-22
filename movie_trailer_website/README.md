@@ -23,7 +23,7 @@ Quick Start
 
 * Clone the repo: `git clone https://github.com/ArmsTech/udacity.git`
 * Navigate to movie_trailer_website `cd udacity/movie_trailer_website`
-* Run `python movie_trailer_website.py` or `./movie_trailer_website.py`
+* Run `python movie_trailer_website.py`
 
 A browser should then open with the website or the website will open in a
 new tab of your open browser.
@@ -31,6 +31,16 @@ new tab of your open browser.
 Requirements
 ------------
 
-* Python 2.7.x
-* A web browser (e.g. Google Chrome)
-* Linux, Mac OS X, (MS Windows may work but hasn't been tested)
+* Python >= 2.7
+* Web browser (e.g. Chrome)
+* Linux, Mac OS X
+
+Grading (by Udacity)
+--------------------
+
+Criteria       |Highest Grade Possible  |Grade Recieved
+---------------|------------------------|--------------
+Functionality  |Exceeds Specifications  |Exceeds Specifications
+Code Quality   |Meets Specifications    |Meets Specifications
+Comments       |Exceeds Specifications  |Exceeds Specifications
+Documentation  |Meets Specifications    |Meets Specifications
