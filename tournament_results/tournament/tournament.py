@@ -204,6 +204,62 @@ def player_standings_by_tournament(tournament):
     return standings['result']
 
 
+def player_has_received_bye(player, tournament):
+    """Get whether or not a player has received a bye for a tournament.
+
+    :param int player: id of the player to check
+    :param int tournament: id of tournament to check
+    :returns: whether a player received a bye in a tournament; True | False
+    :rtype: boolean
+
+    """
+    query = ("SELECT bye "
+             "FROM entrant "
+             "WHERE player_id = %s "
+             "AND tournament_id = %s;")
+    bye = run_query(query, query_args=(player, tournament,))
+
+    return bye['result'][0][0]
+
+
+def update_match_wins(player):
+    """Update match wins in standings for a player.
+
+    :param int player: id of the winning player
+    :returns: count of the rows updated; 0 | 1
+    :rtype: int
+
+    """
+    query = ("UPDATE player "
+             "SET wins = wins + 1 "
+             "WHERE id = %s;")
+    updated = run_query(query, query_args=(player,), query_type='UPDATE')
+    return updated['result']
+
+
+def update_matches_played(players):
+    """Update matches played in standings for a player or players.
+
+    :param list players: id of the winning player(s)
+    :returns: count of the row(s) updated
+    :rtype: int
+
+    """
+    players_count = len(players)
+    if players_count == 1:
+        placeholder = "%s"
+    else:
+        placeholder = ("%s, " * players_count)[:-2]
+
+    query = ("UPDATE player "
+             "SET matches = matches + 1 "
+             "WHERE id IN (%s);") % placeholder
+    updated = run_query(
+        query, query_args=tuple(p for p in players), query_type='UPDATE')
+
+    return updated['result']
+
+
 def report_match(winner, loser, tournament):
     """Report the outcome of a single match between two players.
 
@@ -233,19 +289,34 @@ def report_match(winner, loser, tournament):
         query,
         query_args=(match_id, loser, tournament, LOSS), query_type='INSERT')
 
-    # Update matches played for both players
-    query = ("UPDATE player "
-             "SET matches = matches + 1 "
-             "WHERE id IN (%s, %s);")
-    run_query(query, query_args=(winner, loser), query_type='UPDATE')
-
-    # Update wins for winner
-    query = ("UPDATE player "
-             "SET wins = wins + 1 "
-             "WHERE id = %s;")
-    run_query(query, query_args=(winner,), query_type='UPDATE')
+    # Update matches played and wins
+    update_matches_played([winner, loser])
+    update_match_wins(winner)
 
     return match_id
+
+
+def report_match_bye(player, tournament):
+    """Report a bye for a player in a tournament.
+
+    :param int player: id of the player to report a bye for
+    :param int tournament: id of the tournament to report the bye in
+    :returns: rowcount of the player updated; 0 | 1
+    :rtype: int
+
+    """
+    query = ("UPDATE entrant "
+             "SET bye = TRUE "
+             "WHERE player_id = %s "
+             "AND tournament_id = %s;")
+    updated = run_query(
+        query, query_args=(player, tournament), query_type='UPDATE')
+
+    # Update matches played and wins
+    update_matches_played([player])
+    update_match_wins(player)
+
+    return updated['result']
 
 
 def swiss_pairings(tournament):
@@ -263,6 +334,15 @@ def swiss_pairings(tournament):
     standings = player_standings_by_tournament(tournament)
     standings = [standing[:2] for standing in standings]
 
+    # Player receives a bye if odd number of players
+    if len(standings) % 2 != 0:
+        for standing in reversed(standings):
+            player, _ = standing
+            if not player_has_received_bye(player, tournament):
+                report_match_bye(player, tournament)
+                standings.pop(standings.index(standing))
+                break
+
     players, opponents = [], []
     while standings:
         # Add the player we are going to find a match for
@@ -272,9 +352,9 @@ def swiss_pairings(tournament):
         opponents_played = player_opponents(player[0], tournament)
         # Iterate over the remaining opponents (standings after pop)
         for index, opponent in enumerate(iter(standings)):
-            id_, name = opponent[:2]
+            opponent_id, _ = opponent
             # Never play the same opponent twice
-            if id_ not in opponents_played:
+            if opponent_id not in opponents_played:
                 # Match found; move to next player in standings
                 opponents.append(standings.pop(index))
                 break
