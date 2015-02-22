@@ -1,9 +1,4 @@
-#!/usr/bin/env python
-# encoding: utf-8
-
 """Allow page visitors to review movie details and watch trailers."""
-
-import sys
 
 import fresh_tomatoes
 
@@ -67,12 +62,7 @@ class Movie(object):
 
 
 def main():
-    """Control "serving" of movies page.
-
-    :returns: exit code >=0
-    :rtype: int
-
-    """
+    """Control "serving" of movies page."""
     movies = []
     for movie in MOVIE_STORE.values():
         movies.append(
@@ -87,8 +77,6 @@ def main():
     movies_sorted_by_title = sorted(movies, key=lambda m: m.title.lower())
     fresh_tomatoes.open_movies_page(movies_sorted_by_title)
 
-    return 0
-
 
 if __name__ == '__main__':
-    sys.exit(main())
+    main()
