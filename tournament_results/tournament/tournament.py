@@ -5,6 +5,7 @@ import psycopg2
 WIN = 1
 LOSS = 2
 TIE = 3
+BYE = 4
 
 
 def connect():
@@ -311,6 +312,13 @@ def report_match_bye(player, tournament):
              "AND tournament_id = %s;")
     updated = run_query(
         query, query_args=(player, tournament), query_type='UPDATE')
+
+    # Add bye match to match table
+    query = ("INSERT INTO match "
+             "(player_id, tournament_id, result_id) "
+             "VALUES (%s, %s, %s);")
+    run_query(
+        query, query_args=(player, tournament, BYE), query_type='INSERT')
 
     # Update matches played and wins
     update_matches_played([player])
