@@ -2,6 +2,8 @@
 
 import fresh_tomatoes
 
+# MOVIE_STORE is meant to resemble a database relation. The keys do not imply
+# any order. They are only intended to represent a surrogate/auto key.
 MOVIE_STORE = {
     1: {'title': 'Boyhood',
         'poster_url': 'http://upload.wikimedia.org/wikipedia/en/b/bb/Boyhood_film.jpg',
