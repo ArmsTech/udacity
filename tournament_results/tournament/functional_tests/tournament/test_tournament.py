@@ -205,6 +205,37 @@ class TestTournament(unittest.TestCase):
         self.assertEqual(actual_pairs, correct_pairs)
         print "* After one match, players with one win are paired."
 
+    def test_pairings_with_bye(self):
+        """Test pairing players with an odd number of players."""
+        tournament_id = tournament.register_tournament(
+            "Test Pairings With Bye Tournament", 5)
+        player_names = (
+            "Twilight Sparkle", "Fluttershy", "Applejack",
+            "Pinkie Pie", "Brandy Ruby")
+        for player_name in player_names:
+            tournament.register_player_in_tournament(
+                tournament.register_player(player_name), tournament_id)
+
+        standings = tournament.player_standings_by_tournament(tournament_id)
+        player1, player2, player3, player4, player5 = [
+            row[0] for row in standings]
+        tournament.report_match(player1, player2, tournament_id)
+        tournament.report_match(player3, player4, tournament_id)
+        # Report a match bye for player 5 to test
+        tournament.report_match_bye(player5, tournament_id)
+
+        pairings = tournament.swiss_pairings(tournament_id)
+        [(id1, name1, id2, name2), (id3, name3, id4, name4)] = pairings
+        correct_pairs = set([
+            frozenset([player1, player3]), frozenset([player5, player2])])
+        actual_pairs = set([frozenset([id1, id2]), frozenset([id3, id4])])
+        self.assertEqual(actual_pairs, correct_pairs)
+        # Ensure player5 did not receive another bye
+        self.assertIn(player5, (id1, id2, id3, id4))
+        print (
+            "* After one match where one player was granted a bye, "
+            "players with one win are paired.")
+
 
 if __name__ == '__main__':
     unittest.main()
