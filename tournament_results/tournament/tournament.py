@@ -162,6 +162,28 @@ def player_standings():
     return standings['result']
 
 
+def player_opponents(player_id, tournament_id):
+    """Get a list of the played opponents for a player in a tournament.
+
+    :param int player_id: id of the player to get played opponents for
+    :param int tournament_id: id of the tournament
+    :returns: list of opponents that specified player has played
+    :rtype: list
+
+    """
+    subquery = ("(SELECT id "
+                "FROM match "
+                "WHERE player_id = %s "
+                "AND tournament_id = %s)")
+    query = ("SELECT player_id "
+             "FROM match "
+             "WHERE id IN %s "
+             "AND player_id != %s;") % (subquery, '%s')
+    opponents = run_query(
+        query, query_args=(player_id, tournament_id, player_id))
+    return [result[0] for result in opponents['result']]
+
+
 def player_standings_by_tournament(tournament):
     """Get a list of the players and their win records by tournament.
 
@@ -239,16 +261,25 @@ def swiss_pairings(tournament):
 
     """
     standings = player_standings_by_tournament(tournament)
+    standings = [standing[:2] for standing in standings]
 
     players, opponents = [], []
-    for index, standing in enumerate(standings):
-        id, name = standing[:2]
+    while standings:
+        # Add the player we are going to find a match for
+        player = standings.pop(0)
+        players.append(player)
 
-        if index % 2 == 0:
-            players.append((id, name))
-        else:
-            opponents.append((id, name))
+        opponents_played = player_opponents(player[0], tournament)
+        # Iterate over the remaining opponents (standings after pop)
+        for index, opponent in enumerate(iter(standings)):
+            id, name = opponent[:2]
+            # Never play the same opponent twice
+            if id not in opponents_played:
+                # Match found; move to next player in standings
+                opponents.append(standings.pop(index))
+                break
 
+    # Pair players with their respective opponents (determined above)
     pairings = []
     for matchup in zip(players, opponents):
         player, opponent = matchup
