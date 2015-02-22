@@ -261,38 +261,49 @@ def update_matches_played(players):
     return updated['result']
 
 
-def report_match(winner, loser, tournament):
+def report_match(winner, loser, tournament, tie=False):
     """Report the outcome of a single match between two players.
+
+    Both win-lose and tie matches are reported by report_match. In the event
+    of a tie both players are considered winners.
 
     :param int winner: id of the winner
     :param int loser: id of the loser
     :param int tournament: id of the tournament the match was played in
+    :param bool tie: whether match was a tie; True | False
     :returns: id of the reported match
     :rtype: int
 
     """
-    # Add winner
+    # Add winner or tie
+    result_type = TIE if tie else WIN
     query = ("INSERT INTO match "
              "(player_id, tournament_id, result_id) "
              "VALUES (%s, %s, %s) "
              "RETURNING id;")
     inserted = run_query(
         query,
-        query_args=(winner, tournament, WIN), query_type='INSERT')
+        query_args=(winner, tournament, result_type), query_type='INSERT')
 
     match_id = inserted['result']
 
-    # Add loser
+    # Add loser or tie
+    result_type = TIE if tie else LOSS
     query = ("INSERT INTO match "
              "(id, player_id, tournament_id, result_id) "
              "VALUES (%s, %s, %s, %s);")
     run_query(
         query,
-        query_args=(match_id, loser, tournament, LOSS), query_type='INSERT')
+        query_args=(match_id, loser, tournament, result_type),
+        query_type='INSERT')
 
     # Update matches played and wins
     update_matches_played([winner, loser])
     update_match_wins(winner)
+
+    # Ties count as wins
+    if tie:
+        update_match_wins(loser)
 
     return match_id
 
