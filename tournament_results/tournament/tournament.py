@@ -272,9 +272,9 @@ def swiss_pairings(tournament):
         opponents_played = player_opponents(player[0], tournament)
         # Iterate over the remaining opponents (standings after pop)
         for index, opponent in enumerate(iter(standings)):
-            id, name = opponent[:2]
+            id_, name = opponent[:2]
             # Never play the same opponent twice
-            if id not in opponents_played:
+            if id_ not in opponents_played:
                 # Match found; move to next player in standings
                 opponents.append(standings.pop(index))
                 break
