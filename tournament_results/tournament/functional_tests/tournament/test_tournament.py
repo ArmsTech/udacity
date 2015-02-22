@@ -179,6 +179,27 @@ class TestTournament(unittest.TestCase):
                 self.assertEqual(wins, 0)
         print "* After a match, players have updated standings."
 
+    def test_report_match_with_tie(self):
+        """Test reporting a match tie."""
+        tournament_id = tournament.register_tournament(
+            "Test Matches With Tie Tournament", 2)
+        player_names = ("Bruno Walton", "Boots O'Neal")
+        for player_name in player_names:
+            tournament.register_player_in_tournament(
+                tournament.register_player(player_name), tournament_id)
+
+        standings = tournament.player_standings_by_tournament(tournament_id)
+        player1, player2 = [row[0] for row in standings]
+        tournament.report_match(player1, player2, tournament_id, tie=True)
+
+        standings = tournament.player_standings()
+        for id, name, wins, matches in standings:
+            # Each player should have one match recorded
+            self.assertEqual(matches, 1)
+            # Each match winner should have one win recorded
+            self.assertEqual(wins, 1)
+        print "* After a match tie, tied players both have wins."
+
     def test_pairings(self):
         """Test pairing players."""
         tournament_id = tournament.register_tournament(
