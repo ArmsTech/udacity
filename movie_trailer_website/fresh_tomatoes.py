@@ -1,9 +1,11 @@
+"""Render Fresh Tomatoes webpage content."""
+
 import os
 import re
 import webbrowser
 
 # Styles and scripting for the page
-main_page_head = '''
+MAIN_PAGE_HEAD = '''
 <head>
     <meta charset="utf-8">
     <title>Fresh Tomatoes!</title>
@@ -94,7 +96,7 @@ main_page_head = '''
 '''
 
 # The main page layout and title bar
-main_page_content = '''
+MAIN_PAGE_CONTENT = '''
 <!DOCTYPE html>
 <html lang="en">
   <body>
@@ -110,7 +112,7 @@ main_page_content = '''
         </div>
       </div>
     </div>
-    
+
     <!-- Main Page Content -->
     <div class="container">
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -129,11 +131,11 @@ main_page_content = '''
 '''
 
 # A single movie entry html template
-movie_tile_content = '''
+MOVIE_TILE_CONTENT = '''
 <div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="{trailer_youtube_id}" data-toggle="modal" data-target="#trailer">
     <h1 class="movie-title">{movie_title}</h1>
     <img src="{poster_image_url}" width="220" height="342">
-    <table class="table table-condensed table-borderless"> 
+    <table class="table table-condensed table-borderless">
         <tbody>
             <tr>
                 <td><div class="text-right font-bold">Genre:</div></td>
@@ -152,17 +154,33 @@ movie_tile_content = '''
 </div>
 '''
 
+
+YOUTUBE_URL_RE = re.compile(r'(?<=v=)[^&#]+')
+YOUTUBE_SHORTURL_RE = re.compile(r'(?<=be/)[^&#]+')
+
+
 def create_movie_tiles_content(movies):
-    # The HTML content for this section of the page
-    content = ''
+    """Create movie tiles for the Fresh Tomatoes webpage.
+
+    :param list movies: a list of movie_trailer_website.Movie objects
+    :returns: HTML content for Fresh Tomatoes main page
+    :rtype: str
+
+    """
+    html_content = ''
     for movie in movies:
         # Extract the youtube ID from the url
-        youtube_id_match = re.search(r'(?<=v=)[^&#]+', movie.trailer_youtube_url)
-        youtube_id_match = youtube_id_match or re.search(r'(?<=be/)[^&#]+', movie.trailer_youtube_url)
-        trailer_youtube_id = youtube_id_match.group(0) if youtube_id_match else None
+        youtube_id_match = re.search(YOUTUBE_URL_RE, movie.trailer_youtube_url)
+
+        youtube_id_match = (
+            youtube_id_match or
+            re.search(YOUTUBE_SHORTURL_RE, movie.trailer_youtube_url))
+
+        trailer_youtube_id = (
+            youtube_id_match.group(0) if youtube_id_match else None)
 
         # Append the tile for the movie with its content filled in
-        content += movie_tile_content.format(
+        html_content += MOVIE_TILE_CONTENT.format(
             movie_title=movie.title,
             movie_genre=movie.genre,
             poster_image_url=movie.poster_image_url,
@@ -170,19 +188,23 @@ def create_movie_tiles_content(movies):
             movie_box_office=movie.box_office_earnings,
             movie_theater_date=movie.date_in_theaters
         )
-    return content
+    return html_content
+
 
 def open_movies_page(movies):
-    # Create or overwrite the output file
-    output_file = open('fresh_tomatoes.html', 'w')
+    """Open Fresh Tomatoes movies webpage.
 
-    # Replace the placeholder for the movie tiles with the actual dynamically generated content
-    rendered_content = main_page_content.format(movie_tiles=create_movie_tiles_content(movies))
+    :param list movies: a list of movie_trailer_website.Movie objects
+    :returns: None
 
-    # Output the file
-    output_file.write(main_page_head + rendered_content)
-    output_file.close()
+    """
+    with open('fresh_tomatoes.html', 'w') as output_file:
+        # Replace the placeholder for the movie tiles with the actual
+        # dynamically generated content
+        rendered_content = MAIN_PAGE_CONTENT.format(
+            movie_tiles=create_movie_tiles_content(movies))
 
-    # open the output file in the browser
-    url = os.path.abspath(output_file.name)
-    webbrowser.open('file://' + url, new=2) # open in a new tab, if possible
+        output_file.write(MAIN_PAGE_HEAD + rendered_content)
+
+    local_url = ''.join(['file://', os.path.abspath(output_file.name)])
+    webbrowser.open_new_tab(local_url)
