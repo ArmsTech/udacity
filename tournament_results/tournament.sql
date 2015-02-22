@@ -26,7 +26,7 @@ CREATE TABLE entrant (
 );
 
 CREATE TABLE result (id, name) as
-    SELECT * FROM (VALUES (1, 'Win'), (2, 'Loss'), (3, 'Tie')) R;
+    SELECT * FROM (VALUES (1, 'Win'), (2, 'Loss'), (3, 'Tie'), (4, 'Bye')) R;
     ALTER TABLE result ADD PRIMARY KEY (id);
 
 CREATE TABLE match (
