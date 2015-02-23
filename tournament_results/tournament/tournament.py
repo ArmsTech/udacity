@@ -197,7 +197,9 @@ def player_opponents_match_wins(player, tournament):
     opponents = player_opponents(player, tournament)
 
     opponents_count = len(opponents)
-    if opponents_count == 1:
+    if opponents_count == 0:
+        return 0
+    elif opponents_count == 1:
         placeholder = "%s"
     else:
         placeholder = ("%s, " * opponents_count)[:-2]
@@ -400,6 +402,7 @@ def swiss_pairings(tournament):
 
     """
     standings = player_standings_by_tournament(tournament)
+    standings = rank_by_opponent_match_wins(standings, tournament)
     standings = [standing[:2] for standing in standings]
 
     # Player receives a bye if odd number of players
