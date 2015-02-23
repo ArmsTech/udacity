@@ -163,11 +163,11 @@ def player_standings():
     return standings['result']
 
 
-def player_opponents(player_id, tournament_id):
+def player_opponents(player, tournament):
     """Get a list of the played opponents for a player in a tournament.
 
-    :param int player_id: id of the player to get played opponents for
-    :param int tournament_id: id of the tournament
+    :param int player: id of the player to get played opponents for
+    :param int tournament: id of the tournament
     :returns: list of opponents that specified player has played
     :rtype: list
 
@@ -178,11 +178,37 @@ def player_opponents(player_id, tournament_id):
                 "AND tournament_id = %s)")
     query = ("SELECT player_id "
              "FROM match "
-             "WHERE id IN %s "
+             "WHERE id IN (%s) "
              "AND player_id != %s;") % (subquery, '%s')
     opponents = run_query(
-        query, query_args=(player_id, tournament_id, player_id))
+        query, query_args=(player, tournament, player))
     return [result[0] for result in opponents['result']]
+
+
+def player_opponents_match_wins(player, tournament):
+    """Get a sum of the played opponents match wins.
+
+    :param int player: id of the player
+    :param int tournament: id of the tournament
+    :returns: sum of opponent wins for a specified player
+    :rtype: int
+
+    """
+    opponents = player_opponents(player, tournament)
+
+    opponents_count = len(opponents)
+    if opponents_count == 1:
+        placeholder = "%s"
+    else:
+        placeholder = ("%s, " * opponents_count)[:-2]
+
+    query = ("SELECT sum(wins) "
+             "FROM player "
+             "WHERE id IN (%s);") % placeholder
+    opponents_match_wins = run_query(
+        query, query_args=([o for o in opponents]))
+
+    return opponents_match_wins['result'][0][0]
 
 
 def player_standings_by_tournament(tournament):
@@ -336,6 +362,29 @@ def report_match_bye(player, tournament):
     update_match_wins(player)
 
     return updated['result']
+
+
+def rank_by_opponent_match_wins(standings, tournament):
+    """Rank like players using opponent match wins.
+
+    Players that have equal match wins should be ranked according to the
+    strength of the opponents beaten.
+
+    :param list standings: standings for a tournament
+    :param int tournament: standings for a tournament
+    :returns: standings sorted by opponent match wins
+    :rtype: list
+
+    """
+    def omw_sort(player1, player2):
+        if player1[2] == player2[2]:
+            player1_omw = player_opponents_match_wins(player1[0], tournament)
+            player2_omw = player_opponents_match_wins(player2[0], tournament)
+            if player1_omw > player2_omw:
+                return -1
+        return 1
+
+    return sorted(standings, cmp=omw_sort)
 
 
 def swiss_pairings(tournament):
