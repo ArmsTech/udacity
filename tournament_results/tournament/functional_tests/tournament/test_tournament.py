@@ -200,6 +200,34 @@ class TestTournament(unittest.TestCase):
             self.assertEqual(wins, 1)
         print "* After a match tie, tied players both have wins."
 
+    def test_rank_by_opponent_match_wins(self):
+        """Test ranking standings by opponent match wins."""
+        tournament_id = tournament.register_tournament(
+            "Test OMW Tournament", 4)
+        player_names = (
+            "Bruno Walton", "Boots O'Neal", "Cathy Burton", "Diane Grant")
+        for player_name in player_names:
+            tournament.register_player_in_tournament(
+                tournament.register_player(player_name), tournament_id)
+
+        standings = tournament.player_standings_by_tournament(tournament_id)
+        player1, player2, player3, player4 = [row[0] for row in standings]
+        tournament.report_match(player1, player2, tournament_id)
+        tournament.report_match(player3, player4, tournament_id)
+        # Give player a bye to force re-ordering by omw
+        tournament.report_match_bye(player1, tournament_id)
+
+        standings = tournament.player_standings_by_tournament(tournament_id)
+        omw_standings = tournament.rank_by_opponent_match_wins(
+            standings, tournament_id)
+        # Standings should be re-ordered (Boots and Diane); Boots lost to
+        # Bruno, who has more wins than Cathy (who Diane lost to)
+        self.assertEqual(
+            omw_standings,
+            [(1, 'Bruno Walton', 2, 2), (3, 'Cathy Burton', 1, 1),
+             (2, "Boots O'Neal", 0, 1), (4, 'Diane Grant', 0, 1)])
+        print "* Matches are ranked by opponent match wins."
+
     def test_pairings(self):
         """Test pairing players."""
         tournament_id = tournament.register_tournament(
