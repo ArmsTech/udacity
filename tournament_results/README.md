@@ -17,8 +17,6 @@ The project demonstrates familiarity with:
 * development of an API backed by a database
 * use of functional tests to validate results
 
-Swiss-style tournament system: http://en.wikipedia.org/wiki/Swiss-system_tournament
-
 Rules:
 * players compete against other players of similar rank
 * players cannot play the same opponent more than once
@@ -26,6 +24,8 @@ Rules:
 * individual games in a round can result in a tie (win for both players)
 * players with the same number of wins are ranked by Opponent Match Wins
 * players can play in multiple tournaments
+
+_More on Swiss-style tournament system:_ http://en.wikipedia.org/wiki/Swiss-system_tournament
 
 Quick Start
 -----------
