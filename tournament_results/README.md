@@ -17,7 +17,7 @@ The project demonstrates familiarity with:
 * development of an API backed by a database
 * use of functional tests to validate results
 
-Rules:
+Tournament Rules:
 * players compete against other players of similar rank
 * players cannot play the same opponent more than once
 * players can recieve byes (free win), but only once per tournament
