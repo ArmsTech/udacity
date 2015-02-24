@@ -1,8 +1,8 @@
 """Functional testing of tournament.py using a tournament database."""
 
 import os
-import unittest
 import subprocess
+import unittest
 
 import tournament
 
