@@ -48,3 +48,15 @@ Requirements
 * VirtualBox
 * Python >= 2.7
 * Linux, Mac OS X
+
+Grading (by Udacity)
+--------------------
+
+Criteria       |Highest Grade Possible  |Grade Recieved
+---------------|------------------------|--------------
+Functionality  |Exceeds Specifications  |Exceeds Specifications
+Table Design   |Exceeds Specifications  |Exceeds Specifications
+Column Design  |Exceeds Specifications  |Exceeds Specifications
+Code Quality   |Exceeds Specifications  |Exceeds Specifications
+Comments       |Exceeds Specifications  |Exceeds Specifications
+Documentation  |Meets Specifications    |Meets Specifications
