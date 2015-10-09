@@ -2,8 +2,9 @@
 
 from flask import Flask
 
-from tech_quote.settings import ProductionConfig
+from tech_quote import public
 from tech_quote.extensions import db, migrate
+from tech_quote.settings import ProductionConfig
 
 
 @app.route('/')
@@ -30,6 +31,12 @@ def register_extensions(app):
     """Register flask extensions."""
     db.init_app(app)
     migrate.init_app(app, db)
+
+
+def register_blueprints(app):
+    """Register flask blueprints."""
+    app.register_blueprint(public.views.blueprint)
+    db.init_app(app)
 
 
 if __name__ == '__main__':
