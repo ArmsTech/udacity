@@ -7,11 +7,6 @@ from tech_quote.extensions import db, migrate
 from tech_quote.settings import ProductionConfig
 
 
-@app.route('/')
-def hello_world():
-    return 'Hello World!'
-
-
 def create_app(config_object=ProductionConfig):
     """Create a tech_quote application.
 
