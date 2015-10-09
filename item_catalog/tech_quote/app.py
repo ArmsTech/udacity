@@ -19,6 +19,7 @@ def create_app(config_object=ProductionConfig):
     app = Flask(__name__)
     app.config.from_object(config_object)
     register_extensions(app)
+    register_blueprints(app)
     return app
 
 
@@ -31,7 +32,6 @@ def register_extensions(app):
 def register_blueprints(app):
     """Register flask blueprints."""
     app.register_blueprint(public.views.blueprint)
-    db.init_app(app)
 
 
 if __name__ == '__main__':
