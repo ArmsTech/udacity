@@ -6,10 +6,44 @@ from sqlalchemy import (
     Column, DateTime, ForeignKey, Integer, LargeBinary, String, Text)
 from sqlalchemy.orm import relationship
 
-from tech_quote.database import Base
+from tech_quote.extensions import db
 
 
-class Author(Base):
+class CRUDMixin(object):
+
+    """Add convenience methods for CRUD operations."""
+
+    @classmethod
+    def create(cls, **kwargs):
+        """Create."""
+        instance = cls(**kwargs)
+        return instance._save()
+
+    def update(self, commit=True, **kwargs):
+        """Update."""
+        for attr, value in kwargs.iteritems():
+            setattr(self, attr, value)
+        return commit and self._save() or self
+
+    def delete(self, commit=True):
+        """Delete."""
+        db.session.delete(self)
+        return commit and db.session.commit()
+
+    def _save(self, commit=True):
+        """Commit (save) if requested."""
+        db.session.add(self)
+        if commit:
+            db.session.commit()
+        return self
+
+
+class Model(CRUDMixin, db.Model):
+    """Base model class that with CRUD."""
+    __abstract__ = True
+
+
+class Author(Model):
 
     """Represent an author table in tq."""
 
@@ -30,7 +64,7 @@ class Author(Base):
         return '<Author id={0}, name={1}>'.format(self.id, self.name)
 
 
-class Category(Base):
+class Category(Model):
 
     """Represent an category table in tq."""
 
@@ -50,7 +84,7 @@ class Category(Base):
         return '<Category id={0}, name={1}>'.format(self.id, self.name)
 
 
-class Quote(Base):
+class Quote(Model):
 
     """Represent a quote table in tq."""
 
