@@ -2,11 +2,9 @@
 
 from datetime import datetime
 
-from sqlalchemy import (
-    Column, DateTime, ForeignKey, Integer, LargeBinary, String, Text)
-from sqlalchemy.orm import relationship
-
 from tech_quote.extensions import db
+
+Column = db.Column
 
 
 class CRUDMixin(object):
@@ -49,11 +47,11 @@ class Author(Model):
 
     __tablename__ = 'author'
 
-    id = Column(Integer, primary_key=True)
-    name = Column(String(60), nullable=False)
-    biography = Column(Text, nullable=False)
-    website = Column(String(60), nullable=False)
-    created = Column(DateTime, nullable=False, default=datetime.utcnow)
+    id = Column(db.db.Integer, primary_key=True)
+    name = Column(db.String(60), nullable=False)
+    biography = Column(db.Text, nullable=False)
+    website = Column(db.String(60), nullable=False)
+    created = Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
     def __init__(self, **kwargs):
         """Custom initialization for Author."""
@@ -70,10 +68,10 @@ class Category(Model):
 
     __tablename__ = 'category'
 
-    id = Column(Integer, primary_key=True)
-    name = Column(String(60), nullable=False)
-    description = Column(Text, nullable=False)
-    icon = Column(LargeBinary, nullable=False)
+    id = Column(db.Integer, primary_key=True)
+    name = Column(db.String(60), nullable=False)
+    description = Column(db.Text, nullable=False)
+    icon = Column(db.LargeBinary, nullable=False)
 
     def __init__(self, **kwargs):
         """Custom initialization for category."""
@@ -90,15 +88,15 @@ class Quote(Model):
 
     __tablename__ = 'quote'
 
-    id = Column(Integer, primary_key=True)
-    text = Column(Text, nullable=False)
-    source = Column(String(60), nullable=False)
-    created = Column(DateTime, nullable=False, default=datetime.utcnow)
+    id = Column(db.Integer, primary_key=True)
+    text = Column(db.Text, nullable=False)
+    source = Column(db.String(60), nullable=False)
+    created = Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
-    author_id = Column(Integer, ForeignKey('author.id'))
-    author = relationship(Author)
-    category_id = Column(Integer, ForeignKey('category.id'))
-    category = relationship(Category)
+    author_id = Column(db.Integer, db.ForeignKey('author.id'))
+    author = db.relationship(Author)
+    category_id = Column(db.Integer, db.ForeignKey('category.id'))
+    category = db.relationship(Category)
 
     def __init__(self, **kwargs):
         """Custom initialization for Quote."""
