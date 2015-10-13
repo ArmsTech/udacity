@@ -3,8 +3,8 @@
 from flask import Flask
 
 from tech_quote import public
+from tech_quote.config import ProductionConfig
 from tech_quote.extensions import db, migrate
-from tech_quote.settings import ProductionConfig
 
 
 def create_app(config_object=ProductionConfig):
