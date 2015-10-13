@@ -1,7 +1,4 @@
-help:
-	@echo "clean - remove all Python file artifacts"
-	@echo "clean-pyc - remove Python file artifacts"
-	@echo "lint - check style with flake8"
+.PHONY: clean clean-pyc db
 
 clean: clean-pyc
 
@@ -13,3 +10,7 @@ clean-pyc:
 
 debug:
 	python tech_quote/app.py
+
+db:
+	psql -c "CREATE DATABASE tq;"
+	python manage.py create_tables
