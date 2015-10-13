@@ -1,7 +1,7 @@
 """Manage tech_quote application."""
 
-from flask_script import Manager, Shell, Server
-from flask_script.commands import Clean, ShowUrls
+from flask.ext.script import Manager, Shell, Server, prompt_bool
+from flask.ext.script.commands import Clean, ShowUrls
 
 from tech_quote.app import create_app
 from tech_quote.database import db
@@ -19,6 +19,16 @@ def _make_context():
 def create_tables():
     """Create tech_quote database tables."""
     db.create_all()
+
+
+@MANAGER.command
+def drop_tables():
+    """Drop tech_quote database tables."""
+    if prompt_bool("Drop all database tables?"):
+        db.drop_all()
+    else:
+        import sys
+        sys.exit(1)
 
 
 MANAGER.add_command('server', Server())
