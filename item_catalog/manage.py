@@ -31,6 +31,13 @@ def drop_tables():
         sys.exit(1)
 
 
+@MANAGER.command
+def recreate_tables():
+    """Recreate database (drop then create)."""
+    drop_tables()
+    create_tables()
+
+
 MANAGER.add_command('server', Server())
 MANAGER.add_command('shell', Shell(make_context=_make_context))
 MANAGER.add_command("urls", ShowUrls())
