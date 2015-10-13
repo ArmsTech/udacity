@@ -47,7 +47,7 @@ class Author(Model):
 
     __tablename__ = 'author'
 
-    id = Column(db.db.Integer, primary_key=True)
+    id = Column(db.Integer, primary_key=True)
     name = Column(db.String(60), nullable=False)
     biography = Column(db.Text, nullable=False)
     website = Column(db.String(60), nullable=False)
