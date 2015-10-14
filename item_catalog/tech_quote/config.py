@@ -9,6 +9,15 @@ class Config(object):
 
     APP_DIR = os.path.abspath(os.path.dirname(__file__))
     PROJECT_ROOT = os.path.abspath(os.path.join(APP_DIR, os.pardir))
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2:///tq'
+
+
+class DevelopmentConfig(Config):
+
+    """Development configuration."""
+
+    ENV = 'Development'
+    DEBUG = True
 
 
 class ProductionConfig(Config):
@@ -17,4 +26,3 @@ class ProductionConfig(Config):
 
     ENV = 'Production'
     DEBUG = False
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2:///tq'
