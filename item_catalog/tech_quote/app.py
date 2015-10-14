@@ -1,23 +1,21 @@
 """Flask application for tech_quote."""
 
+import os
+
 from flask import Flask
 
 from tech_quote import public
-from tech_quote.config import ProductionConfig
 from tech_quote.extensions import db, migrate
 
 
-def create_app(config_object=ProductionConfig):
+def create_app():
     """Create a tech_quote application.
-
-    Args:
-        config_object (Config): The configuration object to use.
 
     Returns:
         Flask: The tech_quote application.
     """
     app = Flask(__name__)
-    app.config.from_object(config_object)
+    app.config.from_object(os.environ['APP_SETTINGS'])
     register_extensions(app)
     register_blueprints(app)
     return app
