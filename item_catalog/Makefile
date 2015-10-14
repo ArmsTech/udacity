@@ -11,12 +11,12 @@ clean-pyc:
 
 clean-db:
 	@echo "# Cleaning (dropping) tq database"
-	python manage.py drop_tables && psql -c "DROP DATABASE tq;"
+	python manage.py db drop && psql -c "DROP DATABASE tq;"
 
 db:
 	@echo "# Creating tq database"""
 	psql -c "CREATE DATABASE tq;"
-	python manage.py create_tables
+	python manage.py db create
 
 web:
 	@echo "# Starting web server (debug mode)"
