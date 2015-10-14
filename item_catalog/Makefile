@@ -1,4 +1,4 @@
-.PHONY: clean clean-pyc clean-db db web
+.PHONY: clean clean-pyc clean-db db dev
 
 clean: clean-pyc clean-db
 
@@ -18,6 +18,6 @@ db:
 	psql -c "CREATE DATABASE tq;"
 	python manage.py db create
 
-web:
-	@echo "# Starting web server (debug mode)"
-	python manage.py server --host 0.0.0.0 --debug --reload
+dev:
+	@echo "# Starting web server (development)"
+	honcho start dev_server
