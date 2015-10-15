@@ -7,7 +7,7 @@ clean-pyc:
 	python manage.py clean
 
 db:
-	@echo "# Creating tq database"""
+	@echo "# Creating tq database"
 	psql -c "CREATE DATABASE tq;"
 	python manage.py db create
 
