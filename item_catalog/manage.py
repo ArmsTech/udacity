@@ -21,7 +21,7 @@ def _make_context():
 MANAGER.add_command('db', database_manager)
 MANAGER.add_command("clean", Clean())
 MANAGER.add_command("migrate", MigrateCommand)
-MANAGER.add_command('server', Server())
+MANAGER.add_command('serve', Server())
 MANAGER.add_command('shell', Shell(make_context=_make_context))
 MANAGER.add_command("urls", ShowUrls())
 
