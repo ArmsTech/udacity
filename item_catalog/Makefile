@@ -21,3 +21,7 @@ drop:
 dev:
 	@echo "# Starting web server (development)"
 	honcho start dev_server
+
+shell:
+	@echo "# Starting shell"
+	python manage.py shell
