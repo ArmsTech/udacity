@@ -1,3 +1,1 @@
-create_db: bin/create-db.sh
 dev_server: python manage.py runserver --host 0.0.0.0 --debug --reload
-drop_db: bin/drop-db.sh

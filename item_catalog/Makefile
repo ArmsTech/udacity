@@ -1,6 +1,6 @@
-.PHONY: clean clean-pyc clean-db db dev
+.PHONY: clean clean-pyc db dev drop
 
-clean: clean-pyc clean-db
+clean: clean-pyc
 
 clean-pyc:
 	@echo "# Cleaning Python artifacts"
@@ -9,13 +9,14 @@ clean-pyc:
 	find . -name '*~' -exec rm -f {} +
 	find . -name '__pycache__' -exec rm -fr {} +
 
-clean-db:
-	@echo "# Cleaning (dropping) tq database"
-	honcho start drop_db
-
 db:
 	@echo "# Creating tq database"""
-	honcho start create_db
+	psql -c "CREATE DATABASE tq;"
+	python manage.py db create
+
+drop:
+	@echo "# Cleaning (dropping) tq database"
+	python manage.py db drop && psql -c "DROP DATABASE tq;"
 
 dev:
 	@echo "# Starting web server (development)"
