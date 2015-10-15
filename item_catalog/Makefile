@@ -19,6 +19,11 @@ dev:
 	@echo "# Starting web server (development)"
 	honcho start dev_server
 
+upgrade:
+	@echo "# Making database upgrade"
+	python manage.py migrate migrate
+	python manage.py migrate upgrade
+
 shell:
 	@echo "# Starting shell"
 	python manage.py shell
