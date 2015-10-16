@@ -5,7 +5,7 @@ import os
 from flask import Flask
 
 from tech_quote import public
-from tech_quote.extensions import db, migrate
+from tech_quote.extensions import assets, db, migrate
 
 
 def create_app():
@@ -24,6 +24,7 @@ def create_app():
 def register_extensions(app):
     """Register flask extensions."""
     db.init_app(app)
+    assets.init_app(app)
     migrate.init_app(app, db)
 
 
