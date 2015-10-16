@@ -5,3 +5,6 @@ db = SQLAlchemy()
 
 from flask.ext.migrate import Migrate
 migrate = Migrate()
+
+from flask.ext.assets import Environment
+assets = Environment()
