@@ -18,6 +18,7 @@ class DevelopmentConfig(Config):
 
     ENV = 'Development'
     DEBUG = True
+    ASSETS_DEBUG = True
 
 
 class ProductionConfig(Config):
