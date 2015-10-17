@@ -1,10 +1,11 @@
 """Public views for tech_quote (homepage, etc...)."""
 
-from flask import Blueprint
+from flask import Blueprint, render_template
 
-blueprint = Blueprint('public', __name__)  # , static_folder="../static")
+blueprint = Blueprint('public', __name__, static_folder='../static')
 
 
 @blueprint.route('/')
-def hello_world():
-    return 'Hello World!'
+def homepage():
+    """Render TQ Homepage."""
+    return render_template('layout.html')
