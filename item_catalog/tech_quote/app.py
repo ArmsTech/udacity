@@ -5,7 +5,8 @@ import os
 from flask import Flask
 
 from tech_quote import public
-from tech_quote.extensions import assets, db, migrate
+from tech_quote.extensions import db, migrate
+from tech_quote.assets import assets
 
 
 def create_app():
