@@ -6,6 +6,7 @@ blueprint = Blueprint('public', __name__, static_folder='../static')
 
 
 @blueprint.route('/')
+@blueprint.route('/quotes')
 def homepage():
     """Render TQ Homepage."""
     return render_template('layout.html')
