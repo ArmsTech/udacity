@@ -9,6 +9,7 @@ class Config(object):
 
     APP_DIR = os.path.abspath(os.path.dirname(__file__))
     PROJECT_ROOT = os.path.abspath(os.path.join(APP_DIR, os.pardir))
+    SECRET_KEY = os.environ['TQ_SECRET']
     SITE_NAME = 'Tech Quote'
     SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URI']
 
