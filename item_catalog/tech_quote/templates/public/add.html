@@ -5,4 +5,9 @@
 {% endblock %}
 
 {% block content %}
+    <form method="POST" action="{{ request.url }}">
+        {{ form.hidden_tag() }}
+        {{ form.quotation.label }}
+        {{ form.source.label }}
+    </form>
 {% endblock %}
