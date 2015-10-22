@@ -71,7 +71,7 @@ class Category(Model):
     id = Column(db.Integer, primary_key=True)
     name = Column(db.String(60), nullable=False)
     description = Column(db.Text, nullable=False)
-    icon = Column(db.LargeBinary, nullable=False)
+    icon_url = Column(db.String(60), nullable=False)
 
     def __init__(self, **kwargs):
         """Custom initialization for category."""
