@@ -21,7 +21,7 @@ def add_quote():
 
     if request.method == 'POST':
         if form.validate_on_submit():
-            return redirect(url_for("public.layout"))
+            return redirect(url_for('public.homepage'))
         else:
             print "FLASH/LOG AN ERROR HERE!"
 
