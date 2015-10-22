@@ -21,7 +21,6 @@ dev:
 
 upgrade:
 	@echo "# Making database upgrade"
-	python manage.py migrate migrate
 	python manage.py migrate upgrade
 
 shell:
