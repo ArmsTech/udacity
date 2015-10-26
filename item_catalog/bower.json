@@ -2,6 +2,7 @@
   "name": "tech_quote",
   "homepage": "https://github.com/brenj/udacity",
   "dependencies": {
-    "bootstrap": "~3.3.5"
+    "bootstrap": "~3.3.5",
+    "selectize": "~0.12.1"
   }
 }
