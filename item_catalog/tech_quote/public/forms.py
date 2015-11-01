@@ -14,7 +14,7 @@ class AddQuoteForm(Form):
     quotation = TextField('Quotation', validators=[DataRequired()])
     source = TextField('Source', validators=[DataRequired()])
     category = SelectField('Category', validators=[DataRequired()])
-    author = TextField('Author', validators=[DataRequired()])
+    author = SelectField('Author', validators=[DataRequired()])
 
     def __init__(self, *args, **kwargs):
         """Initialize Form and set category choices."""
