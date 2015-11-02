@@ -19,6 +19,15 @@
       {{ form.category.label }}
       {{ form.category(class="form-control") }}
     </div>
+    <div class="form-group">
+      {{ form.author.label }}
+      {{ form.author(class="form-control") }}
+      <script>
+        $('#author').selectize({
+            maxItems: 1
+        });
+      </script>
+    </div>
     <button type="submit" class="btn btn-default">Add Quote</button>
   </form>
 {% endblock %}
