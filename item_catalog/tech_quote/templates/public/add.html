@@ -9,21 +9,29 @@
     {{ form.hidden_tag() }}
     <div class="form-group">
       {{ form.quotation.label }}
-      {{ form.quotation(class="form-control", placeholder="Quote") }}
+      {{ form.quotation(class="form-control", placeholder="Special cases aren't special enough to break the rules.") }}
     </div>
     <div class="form-group">
       {{ form.source.label }}
-      {{ form.source(class="form-control", placeholder="Source") }}
+      {{ form.source(class="form-control", placeholder="https://www.python.org/dev/peps/pep-0020/") }}
     </div>
     <div class="form-group">
       {{ form.category.label }}
-      {{ form.category(class="form-control") }}
+      {{ form.category(class="form-control", placeholder="Python") }}
+      <script>
+        $('#category').selectize({
+            create: false,
+            placeholder: 'Python',
+            maxItems: 1
+        });
+      </script>
     </div>
     <div class="form-group">
       {{ form.author.label }}
-      {{ form.author(class="form-control") }}
+      {{ form.author(class="form-control", placeholder="Tim Peters") }}
       <script>
         $('#author').selectize({
+            placeholder: 'Tim Peters',
             maxItems: 1
         });
       </script>

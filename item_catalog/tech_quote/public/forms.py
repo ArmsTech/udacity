@@ -6,6 +6,8 @@ from wtforms.validators import DataRequired
 
 from tech_quote.database import Category
 
+PLACEHOLDER = ("", "")
+
 
 class AddQuoteForm(Form):
 
@@ -21,7 +23,7 @@ class AddQuoteForm(Form):
         Form.__init__(self, *args, **kwargs)
 
         categories = Category.query.with_entities(
-            Category.id, Category.name).order_by(Category.name)
-        self.category.choices = categories
+            Category.id, Category.name).order_by(Category.name).all()
+        self.category.choices = [PLACEHOLDER] + categories
 
-        self.author.choices = ((1, 'Sadie'), (2, 'Monty'))
+        self.author.choices = (PLACEHOLDER, (1, 'Sadie'), (2, 'Monty'))
