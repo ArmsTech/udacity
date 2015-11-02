@@ -19,6 +19,9 @@ class AddQuoteForm(Form):
     def __init__(self, *args, **kwargs):
         """Initialize Form and set category choices."""
         Form.__init__(self, *args, **kwargs)
+
         categories = Category.query.with_entities(
             Category.id, Category.name).order_by(Category.name)
         self.category.choices = categories
+
+        self.author.choices = ((1, 'Sadie'), (2, 'Monty'))
