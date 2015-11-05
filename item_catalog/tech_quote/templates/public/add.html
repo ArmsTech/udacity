@@ -20,7 +20,6 @@
       {{ form.category(class="form-control", placeholder="Python") }}
       <script>
         $('#category').selectize({
-            create: false,
             placeholder: 'Python',
             maxItems: 1
         });
@@ -31,6 +30,7 @@
       {{ form.author(class="form-control", placeholder="Tim Peters") }}
       <script>
         $('#author').selectize({
+            create: true,
             placeholder: 'Tim Peters',
             maxItems: 1
         });
