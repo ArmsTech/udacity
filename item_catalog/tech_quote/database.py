@@ -48,9 +48,8 @@ class Author(Model):
     __tablename__ = 'author'
 
     id = Column(db.Integer, primary_key=True)
-    name = Column(db.String(60), nullable=False)
-    biography = Column(db.Text, nullable=False)
-    website = Column(db.String(60), nullable=False)
+    name = Column(db.String(70), nullable=False)
+    biography = Column(db.String(200), nullable=False)
     created = Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
     def __init__(self, **kwargs):
@@ -69,9 +68,9 @@ class Category(Model):
     __tablename__ = 'category'
 
     id = Column(db.Integer, primary_key=True)
-    name = Column(db.String(60), nullable=False)
+    name = Column(db.String(70), nullable=False)
     description = Column(db.Text, nullable=False)
-    icon_url = Column(db.String(60), nullable=False)
+    icon_url = Column(db.String(200), nullable=False)
 
     def __init__(self, **kwargs):
         """Custom initialization for category."""
@@ -90,7 +89,7 @@ class Quote(Model):
 
     id = Column(db.Integer, primary_key=True)
     text = Column(db.Text, nullable=False)
-    source = Column(db.String(60), nullable=False)
+    source = Column(db.String(200), nullable=False)
     created = Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
     author_id = Column(db.Integer, db.ForeignKey('author.id'))
