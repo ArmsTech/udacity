@@ -20,7 +20,7 @@ class DynamicSelectField(SelectField):
         pass
 
 
-class AddQuoteForm(Form):
+class QuoteForm(Form):
 
     """Form for adding new quotes."""
 

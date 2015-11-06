@@ -2,7 +2,7 @@
 
 from flask import Blueprint, redirect, request, render_template, url_for
 
-from tech_quote.public.forms import AddQuoteForm
+from tech_quote.public.forms import QuoteForm
 
 blueprint = Blueprint('public', __name__, static_folder='../static')
 
@@ -17,12 +17,13 @@ def homepage():
 @blueprint.route('/quotes/add', methods=('GET', 'POST'))
 def add_quote():
     """Add a quotation."""
-    form = AddQuoteForm(request.form)
+    form = QuoteForm(request.form)
 
     if request.method == 'POST':
         if form.validate_on_submit():
             return redirect(url_for('public.homepage'))
         else:
+            print form.errors
             print "FLASH/LOG AN ERROR HERE!"
 
-    return render_template('public/add.html', form=form)
+    return render_template('public/quote.html', form=form, form_action='Add')
