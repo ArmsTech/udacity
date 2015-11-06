@@ -41,7 +41,9 @@ def add_quote():
             flash("Quote created", 'success')
             return redirect(url_for('public.homepage'))
         else:
-            print form.errors
-            print "FLASH/LOG AN ERROR HERE!"
+            errors = sorted(form.errors.keys())
+            field_or_fields = 'fields' if len(errors) > 1 else 'field'
+            flash("Invalid data provided for {0}: {1}".format(
+                field_or_fields, ', '.join(errors)), 'danger')
 
     return render_template('public/quote.html', form=form, form_action='Add')
