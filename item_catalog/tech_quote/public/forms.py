@@ -6,7 +6,7 @@ from flask.ext.wtf import Form
 from wtforms import TextField, SelectField
 from wtforms.validators import InputRequired, Length, URL, ValidationError
 
-from tech_quote.database import Category
+from tech_quote.database import Author, Category
 
 EMPTY_OPTION = ("", "")
 
@@ -39,10 +39,12 @@ class QuoteForm(Form):
 
         categories = Category.query.with_entities(
             Category.id, Category.name).order_by(Category.name).all()
-        self.category.choices = [EMPTY_OPTION] + map(
-            lambda (id_, value): (str(id_), value), categories)
+        self.category.choices = (
+            [EMPTY_OPTION] + self.stringify_choices(categories))
 
-        self.author.choices = (EMPTY_OPTION, (1, 'Sadie'), (2, 'Monty'))
+        authors = Author.query.with_entities(
+            Author.id, Author.name).order_by(Author.name).all()
+        self.author.choices = [EMPTY_OPTION] + self.stringify_choices(authors)
 
     def validate_author(self, field):
         """Validate author hybrid select/text field."""
@@ -52,3 +54,7 @@ class QuoteForm(Form):
             author_ids = map(operator.itemgetter(0), self.author.choices)
             if author not in author_ids:
                 raise ValidationError("Author must not be a number")
+
+    def stringify_choices(self, choices):
+        """Convert int ids to str representations."""
+        return map(lambda (id_, value): (str(id_), value), choices)
