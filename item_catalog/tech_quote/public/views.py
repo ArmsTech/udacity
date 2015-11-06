@@ -23,8 +23,11 @@ def add_quote():
     if request.method == 'POST':
         if form.validate_on_submit():
 
-            # If we receive String data we have a new author to create
-            if type(form.author.data) in (unicode, str):
+            try:
+                # New or existing author?
+                int(form.author.data)
+            except ValueError:
+                # We have a new author to create
                 author_id = Author.create(
                     name=form.author.data, biography=form.biography.data).id
             else:

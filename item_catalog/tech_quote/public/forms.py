@@ -49,7 +49,13 @@ class QuoteForm(Form):
     def validate_author(self, field):
         """Validate author hybrid select/text field."""
         author = field.data
-        if type(author) == int:
+        try:
+            # Is it an id?
+            int(author)
+        except ValueError:
+            # Nope, must be a name. Let it pass.
+            return
+        else:
             # An existing author (id) was selected let's make sure it's valid
             author_ids = map(operator.itemgetter(0), self.author.choices)
             if author not in author_ids:
