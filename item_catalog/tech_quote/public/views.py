@@ -1,6 +1,7 @@
 """Public views for tech_quote (homepage, etc...)."""
 
-from flask import Blueprint, redirect, request, render_template, url_for
+from flask import (
+    Blueprint, flash, redirect, request, render_template, url_for)
 
 from tech_quote.public.forms import QuoteForm
 from tech_quote.database import Author, Quote
@@ -37,6 +38,7 @@ def add_quote():
                 text=form.quotation.data, source=form.source.data,
                 author_id=author_id, category_id=form.category.data)
 
+            flash("Quote created", 'success')
             return redirect(url_for('public.homepage'))
         else:
             print form.errors
