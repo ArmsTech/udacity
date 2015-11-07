@@ -32,10 +32,7 @@ def add_quote():
             flash("Quote created", 'success')
             return redirect(url_for('public.homepage'))
         else:
-            errors = sorted(form.errors.keys())
-            field_or_fields = 'fields' if len(errors) > 1 else 'field'
-            flash("Invalid data provided for {0}: {1}".format(
-                field_or_fields, ', '.join(errors)), 'danger')
+            flash(form.get_post_invalid_message(), 'danger')
 
     return render_template('public/quote.html', form=form, form_action='Add')
 
@@ -65,10 +62,7 @@ def edit_quote(quote_id):
             flash("Quote updated", 'success')
             return redirect(url_for('public.homepage'))
         else:
-            errors = sorted(form.errors.keys())
-            field_or_fields = 'fields' if len(errors) > 1 else 'field'
-            flash("Invalid data provided for {0}: {1}".format(
-                field_or_fields, ', '.join(errors)), 'danger')
+            flash(form.get_post_invalid_message(), 'danger')
 
     return render_template(
         'public/quote.html', form=form, form_action='Update')

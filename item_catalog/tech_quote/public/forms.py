@@ -82,3 +82,10 @@ class QuoteForm(Form):
             author_id = self.author_name.data
 
         return author_id
+
+    def get_post_invalid_message(self):
+        """Get the default error message for a invalid post request."""
+        errors = sorted(self.errors.keys())
+        field_or_fields = 'fields' if len(errors) > 1 else 'field'
+        return "Invalid data provided for {0}: {1}".format(
+            field_or_fields, ', '.join(errors))
