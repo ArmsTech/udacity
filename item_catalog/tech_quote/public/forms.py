@@ -24,7 +24,7 @@ class QuoteForm(Form):
 
     """Form for adding new quotes."""
 
-    quotation = TextField('Quotation', validators=[InputRequired()])
+    quote = TextField('Quotation', validators=[InputRequired()])
     source = TextField(
         'Source', validators=[InputRequired(), Length(1, 200), URL()])
     category = SelectField('Category', validators=[InputRequired()])
