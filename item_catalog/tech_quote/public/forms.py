@@ -67,3 +67,18 @@ class QuoteForm(Form):
     def stringify_choices(self, choices):
         """Convert int ids to str representations."""
         return map(lambda (id_, value): (str(id_), value), choices)
+
+    def get_selected_author_id(self):
+        """Get the selected author_id on the current form."""
+        try:
+            # New or existing (id of existing) author?
+            int(self.author_name.data)
+        except ValueError:
+            # We have a new author to create
+            author_id = Author.create(
+                author_name=self.author_name.data,
+                author_bio=self.author_bio.data).author_id
+        else:
+            author_id = self.author_name.data
+
+        return author_id
