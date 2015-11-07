@@ -15,20 +15,20 @@ class CRUDMixin(object):
     def create(cls, **kwargs):
         """Create."""
         instance = cls(**kwargs)
-        return instance._save()
+        return instance.save()
 
     def update(self, commit=True, **kwargs):
         """Update."""
         for attr, value in kwargs.iteritems():
             setattr(self, attr, value)
-        return commit and self._save() or self
+        return commit and self.save() or self
 
     def delete(self, commit=True):
         """Delete."""
         db.session.delete(self)
         return commit and db.session.commit()
 
-    def _save(self, commit=True):
+    def save(self, commit=True):
         """Commit (save) if requested."""
         db.session.add(self)
         if commit:
