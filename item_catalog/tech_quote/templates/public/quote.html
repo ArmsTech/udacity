@@ -8,28 +8,28 @@
   <form method="POST" action="{{ request.url }}">
     {{ form.hidden_tag() }}
     <div class="form-group">
-      {{ form.quote.label }}
-      {{ form.quote(class="form-control", placeholder="Special cases aren't special enough to break the rules.") }}
+      {{ form.quote_text.label }}
+      {{ form.quote_text(class="form-control", placeholder="Special cases aren't special enough to break the rules.") }}
     </div>
     <div class="form-group">
-      {{ form.source.label }}
-      {{ form.source(class="form-control", placeholder="https://www.python.org/dev/peps/pep-0020/") }}
+      {{ form.quote_source.label }}
+      {{ form.quote_source(class="form-control", placeholder="https://www.python.org/dev/peps/pep-0020/") }}
     </div>
     <div class="form-group">
-      {{ form.category.label }}
-      {{ form.category(class="form-control", placeholder="Python") }}
+      {{ form.category_name.label }}
+      {{ form.category_name(class="form-control", placeholder="Python") }}
       <script>
-        $('#category').selectize({
+        $('#category_name').selectize({
             placeholder: 'Python',
             maxItems: 1
         });
       </script>
     </div>
     <div class="form-group">
-      {{ form.author.label }}
-      {{ form.author(class="form-control", placeholder="Tim Peters") }}
+      {{ form.author_name.label }}
+      {{ form.author_name(class="form-control", placeholder="Tim Peters") }}
       <script>
-        $('#author').selectize({
+        $('#author_name').selectize({
             create: true,
             placeholder: 'Tim Peters',
             maxItems: 1
@@ -37,8 +37,8 @@
       </script>
     </div>
     <div class="form-group">
-      {{ form.biography.label }}
-      {{ form.biography(class="form-control", placeholder="http://stackoverflow.com/users/2705542/tim-peters") }}
+      {{ form.author_bio.label }}
+      {{ form.author_bio(class="form-control", placeholder="http://stackoverflow.com/users/2705542/tim-peters") }}
     </div>
     <button type="submit" class="btn btn-primary">{{ form_action }} Quote</button>
     <a class="btn btn-default" href="{{ url_for('public.homepage') }}">Cancel</a>

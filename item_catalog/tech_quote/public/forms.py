@@ -24,13 +24,13 @@ class QuoteForm(Form):
 
     """Form for adding new quotes."""
 
-    quote = TextField('Quotation', validators=[InputRequired()])
-    source = TextField(
+    quote_text = TextField('Quotation', validators=[InputRequired()])
+    quote_source = TextField(
         'Source', validators=[InputRequired(), Length(1, 200), URL()])
-    category = SelectField('Category', validators=[InputRequired()])
-    author = DynamicSelectField(
+    category_name = SelectField('Category', validators=[InputRequired()])
+    author_name = DynamicSelectField(
         'Author', validators=[InputRequired(), Length(1, 70)])
-    biography = TextField(
+    author_bio = TextField(
         'Biography', validators=[InputRequired(), Length(1, 200), URL()])
 
     def __init__(self, *args, **kwargs):
@@ -38,13 +38,16 @@ class QuoteForm(Form):
         Form.__init__(self, *args, **kwargs)
 
         categories = Category.query.with_entities(
-            Category.id, Category.name).order_by(Category.name).all()
-        self.category.choices = (
+            Category.category_id, Category.category_name).order_by(
+            Category.category_name).all()
+        self.category_name.choices = (
             [EMPTY_OPTION] + self.stringify_choices(categories))
 
         authors = Author.query.with_entities(
-            Author.id, Author.name).order_by(Author.name).all()
-        self.author.choices = [EMPTY_OPTION] + self.stringify_choices(authors)
+            Author.author_id, Author.author_name).order_by(
+            Author.author_name).all()
+        self.author_name.choices = (
+            [EMPTY_OPTION] + self.stringify_choices(authors))
 
     def validate_author(self, field):
         """Validate author hybrid select/text field."""
@@ -57,7 +60,7 @@ class QuoteForm(Form):
             return
         else:
             # An existing author (id) was selected let's make sure it's valid
-            author_ids = map(operator.itemgetter(0), self.author.choices)
+            author_ids = map(operator.itemgetter(0), self.author_name.choices)
             if author not in author_ids:
                 raise ValidationError("Author must not be a number")
 
