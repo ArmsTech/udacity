@@ -47,10 +47,11 @@ class Author(Model):
 
     __tablename__ = 'author'
 
-    id = Column(db.Integer, primary_key=True)
-    name = Column(db.String(70), nullable=False)
-    biography = Column(db.String(200), nullable=False)
-    created = Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    author_id = Column(db.Integer, primary_key=True)
+    author_name = Column(db.String(70), nullable=False)
+    author_bio = Column(db.String(200), nullable=False)
+    author_created = Column(
+        db.DateTime, nullable=False, default=datetime.utcnow)
 
     def __init__(self, **kwargs):
         """Custom initialization for Author."""
@@ -58,7 +59,8 @@ class Author(Model):
 
     def __repr__(self):
         """Compute representation of an Author object."""
-        return '<Author id={0}, name={1}>'.format(self.id, self.name)
+        return '<Author author_id={0}, author_name={1}>'.format(
+            self.author_id, self.author_name)
 
 
 class Category(Model):
@@ -67,10 +69,10 @@ class Category(Model):
 
     __tablename__ = 'category'
 
-    id = Column(db.Integer, primary_key=True)
-    name = Column(db.String(70), nullable=False)
-    description = Column(db.Text, nullable=False)
-    icon_url = Column(db.String(200), nullable=False)
+    category_id = Column(db.Integer, primary_key=True)
+    category_name = Column(db.String(70), nullable=False)
+    category_description = Column(db.Text, nullable=False)
+    category_icon_url = Column(db.String(200), nullable=False)
 
     def __init__(self, **kwargs):
         """Custom initialization for category."""
@@ -78,7 +80,8 @@ class Category(Model):
 
     def __repr__(self):
         """Compute representation of a category object."""
-        return '<Category id={0}, name={1}>'.format(self.id, self.name)
+        return '<Category category_id={0}, category_name={1}>'.format(
+            self.category_id, self.category_name)
 
 
 class Quote(Model):
@@ -87,14 +90,15 @@ class Quote(Model):
 
     __tablename__ = 'quote'
 
-    id = Column(db.Integer, primary_key=True)
-    text = Column(db.Text, nullable=False)
-    source = Column(db.String(200), nullable=False)
-    created = Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    quote_id = Column(db.Integer, primary_key=True)
+    quote_text = Column(db.Text, nullable=False)
+    quote_source = Column(db.String(200), nullable=False)
+    quote_created = Column(
+        db.DateTime, nullable=False, default=datetime.utcnow)
 
-    author_id = Column(db.Integer, db.ForeignKey('author.id'))
+    author_id = Column(db.Integer, db.ForeignKey('author.author_id'))
     author = db.relationship(Author)
-    category_id = Column(db.Integer, db.ForeignKey('category.id'))
+    category_id = Column(db.Integer, db.ForeignKey('category.category_id'))
     category = db.relationship(Category)
 
     def __init__(self, **kwargs):
@@ -103,4 +107,5 @@ class Quote(Model):
 
     def __repr__(self):
         """Compute representation of a Quote object."""
-        return '<Quote id={0}, text={1}>'.format(self.id, self.text)
+        return '<Quote quote_id={0}, quote_text={1}>'.format(
+            self.quote_id, self.quote_text)
