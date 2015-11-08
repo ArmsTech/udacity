@@ -3,17 +3,23 @@
 from flask import (
     Blueprint, flash, redirect, request, render_template, url_for)
 
-from tech_quote.public.forms import QuoteForm
 from tech_quote.database import Quote
+from tech_quote.public.forms import QuoteForm
 
 blueprint = Blueprint('public', __name__, static_folder='../static')
+
+# TODO: Obtain this from tech_quote.config
+POSTS_PER_PAGE = 3
 
 
 @blueprint.route('/')
 @blueprint.route('/quotes')
-def homepage():
+@blueprint.route('/quotes/<int:page>', methods=('GET',))
+def homepage(page=1):
     """Render TQ Homepage."""
-    return render_template('layout.html')
+    quotes = Quote.query.order_by(
+        Quote.quote_created.desc()).paginate(page, POSTS_PER_PAGE)
+    return render_template('public/index.html', quotes=quotes)
 
 
 @blueprint.route('/quotes/add', methods=('GET', 'POST'))
