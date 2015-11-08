@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block content %}
+{% for quote in quotes.items %}
+  <p>
+    {{ quote.quote_text }}
+    {{ quote.quote_source }}
+    {{ quote.category.category_name }}
+    {{ quote.author.author_name }}
+  </p>
+{% endfor %}
+
+{% if quotes.has_prev %}
+  <a href="{{ url_for('public.homepage', page=quotes.prev_num) }}">Previous |</a>
+{% else %}
+  Previous |
+{% endif %}
+{% if quotes.has_next %}
+  <a href="{{ url_for('public.homepage', page=quotes.next_num) }}">Next </a>
+{% else %}
+  Next
+{% endif %} 
+{% endblock %}
