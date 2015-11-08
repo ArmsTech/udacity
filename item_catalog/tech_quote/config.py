@@ -9,8 +9,8 @@ class Config(object):
 
     APP_DIR = os.path.abspath(os.path.dirname(__file__))
     PROJECT_ROOT = os.path.abspath(os.path.join(APP_DIR, os.pardir))
-    SECRET_KEY = os.environ['TQ_SECRET']
     SITE_NAME = 'Tech Quote'
+    SECRET_KEY = os.environ['TQ_SECRET']
     SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URI']
 
 
@@ -19,8 +19,10 @@ class DevelopmentConfig(Config):
     """Development configuration."""
 
     ENV = 'Development'
-    DEBUG = True
+
     ASSETS_DEBUG = True
+    DEBUG = True
+    POSTS_PER_PAGE = 3
 
 
 class ProductionConfig(Config):
@@ -28,4 +30,6 @@ class ProductionConfig(Config):
     """Production configuration."""
 
     ENV = 'Production'
+
     DEBUG = False
+    POSTS_PER_PAGE = 25
