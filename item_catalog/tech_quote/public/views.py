@@ -8,8 +8,12 @@ from tech_quote.public.forms import QuoteForm
 
 blueprint = Blueprint('public', __name__, static_folder='../static')
 
-# TODO: Obtain this from tech_quote.config
-POSTS_PER_PAGE = 3
+
+@blueprint.record_once
+def record_params(state):
+    """Store app.config in blueprint when blueprint is registered on app."""
+    app = state.app
+    blueprint.config = {key: value for key, value in app.config.iteritems()}
 
 
 @blueprint.route('/')
@@ -17,8 +21,9 @@ POSTS_PER_PAGE = 3
 @blueprint.route('/quotes/<int:page>', methods=('GET',))
 def homepage(page=1):
     """Render TQ Homepage."""
+    posts_per_page = blueprint.config['POSTS_PER_PAGE']
     quotes = Quote.query.order_by(
-        Quote.quote_created.desc()).paginate(page, POSTS_PER_PAGE)
+        Quote.quote_created.desc()).paginate(page, posts_per_page)
     return render_template('public/index.html', quotes=quotes)
 
 
