@@ -11,7 +11,8 @@ CSS = (
 JS = (
     'libs/jQuery/dist/jquery.js',
     'libs/bootstrap/dist/js/bootstrap.js',
-    'libs/selectize/dist/js/standalone/selectize.js')
+    'libs/selectize/dist/js/standalone/selectize.js',
+    'libs/bootbox.js/bootbox.js')
 
 assets.register(
     'css_all', Bundle(*CSS, filters='cssmin', output='gen/packed.css'))

@@ -3,6 +3,7 @@
   "homepage": "https://github.com/brenj/udacity",
   "dependencies": {
     "bootstrap": "~3.3.5",
-    "selectize": "~0.12.1"
+    "selectize": "~0.12.1",
+    "bootbox.js": "bootbox#~4.4.0"
   }
 }
