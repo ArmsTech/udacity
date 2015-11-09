@@ -3,7 +3,7 @@
 import operator
 
 from flask.ext.wtf import Form
-from wtforms import TextField, SelectField
+from wtforms import SelectField, TextAreaField, TextField
 from wtforms.validators import InputRequired, Length, URL, ValidationError
 
 from tech_quote.database import Author, Category
@@ -24,7 +24,7 @@ class QuoteForm(Form):
 
     """Form for adding new quotes."""
 
-    quote_text = TextField('Quotation', validators=[InputRequired()])
+    quote_text = TextAreaField('Quotation', validators=[InputRequired()])
     quote_source = TextField(
         'Source', validators=[InputRequired(), Length(1, 200), URL()])
     category_name = SelectField('Category', validators=[InputRequired()])
