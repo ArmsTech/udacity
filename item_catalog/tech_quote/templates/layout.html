@@ -3,7 +3,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>{% block title -%}{%- endblock %}</title>
+    <title>
+      {% block title %}
+          {{ config.SITE_NAME }}
+      {% endblock %}
+    </title>
     
     {% assets "js_all" -%}
         <script type="text/javascript" src="{{ ASSET_URL }}"></script>

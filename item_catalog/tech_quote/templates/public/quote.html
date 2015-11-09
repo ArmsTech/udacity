@@ -1,9 +1,5 @@
 {% extends "layout.html" %}
 
-{% block title %}
-    {{ config.SITE_NAME }}
-{% endblock %}
-
 {% block content %}
   <form method="POST" action="{{ request.url }}">
     {{ form.hidden_tag() }}
