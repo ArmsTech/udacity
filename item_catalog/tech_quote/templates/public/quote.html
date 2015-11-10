@@ -14,7 +14,7 @@
     <div class="form-group">
       {{ form.category_name.label }}
       {{ form.category_name(class="form-control", placeholder="Python") }}
-      <script>
+      <script type="text/javascript">
         $('#category_name').selectize({
             placeholder: 'Python',
             maxItems: 1
@@ -24,7 +24,7 @@
     <div class="form-group">
       {{ form.author_name.label }}
       {{ form.author_name(class="form-control", placeholder="Tim Peters") }}
-      <script>
+      <script type="text/javascript">
         $('#author_name').selectize({
             create: true,
             placeholder: 'Tim Peters',
