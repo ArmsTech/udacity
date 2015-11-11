@@ -103,6 +103,8 @@ class Quote(Model):
     author = db.relationship(Author)
     category_id = Column(db.Integer, db.ForeignKey('category.category_id'))
     category = db.relationship(Category)
+    user_id = Column(db.Integer, db.ForeignKey('user.user_id'))
+    user = db.relationship('User', backref='quote')
 
     def __init__(self, text, source, **kwargs):
         """Create instance for Quote."""
