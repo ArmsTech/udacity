@@ -4,7 +4,7 @@ import os
 
 from flask import Flask, render_template
 
-from tech_quote import public
+from tech_quote import public, user
 from tech_quote.extensions import db, login_manager, migrate
 from tech_quote.assets import assets
 
@@ -34,6 +34,7 @@ def register_extensions(app):
 def register_blueprints(app):
     """Register flask blueprints."""
     app.register_blueprint(public.views.blueprint)
+    app.register_blueprint(user.views.blueprint, url_prefix='/user')
 
 
 def register_errors(app):
