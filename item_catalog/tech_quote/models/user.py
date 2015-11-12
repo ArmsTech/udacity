@@ -7,26 +7,6 @@ from flask.ext.login import UserMixin
 from tech_quote.database import Column, Model, db
 
 
-class Role(Model):
-    """A role for a tq user."""
-
-    __tablename__ = 'role'
-
-    role_id = Column(db.Integer, primary_key=True)
-    role_name = Column(db.String(80), unique=True, nullable=False)
-
-    user_id = Column(db.Integer, db.ForeignKey('user.user_id'))
-    user = db.relationship('User', backref='role')
-
-    def __init__(self, name, **kwargs):
-        """Create instance for Role."""
-        super(Role, self).__init__(name=name, **kwargs)
-
-    def __repr__(self):
-        """Represent Role instance as a string."""
-        return '<Role({0})>'.format(self.name)
-
-
 class User(UserMixin, Model):
     """A user of the tq app."""
 
@@ -53,3 +33,23 @@ class User(UserMixin, Model):
     def __repr__(self):
         """Represent User instance as a string."""
         return '<User({0})>'.format(self.email)
+
+
+class Role(Model):
+    """A role for a tq user."""
+
+    __tablename__ = 'role'
+
+    role_id = Column(db.Integer, primary_key=True)
+    role_name = Column(db.String(80), unique=True, nullable=False)
+
+    user_id = Column(db.Integer, db.ForeignKey('user.user_id'))
+    user = db.relationship(User, backref='role')
+
+    def __init__(self, name, **kwargs):
+        """Create instance for Role."""
+        super(Role, self).__init__(name=name, **kwargs)
+
+    def __repr__(self):
+        """Represent Role instance as a string."""
+        return '<Role({0})>'.format(self.name)
