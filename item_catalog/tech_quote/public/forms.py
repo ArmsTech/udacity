@@ -6,7 +6,7 @@ from flask.ext.wtf import Form
 from wtforms import SelectField, TextAreaField, TextField
 from wtforms.validators import InputRequired, Length, URL, ValidationError
 
-from tech_quote.database import Author, Category
+from tech_quote.models.tq import Author, Category
 
 EMPTY_OPTION = ("", "")
 
