@@ -13,6 +13,7 @@ Mako==1.0.2
 MarkupSafe==0.23
 psycopg2==2.6.1
 python-editor==0.4
+rauth==0.7.2
 requests==2.8.1
 SQLAlchemy==1.0.8
 webassets==0.11.1
