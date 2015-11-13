@@ -1,6 +1,16 @@
 {% extends "layout.html" %}
 
 {% block content %}
+
+<div class="container">
+  <div class="jumbotron">
+    <blockquote>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+      <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
+    </blockquote>
+  </div>
+</div>
+
 {% for quote in quotes.items %}
   <p>
     {{ quote.quote_text }}
