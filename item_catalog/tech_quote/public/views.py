@@ -2,7 +2,7 @@
 
 from flask import (
     Blueprint, flash, redirect, request, render_template, url_for)
-from flask.ext.login import login_user
+from flask.ext.login import login_user, logout_user, login_required
 
 from tech_quote.extensions import login_manager
 from tech_quote.models.tq import Quote
@@ -17,6 +17,14 @@ blueprint = Blueprint('public', __name__, static_folder='../static')
 def load_user(user_id):
     """Reload the user object from the user ID stored in the session."""
     return User.query.get(user_id)
+
+
+@blueprint.route("/logout")
+@login_required
+def logout():
+    """User will be logged out, and their session will be cleaned up."""
+    logout_user()
+    return redirect(url_for('public.homepage'))
 
 
 @blueprint.record_once
