@@ -12,6 +12,8 @@ from tech_quote.public.forms import QuoteForm
 
 blueprint = Blueprint('public', __name__, static_folder='../static')
 
+login_manager.login_view = 'public.homepage'
+
 
 @login_manager.user_loader
 def load_user(user_id):
