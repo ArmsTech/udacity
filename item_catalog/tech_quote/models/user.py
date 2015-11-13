@@ -23,11 +23,18 @@ class User(UserMixin, Model):
     user_is_active = Column(db.Boolean(), default=False)
     user_is_admin = Column(db.Boolean(), default=False)
 
-    def __init__(self, email, github_id, github_login, **kwargs):
+    def __init__(self, **kwargs):
         """Create instance for User."""
-        super(User, self).__init__(
-            user_email=email, user_github_id=github_id,
-            user_github_login=github_login, **kwargs)
+        super(User, self).__init__(**kwargs)
+
+    @classmethod
+    def by_github_id(cls, github_id):
+        """Get a user by a specified github_id."""
+        return cls.query.filter_by(user_github_id=github_id).one_or_none()
+
+    def get_id(self):
+        """Get unicode id that uniquely identifies a User."""
+        return unicode(self.user_id)
 
     def __repr__(self):
         """Represent User instance as a string."""
