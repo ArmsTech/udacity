@@ -6,7 +6,9 @@ from tech_quote.extensions import assets
 
 CSS = (
     'libs/bootstrap/dist/css/bootstrap.css',
-    'libs/selectize/dist/css/selectize.bootstrap3.css')
+    'libs/selectize/dist/css/selectize.bootstrap3.css',
+    'libs/bootstrap-social/bootstrap-social.css',
+    'libs/font-awesome/css/font-awesome.css')
 
 JS = (
     'libs/jQuery/dist/jquery.js',

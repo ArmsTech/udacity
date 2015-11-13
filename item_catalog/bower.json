@@ -4,6 +4,8 @@
   "dependencies": {
     "bootstrap": "~3.3.5",
     "selectize": "~0.12.1",
-    "bootbox.js": "bootbox#~4.4.0"
+    "bootbox.js": "bootbox#~4.4.0",
+    "bootstrap-social": "~4.10.1",
+    "font-awesome": "fontawesome#~4.4.0"
   }
 }
