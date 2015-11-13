@@ -24,6 +24,10 @@
     {% else %}
       <li class="disabled"><a href="#">Next </a></li>
     {% endif %} 
-    {% endblock %}
   </ul>
 </nav>
+
+<form method="GET" action="{{ url_for('public.login_with_github') }}" role="form">
+  <button type="submit" class="btn btn-primary">Sign in with GitHub</button>
+</form>
+{% endblock %}
