@@ -38,7 +38,7 @@ def record_params(state):
 
 @blueprint.route('/')
 @blueprint.route('/quotes')
-@blueprint.route('/quotes/<int:page>', methods=('GET',))
+@blueprint.route('/quotes/<int:page>')
 def homepage(page=1):
     """Render TQ Homepage."""
     posts_per_page = blueprint.config['POSTS_PER_PAGE']
