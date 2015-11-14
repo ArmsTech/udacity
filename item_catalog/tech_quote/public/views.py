@@ -13,6 +13,7 @@ from tech_quote.public.forms import QuoteForm
 blueprint = Blueprint('public', __name__, static_folder='../static')
 
 login_manager.login_view = 'public.homepage'
+login_manager.login_message_category = 'danger'
 
 
 @login_manager.user_loader
