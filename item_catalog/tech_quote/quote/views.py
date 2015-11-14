@@ -29,13 +29,14 @@ def add_quote():
         else:
             flash(form.get_post_invalid_message(), 'danger')
 
-    return render_template('quote/quote.html', form=form, form_action='Add')
+    return render_template(
+        'quote/add_or_edit.html', form=form, form_action='Add')
 
 
 @blueprint.route('/edit/<int:quote_id>', methods=('GET', 'POST'))
 @login_required
 def edit_quote(quote_id):
-    """Edit and update a quote."""
+    """Edit a quote."""
     quote = Quote.query.filter_by(quote_id=quote_id).first_or_404()
 
     form = QuoteForm(
@@ -61,4 +62,4 @@ def edit_quote(quote_id):
             flash(form.get_post_invalid_message(), 'danger')
 
     return render_template(
-        'quote/quote.html', form=form, form_action='Update')
+        'quote/add_or_edit.html', form=form, form_action='Update')
