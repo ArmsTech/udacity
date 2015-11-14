@@ -33,6 +33,7 @@ def add_quote():
 
 
 @blueprint.route('/edit/<int:quote_id>', methods=('GET', 'POST'))
+@login_required
 def edit_quote(quote_id):
     """Edit and update a quote."""
     quote = Quote.query.filter_by(quote_id=quote_id).first_or_404()
