@@ -1,4 +1,4 @@
-"""Define models for tech_quote quotes (tq)."""
+"""Define models for tech_quote quotes."""
 
 from datetime import datetime
 
@@ -18,9 +18,9 @@ class Author(Model):
     author_created = Column(
         db.DateTime, nullable=False, default=datetime.utcnow)
 
-    def __init__(self, name, bio):
+    def __init__(self, **kwargs):
         """Create instance for Author."""
-        super(Author, self).__init__(author_name=name, author_bio=bio)
+        super(Author, self).__init__(**kwargs)
 
     def __repr__(self):
         """Represent Author instance as a string."""
@@ -39,12 +39,9 @@ class Category(Model):
     category_description = Column(db.Text, nullable=False)
     category_icon_url = Column(db.String(200), nullable=False)
 
-    def __init__(self, name, description, icon_url):
+    def __init__(self, **kwargs):
         """Create instance for Category."""
-        super(Category, self).__init__(
-            category_name=name,
-            category_description=description,
-            category_icon_url=icon_url)
+        super(Category, self).__init__(**kwargs)
 
     def __repr__(self):
         """Represent Category instance as a string."""
@@ -71,10 +68,9 @@ class Quote(Model):
     user_id = Column(db.Integer, db.ForeignKey('user.user_id'))
     user = db.relationship(User, backref='quote')
 
-    def __init__(self, text, source, **kwargs):
+    def __init__(self, **kwargs):
         """Create instance for Quote."""
-        super(Quote, self).__init__(
-            quote_text=text, quote_source=source, **kwargs)
+        super(Quote, self).__init__(**kwargs)
 
     def __repr__(self):
         """Represent Quote instance as a string."""
