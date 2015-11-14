@@ -1,4 +1,4 @@
-"""Define models for tech_quote database (tq)."""
+"""Define models for tech_quote quotes (tq)."""
 
 from datetime import datetime
 
