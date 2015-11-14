@@ -11,6 +11,7 @@ blueprint = Blueprint('quote', __name__, static_folder='../static')
 
 
 @blueprint.route('/add', methods=('GET', 'POST'))
+@login_required
 def add_quote():
     """Add a quote."""
     form = QuoteForm(request.form)
