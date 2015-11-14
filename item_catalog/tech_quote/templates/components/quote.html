@@ -1,0 +1,12 @@
+{% macro render_quote(quote) %}
+  <div class="container">
+    <div class="jumbotron">
+      <blockquote>
+        <p>"{{ quote.quote_text }}"</p>
+        <footer>
+          <cite title="Source Title">{{ quote.author.author_name }}</cite>
+        </footer>
+      </blockquote>
+    </div>
+  </div>
+{% endmacro %}

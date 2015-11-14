@@ -1,23 +1,11 @@
+{% from 'components/quote.html' import render_quote %}
+
 {% extends "layout.html" %}
 
 {% block content %}
 
-<div class="container">
-  <div class="jumbotron">
-    <blockquote>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-      <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
-    </blockquote>
-  </div>
-</div>
-
 {% for quote in quotes.items %}
-  <p>
-    {{ quote.quote_text }}
-    {{ quote.quote_source }}
-    {{ quote.category.category_name }}
-    {{ quote.author.author_name }}
-  </p>
+  {{ render_quote(quote) }}
 {% endfor %}
 
 <nav>
