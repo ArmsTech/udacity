@@ -4,7 +4,7 @@ from flask import (
     Blueprint, flash, redirect, request, render_template, url_for)
 from flask.ext.login import login_required
 
-from tech_quote.models.tq import Quote
+from tech_quote.models.quote import Quote
 from tech_quote.public.forms import QuoteForm
 
 blueprint = Blueprint('quote', __name__, static_folder='../static')
