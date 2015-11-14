@@ -1,4 +1,4 @@
-"""Forms for public tech_quote website."""
+"""Forms for handling quotes in tq website."""
 
 import operator
 
