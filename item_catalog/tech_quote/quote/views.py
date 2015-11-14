@@ -10,7 +10,7 @@ from tech_quote.public.forms import QuoteForm
 blueprint = Blueprint('quote', __name__, static_folder='../static')
 
 
-@blueprint.route('/quotes/add', methods=('GET', 'POST'))
+@blueprint.route('/add', methods=('GET', 'POST'))
 def add_quote():
     """Add a quote."""
     form = QuoteForm(request.form)
@@ -31,7 +31,7 @@ def add_quote():
     return render_template('public/quote.html', form=form, form_action='Add')
 
 
-@blueprint.route('/quotes/edit/<int:quote_id>', methods=('GET', 'POST'))
+@blueprint.route('/edit/<int:quote_id>', methods=('GET', 'POST'))
 def edit_quote(quote_id):
     """Edit and update a quote."""
     quote = Quote.query.filter_by(quote_id=quote_id).first_or_404()
