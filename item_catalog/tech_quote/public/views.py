@@ -5,7 +5,7 @@ from flask import (
 from flask.ext.login import login_user, logout_user, login_required
 
 from tech_quote.extensions import login_manager
-from tech_quote.models.tq import Quote
+from tech_quote.models.quote import Quote
 from tech_quote.models.user import User
 from tech_quote.oauth.providers import GitHubSignIn
 

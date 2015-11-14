@@ -5,7 +5,7 @@ from flask import (
 from flask.ext.login import login_required
 
 from tech_quote.models.quote import Quote
-from tech_quote.public.forms import QuoteForm
+from tech_quote.quote.forms import QuoteForm
 
 blueprint = Blueprint('quote', __name__, static_folder='../static')
 
