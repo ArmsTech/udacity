@@ -10,7 +10,7 @@ from tech_quote.database import Column, Model, db
 class User(UserMixin, Model):
     """A user of the tq app."""
 
-    __tablename__ = 'user'
+    __tablename__ = 'tq_user'
 
     user_id = Column(db.Integer, primary_key=True)
 
@@ -51,7 +51,7 @@ class Role(Model):
 
     role_name = Column(db.String(80), unique=True, nullable=False)
 
-    user_id = Column(db.Integer, db.ForeignKey('user.user_id'))
+    user_id = Column(db.Integer, db.ForeignKey('tq_user.user_id'))
     user = db.relationship(User, backref='role')
 
     def __init__(self, name, **kwargs):
