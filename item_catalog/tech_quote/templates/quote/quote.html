@@ -10,7 +10,9 @@
         <a class="btn btn-default btn-block" href="{{ url_for('quote.edit_quote', quote_id=quote.quote_id) }}" role="button">Edit</a>
       </div>
       <div class="col-sm-1 col-10-gutter">
-        <button type="submit" class="btn btn-danger btn-block">Delete</button>
+        <form method="POST" action="{{ url_for('quote.delete_quote', quote_id=quote.quote_id) }}">
+          <button type="submit" class="btn btn-danger btn-block">Delete</button>
+        </form>
       </div>
     </div>
   </div>

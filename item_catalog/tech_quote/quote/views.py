@@ -1,8 +1,8 @@
 """Quote views for logged-in tech_quote users (add_quote, etc...)."""
 
 from flask import (
-    Blueprint, flash, redirect, request, render_template, url_for)
-from flask.ext.login import login_required
+    Blueprint, abort, flash, redirect, request, render_template, url_for)
+from flask.ext.login import login_required, current_user
 
 from tech_quote.models.quote import Quote
 from tech_quote.quote.forms import QuoteForm
@@ -30,7 +30,8 @@ def add_quote():
                 quote_text=form.quote_text.data,
                 quote_source=form.quote_source.data,
                 author_id=form.get_selected_author_id(),
-                category_id=form.category_name.data)
+                category_id=form.category_name.data,
+                user_id=current_user.user_id)
 
             flash("Quote created", 'success')
             return redirect(url_for('public.homepage'))
@@ -69,3 +70,17 @@ def edit_quote(quote_id):
             flash(form.get_post_invalid_message(), 'danger')
 
     return render_template('quote/add_or_edit.html', form=form)
+
+
+@blueprint.route('/delete/<int:quote_id>', methods=('POST',))
+@login_required
+def delete_quote(quote_id):
+    """Delete a quote."""
+    quote = Quote.query.filter_by(quote_id=quote_id).first_or_404()
+    current_user_is_owner = current_user.user_id == quote.user_id
+
+    if current_user_is_owner:
+        quote.delete()
+        return redirect(url_for('public.homepage'))
+    else:
+        abort(401)
