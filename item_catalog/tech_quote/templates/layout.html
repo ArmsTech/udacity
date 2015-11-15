@@ -8,13 +8,19 @@
           {{ config.SITE_NAME }}
       {% endblock %}
     </title>
-    
+
     {% assets "js_all" -%}
         <script type="text/javascript" src="{{ ASSET_URL }}"></script>
     {%- endassets %}
     {% assets "css_all" -%}
         <link rel="stylesheet" href="{{ ASSET_URL }}">
     {%- endassets %}
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+          $('[data-toggle="tooltip"]').tooltip()
+        });
+    </script>
 </head>
 <body>
     {% include 'nav.html' %}

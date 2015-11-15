@@ -6,7 +6,13 @@
     margin-left: -10px;
     margin-right: -10px;
 }
+
 .col-10-gutter {
     padding-left: 10px;
     padding-right: 10px;
+}
+
+.tooltip-inner {
+    max-width: 100px;
+    width: 100px; 
 }
