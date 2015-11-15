@@ -61,11 +61,14 @@ class Quote(Model):
     quote_created = Column(
         db.DateTime, nullable=False, default=datetime.utcnow)
 
-    author_id = Column(db.Integer, db.ForeignKey('author.author_id'))
+    author_id = Column(
+        db.Integer, db.ForeignKey('author.author_id'), nullable=False)
     author = db.relationship(Author)
-    category_id = Column(db.Integer, db.ForeignKey('category.category_id'))
+    category_id = Column(
+        db.Integer, db.ForeignKey('category.category_id'), nullable=False)
     category = db.relationship(Category)
-    user_id = Column(db.Integer, db.ForeignKey('user.user_id'))
+    user_id = Column(
+        db.Integer, db.ForeignKey('tq_user.user_id'), nullable=False)
     user = db.relationship(User, backref='quote')
 
     def __init__(self, **kwargs):
