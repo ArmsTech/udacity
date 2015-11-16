@@ -3,7 +3,7 @@
     <div class="container">
       <div class="jumbotron">
         <blockquote>
-          <p><i class="fa fa-quote-left fa-lg"></i> {{ quote.quote_text }} <i class="fa fa-quote-right fa-lg"></i></p>
+          <p><i class="fa fa-quote-left fa-lg"></i> <a href="{{ url_for('quote.show_quote', quote_id=quote.quote_id) }}">{{ quote.quote_text }} </a><i class="fa fa-quote-right fa-lg"></i></p>
           <footer>
             <cite title="Source Title">{{ quote.author.author_name }}</cite>
           </footer>
