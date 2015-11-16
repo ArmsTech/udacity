@@ -38,7 +38,8 @@ def add_quote():
         else:
             flash(form.get_post_invalid_message(), 'danger')
 
-    return render_template('quote/add_or_edit.html', form=form)
+    return render_template(
+        'quote/add_or_edit.html', form=form, form_action='add')
 
 
 @blueprint.route('/edit/<int:quote_id>', methods=('GET', 'POST'))
@@ -69,7 +70,8 @@ def edit_quote(quote_id):
         else:
             flash(form.get_post_invalid_message(), 'danger')
 
-    return render_template('quote/add_or_edit.html', form=form)
+    return render_template(
+        'quote/add_or_edit.html', form=form, form_action='edit')
 
 
 @blueprint.route('/delete/<int:quote_id>', methods=('POST',))

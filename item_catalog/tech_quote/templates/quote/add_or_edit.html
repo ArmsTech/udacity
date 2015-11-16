@@ -8,7 +8,11 @@
   </script>
   <div class="container">
     <div class="page-header text-center">
-      <h1 style="margin-bottom: 0px;"><i class="fa fa-plus-square-o fa-lg"></i> Add a quote for the internets to see</h1>
+      {% if form_action == 'add' %}
+        <h1 style="margin-bottom: 0px;"><i class="fa fa-plus-square-o fa-lg"></i> Add a quote for the internets to see</h1>
+      {% else %}
+        <h1 style="margin-bottom: 0px;"><i class="fa fa-pencil-square-o fa-lg"></i> Edit that quote to ** perfection ** !</h1>
+      {% endif %} 
       <h1 style="margin-top: 0px;"><small>... and don't worry about the quotation marks -- we got you ;)</small></h1>
     </div>
     <div class="col-xs-12" style="height:25px;"></div>
