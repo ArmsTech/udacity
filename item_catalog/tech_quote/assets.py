@@ -15,7 +15,6 @@ JS = (
     'libs/jQuery/dist/jquery.js',
     'libs/bootstrap/dist/js/bootstrap.js',
     'libs/selectize/dist/js/standalone/selectize.js',
-    'libs/bootbox.js/bootbox.js',
     'js/app.js')
 
 assets.register(
