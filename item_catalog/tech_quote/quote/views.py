@@ -11,7 +11,6 @@ blueprint = Blueprint('quote', __name__, static_folder='../static')
 
 
 @blueprint.route('/<int:quote_id>')
-@login_required
 def show_quote(quote_id):
     """Show a single quote."""
     quote = Quote.query.get_or_404(quote_id)
