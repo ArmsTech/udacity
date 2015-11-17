@@ -79,9 +79,8 @@ def edit_quote(quote_id):
 def delete_quote(quote_id):
     """Delete a quote."""
     quote = Quote.query.filter_by(quote_id=quote_id).first_or_404()
-    current_user_is_owner = current_user.user_id == quote.user_id
 
-    if current_user_is_owner:
+    if quote.is_owned_by(current_user):
         quote.delete()
         flash("Quote deleted", 'success')
         return redirect(url_for('public.homepage'))

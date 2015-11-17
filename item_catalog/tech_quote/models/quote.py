@@ -75,6 +75,10 @@ class Quote(Model):
         """Create instance for Quote."""
         super(Quote, self).__init__(**kwargs)
 
+    def is_owned_by(self, user):
+        """Whether quote is owned by provided user object."""
+        return self.user_id == user.user_id
+
     def __repr__(self):
         """Represent Quote instance as a string."""
         return '<Quote quote_id={0}, quote_text={1}>'.format(
