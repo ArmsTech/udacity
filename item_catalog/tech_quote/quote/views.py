@@ -83,6 +83,7 @@ def delete_quote(quote_id):
 
     if current_user_is_owner:
         quote.delete()
+        flash("Quote deleted", 'success')
         return redirect(url_for('public.homepage'))
     else:
         abort(401)
