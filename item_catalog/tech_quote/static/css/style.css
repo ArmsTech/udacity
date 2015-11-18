@@ -26,3 +26,11 @@
 .username-width {
   max-width: 200px;
 }
+
+blockquote a {
+  color: black;
+}
+
+blockquote a:visited {
+  color: #660000;
+}

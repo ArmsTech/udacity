@@ -1,13 +1,19 @@
 {% macro render_quote(quote) %}
   <p>
     <div class="container">
-      <div class="jumbotron">
-        <blockquote>
-          <p><i class="fa fa-quote-left fa-lg"></i> <a href="{{ url_for('quote.show_quote', quote_id=quote.quote_id) }}">{{ quote.quote_text }} </a><i class="fa fa-quote-right fa-lg"></i></p>
-          <footer>
-            <cite title="Source Title">{{ quote.author.author_name }}</cite>
-          </footer>
-        </blockquote>
+      <div class="row">
+        <div class="jumbotron">
+          <blockquote>
+            <p><i class="fa fa-quote-left fa-lg"></i> <a href="{{ url_for('quote.show_quote', quote_id=quote.quote_id) }}">{{ quote.quote_text }} </a><i class="fa fa-quote-right fa-lg"></i></p>
+            <footer>
+              <cite title="Source Title">{{ quote.author.author_name }}</cite>
+            </footer>
+          </blockquote>
+        </div>
+      </div>
+      <div class="row" style="margin-top: -60px; padding-left: 10px;">
+        <a href="{{ quote.author.author_bio }}" target="external" role="button" class="btn btn-default btn-xs"><i class="fa fa-external-link"></i> More about author</a>
+        <a href="{{ quote.quote_source }}" target="external" role="button" class="btn btn-default btn-xs"><i class="fa fa-external-link"></i> Source of quote ^</a>
       </div>
     </div>
   </p>
