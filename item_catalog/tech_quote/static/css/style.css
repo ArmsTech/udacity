@@ -2,6 +2,24 @@
    Tech Quote (custom) CSS file.
    ======================================================================== */
 
+body {
+    background-image: url("../images/cream_dust.png");
+}
+
+.jumbotron {
+  background: url("../images/cream_dust.png");
+  border-style: solid;
+  border-width: 1px;
+}
+
+blockquote a {
+  color: black;
+}
+
+blockquote a:visited {
+  color: #660000;
+}
+
 .row-10-gutter {
     margin-left: -10px;
     margin-right: -10px;
@@ -25,12 +43,4 @@
 
 .username-width {
   max-width: 200px;
-}
-
-blockquote a {
-  color: black;
-}
-
-blockquote a:visited {
-  color: #660000;
 }
