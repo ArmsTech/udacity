@@ -1,6 +1,9 @@
 {% macro render_quote(quote) %}
   <p>
     <div class="container">
+      <div class="row pull-right" style="padding: 10px 10px 0 0;">
+        <a href="#">{{ quote.category.category_name }}</a>
+      </div>
       <div class="row">
         <div class="jumbotron">
           <blockquote>
