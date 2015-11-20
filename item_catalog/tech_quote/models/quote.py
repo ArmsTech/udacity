@@ -77,7 +77,7 @@ class Quote(Model):
 
     def is_owned_by(self, user):
         """Whether quote is owned by provided user object."""
-        return self.user_id == user.user_id
+        return unicode(self.user_id) == user.get_id()
 
     def __repr__(self):
         """Represent Quote instance as a string."""
