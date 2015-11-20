@@ -14,10 +14,12 @@ body {
 
 blockquote a {
   color: black;
+  text-decoration: none !important;
 }
 
 blockquote a:visited {
   color: #660000;
+  text-decoration: none !important;
 }
 
 .row-10-gutter {
