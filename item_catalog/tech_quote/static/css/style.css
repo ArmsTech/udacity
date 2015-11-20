@@ -9,11 +9,13 @@ body {
 blockquote a {
   color: black;
   text-decoration: none !important;
+  font-family: 'Ubuntu', sans-serif;
 }
 
 blockquote a:visited {
   color: #660000;
   text-decoration: none !important;
+  font-family: 'Ubuntu', sans-serif;
 }
 
 .jumbotron {
