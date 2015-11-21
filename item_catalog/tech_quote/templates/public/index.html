@@ -1,11 +1,12 @@
-{% from 'components/quote.html' import render_quote %}
+{% from 'components/quote.html' import render_quote_with_details %}
 
 {% extends "layout.html" %}
 
 {% block content %}
 
 {% for quote in quotes.items %}
-  {{ render_quote(quote) }}
+  {{ render_quote_with_details(quote) }}
+  <div class="col-xs-12" style="height: 30px;"></div>
 {% endfor %}
 
 <nav>

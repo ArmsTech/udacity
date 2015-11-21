@@ -1,10 +1,14 @@
-{% from 'components/quote.html' import render_quote %}
+{% from 'components/quote.html' import render_quote_text_only %}
 
 {% extends "layout.html" %}
 
 {% block content %}
   <div class="col-xs-12" style="height:25px;"></div>
-  {{ render_quote(quote) }}
+  <div class="container">
+    <div class="row">
+      {{ render_quote_text_only(quote) }}
+    </div>
+  </div>
   {% if quote.is_owned_by(current_user) -%}
     <div class="container">
       <div class="row row-10-gutter">
