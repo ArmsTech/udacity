@@ -52,6 +52,15 @@ blockquote a:visited {
   max-width: 200px;
 }
 
+.footer-content {
+  margin: 20px;
+  text-align: center;
+}
+
+.connect-icons {
+  padding-top: 5px !important;
+}
+
 #wrap {
   min-height: 100%;
 }
