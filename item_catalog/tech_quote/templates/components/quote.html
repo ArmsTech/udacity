@@ -1,26 +1,37 @@
 {% macro render_quote(quote) %}
-  <p>
-    <div class="container">
-      <div class="row">
-        <div class="jumbotron">
-          <blockquote>
-            <p>"<a href="{{ url_for('quote.show_quote', quote_id=quote.quote_id) }}">{{ quote.quote_text }} </a>"</p>
-            <footer>
-              <cite title="Source Title">{{ quote.author.author_name }}</cite>
-            </footer>
-          </blockquote>
-        </div>
-      </div>
-      <div class="row" style="margin-top: -60px; padding-left: 60px;">
-        <div style="padding: 0 0 10px 2px;">
-          Category = <a href="#">{{ quote.category.category_name }} <span class="badge">2</span></a>
-        </div>
-        <a href="{{ quote.author.author_bio }}" target="external" role="button" class="btn btn-default btn-xs"><i class="fa fa-external-link"></i> More about author </a>
-        <a href="{{ quote.quote_source }}" target="external" role="button" class="btn btn-default btn-xs"><i class="fa fa-external-link"></i> Source of quote </a>
-        <span class="pull-right">Submitted by <a href="#">{{ quote.user.user_github_login }}</a></span>
-        <br />
-      </div>
+  <div class="jumbotron">
+    <blockquote>
+      <p>"<a href="{{ url_for('quote.show_quote', quote_id=quote.quote_id) }}">{{ quote.quote_text }} </a>"</p>
+      <footer>
+        <cite title="Source Title">{{ quote.author.author_name }}</cite>
+      </footer>
+    </blockquote>
+  </div>
+{% endmacro %}
+
+{% macro render_quote_text_only(quote) %}
+  <div class="jumbotron">
+    <blockquote>
+      <p>" {{ quote.quote_text }} "</p>
+      <footer>
+        <cite title="Source Title">{{ quote.author.author_name }}</cite>
+      </footer>
+    </blockquote>
+  </div>
+{% endmacro %}
+
+{% macro render_quote_with_details(quote) %}
+  <div class="container">
+    <div class="row">
+      {{ render_quote(quote) }}
     </div>
-    <div class="col-xs-12" style="height: 30px;"></div>
-  </p>
+    <div class="row" style="margin-top: -60px; padding-left: 60px;">
+      <div style="padding: 0 0 10px 2px;">
+        Category: <a href="#">{{ quote.category.category_name }} <span class="badge">2</span></a>
+      </div>
+      <a href="{{ quote.author.author_bio }}" target="external" role="button" class="btn btn-default btn-xs"><i class="fa fa-external-link"></i> More about author </a>
+      <a href="{{ quote.quote_source }}" target="external" role="button" class="btn btn-default btn-xs"><i class="fa fa-external-link"></i> Source of quote </a>
+      <span class="pull-right">Submitted by <a href="#">{{ quote.user.user_github_login }}</a></span>
+    </div>
+  </div>
 {% endmacro %}
