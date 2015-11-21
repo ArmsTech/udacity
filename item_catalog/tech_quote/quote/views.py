@@ -70,7 +70,7 @@ def edit_quote(quote_id):
             flash(form.get_post_invalid_message(), 'danger')
 
     return render_template(
-        'quote/add_or_edit.html', form=form, form_action='edit')
+        'quote/add_or_edit.html', quote=quote, form=form, form_action='edit')
 
 
 @blueprint.route('/delete/<int:quote_id>', methods=('POST',))

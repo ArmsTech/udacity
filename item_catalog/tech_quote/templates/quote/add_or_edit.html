@@ -74,15 +74,15 @@
       <div class="col-xs-12" style="height:25px;"></div>
       <div class="row row-10-gutter">
         <div class="col-md-1 col-md-offset-6 col-10-gutter">
-          <a class="btn btn-default btn-block" href="{{ url_for('public.homepage') }}" role="button">Cancel</a>
+          {% if form_action == 'add' %}
+            <a class="btn btn-default btn-block" href="{{ url_for('public.homepage') }}" role="button">Cancel</a>
+          {% else %}
+            <a class="btn btn-default btn-block" href="{{ url_for('quote.show_quote', quote_id=quote.quote_id) }}" role="button">Cancel</a>
+          {% endif %} 
         </div>
         <div class="col-md-1 col-10-gutter">
           <button type="submit" class="btn btn-success btn-block">Save</button>
         </div>
-          <!-- <div class="btn-group" role="group"> -->
-          <!--   <a class="btn btn-default" href="{{ url_for('public.homepage') }}" role="button">Cancel</a> -->
-          <!--   <button type="submit" class="btn btn-success">Save</button> -->
-          <!-- </div> -->
         </div>
       </div>
     </form>
