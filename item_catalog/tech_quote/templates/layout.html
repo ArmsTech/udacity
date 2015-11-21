@@ -25,8 +25,15 @@
     <link href='https://fonts.googleapis.com/css?family=Ubuntu:300' rel='stylesheet' type='text/css'>
 </head>
 <body>
-    {% include 'nav.html' %}
-    {% include 'components/flash.html' %}
-    {% block content %}{% endblock %}
+    <div id="wrap">
+      <div id="main">
+        {% include 'nav.html' %}
+        {% include 'components/flash.html' %}
+        {% block content %}{% endblock %}
+      </div>
+    </div>
+    <div id="footer">
+      {% include 'footer.html' %}
+    </div>
 </body>
 </html>
