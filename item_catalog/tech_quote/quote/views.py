@@ -4,7 +4,7 @@ from flask import (
     Blueprint, abort, flash, redirect, request, render_template, url_for)
 from flask.ext.login import login_required, current_user
 
-from tech_quote.models.quote import Quote
+from tech_quote.models.quote import Quote, Category
 from tech_quote.quote.forms import QuoteForm
 
 blueprint = Blueprint('quote', __name__, static_folder='../static')
@@ -15,6 +15,14 @@ def show_quote(quote_id):
     """Show a single quote."""
     quote = Quote.query.get_or_404(quote_id)
     return render_template('quote/quote.html', quote=quote)
+
+
+@blueprint.route('/category/<int:category_id>')
+def show_category(category_id):
+    """Show a quote category."""
+    category = Category.query.get_or_404(category_id)
+    return render_template(
+        'quote/category.html', category=category)
 
 
 @blueprint.route('/add', methods=('GET', 'POST'))
