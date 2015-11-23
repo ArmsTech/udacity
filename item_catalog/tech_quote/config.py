@@ -22,7 +22,7 @@ class DevelopmentConfig(Config):
 
     ASSETS_DEBUG = True
     DEBUG = True
-    POSTS_PER_PAGE = 3
+    QUOTES_PER_PAGE = 3
 
 
 class ProductionConfig(Config):
@@ -32,4 +32,4 @@ class ProductionConfig(Config):
     ENV = 'Production'
 
     DEBUG = False
-    POSTS_PER_PAGE = 25
+    QUOTES_PER_PAGE = 10
