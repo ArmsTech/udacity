@@ -1,0 +1,18 @@
+{% macro render_pager(quotes) %}
+  <nav>
+    <ul class="pager">
+      {% if quotes.has_prev %}
+        <li>
+          <a href="{{ url_for('public.homepage', page=quotes.prev_num) }}">Previous </a>
+        </li>
+      {% else %}
+        <li class="disabled"><a href="#"> Previous</a></li>
+      {% endif %}
+      {% if quotes.has_next %}
+        <li><a href="{{ url_for('public.homepage', page=quotes.next_num) }}">Next </a></li>
+      {% else %}
+        <li class="disabled"><a href="#">Next </a></li>
+      {% endif %} 
+    </ul>
+  </nav>
+{% endmacro %}
