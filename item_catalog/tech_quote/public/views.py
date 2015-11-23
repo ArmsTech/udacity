@@ -40,9 +40,7 @@ def record_params(state):
 @blueprint.route('/quotes/<int:page>')
 def homepage(page=1):
     """Render TQ Homepage."""
-    posts_per_page = blueprint.config['POSTS_PER_PAGE']
-    quotes = Quote.query.order_by(
-        Quote.quote_created.desc()).paginate(page, posts_per_page)
+    quotes = Quote.get_quotes_with_pagination(page)
     return render_template('public/index.html', quotes=quotes)
 
 

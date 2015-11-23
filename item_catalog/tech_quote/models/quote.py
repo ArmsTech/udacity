@@ -79,6 +79,13 @@ class Quote(Model):
         """Whether quote is owned by provided user object."""
         return unicode(self.user_id) == user.get_id()
 
+    @classmethod
+    def get_quotes_with_pagination(cls, page):
+        """Get a number of quotes for a specified page."""
+        posts_per_page = db.get_app().config['POSTS_PER_PAGE']
+        return cls.query.order_by(
+            cls.quote_created.desc()).paginate(page, posts_per_page)
+
     def __repr__(self):
         """Represent Quote instance as a string."""
         return '<Quote quote_id={0}, quote_text={1}>'.format(
