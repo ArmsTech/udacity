@@ -18,11 +18,13 @@ def show_quote(quote_id):
 
 
 @blueprint.route('/category/<int:category_id>')
-def show_category(category_id):
+@blueprint.route('/category/<int:category_id>/<int:page>')
+def show_category(category_id, page=1):
     """Show a quote category."""
     category = Category.query.get_or_404(category_id)
+    quotes = Quote.get_quotes_by_category_with_pagination(category_id, page)
     return render_template(
-        'quote/category.html', category=category)
+        'quote/category.html', category=category, quotes=quotes)
 
 
 @blueprint.route('/add', methods=('GET', 'POST'))

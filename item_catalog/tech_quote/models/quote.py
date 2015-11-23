@@ -86,6 +86,13 @@ class Quote(Model):
         return cls.query.order_by(
             cls.quote_created.desc()).paginate(page, quotes_per_page)
 
+    @classmethod
+    def get_quotes_by_category_with_pagination(cls, category_id, page):
+        """Get a number of quotes by category for a specified page."""
+        quotes_per_page = db.get_app().config['QUOTES_PER_PAGE']
+        return cls.query.filter_by(category_id=category_id).order_by(
+            cls.quote_created.desc()).paginate(page, quotes_per_page)
+
     def __repr__(self):
         """Represent Quote instance as a string."""
         return '<Quote quote_id={0}, quote_text={1}>'.format(
