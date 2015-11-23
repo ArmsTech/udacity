@@ -38,6 +38,7 @@ def logout():
 
 
 @blueprint.route('/')
+@blueprint.route('/quotes')
 @blueprint.route('/quotes/<int:page>')
 def homepage(page=1):
     """Render TQ Homepage."""
