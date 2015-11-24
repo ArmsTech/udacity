@@ -23,8 +23,15 @@ def show_category(category_id, page=1):
     """Show a quote category."""
     category = Category.query.get_or_404(category_id)
     quotes = Quote.get_quotes_by_category_with_pagination(category_id, page)
+
+    prev_page = url_for(
+        'quote.show_category', category_id=category_id, page=quotes.prev_num)
+    next_page = url_for(
+        'quote.show_category', category_id=category_id, page=quotes.next_num)
+
     return render_template(
-        'quote/category.html', category=category, quotes=quotes)
+        'quote/category.html', category=category, quotes=quotes,
+        prev_page=prev_page, next_page=next_page)
 
 
 @blueprint.route('/add', methods=('GET', 'POST'))

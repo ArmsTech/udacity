@@ -43,7 +43,13 @@ def logout():
 def homepage(page=1):
     """Render TQ Homepage."""
     quotes = Quote.get_quotes_with_pagination(page)
-    return render_template('public/index.html', quotes=quotes)
+
+    prev_page = url_for('public.homepage', page=quotes.prev_num)
+    next_page = url_for('public.homepage', page=quotes.next_num)
+
+    return render_template(
+        'public/index.html', quotes=quotes,
+        prev_page=prev_page, next_page=next_page)
 
 
 @blueprint.route('/login/oauth/github')
