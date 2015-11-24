@@ -8,9 +8,7 @@
     <div class="row">
       {{ render_quote_text_only(quote) }}
     </div>
-  </div>
-  {% if quote.is_owned_by(current_user) -%}
-    <div class="container">
+    {% if quote.is_owned_by(current_user) -%}
       <div class="row creamdust">
         <div class="col-sm-3 ">
           <h2>Actions</h2>
@@ -40,37 +38,38 @@
           <button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#confirmDelete">Delete</button>
         </div>
       </div>
-  {%- endif %}
-    <div class="col-xs-12" style="height: 30px;"></div>
-    <div class="row creamdust">
-      <div class="col-sm-3">
-        <h2>Details</h2>
+    {%- endif %}
+      <div class="col-xs-12" style="height: 30px;"></div>
+      <div class="row creamdust">
+        <div class="col-sm-3">
+          <h2>Details</h2>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-3 col-sm-offset-3">
-        <strong>Created:</strong> {{ quote.quote_created }}
+      <div class="row">
+        <div class="col-sm-3 col-sm-offset-3">
+          <strong>Created:</strong> {{ quote.quote_created }}
+        </div>
+        <div class="col-sm-3 col-sm-offset-1">
+          <strong>Submitted by:</strong> {{ quote.user.user_github_login }}
+        </div>
       </div>
-      <div class="col-sm-3 col-sm-offset-1">
-        <strong>Submitted by:</strong> {{ quote.user.user_github_login }}
+      <div class="col-xs-12" style="height: 10px;"></div>
+      <div class="row">
+        <div class="col-sm-3 col-sm-offset-3">
+          <strong>Category:</strong> {{ quote.category.category_name }}
+        </div>
+        <div class="col-sm-3 col-sm-offset-1">
+          <strong>Source:</strong> <a href="{{ quote.quote_source }}" target="external"> View source </a>
+        </div>
       </div>
-    </div>
-    <div class="col-xs-12" style="height: 10px;"></div>
-    <div class="row">
-      <div class="col-sm-3 col-sm-offset-3">
-        <strong>Category:</strong> {{ quote.category.category_name }}
+      <div class="col-xs-12" style="height: 10px;"></div>
+      <div class="row">
+        <div class="col-sm-3 col-sm-offset-3">
+          <strong>Author:</strong> {{ quote.author.author_name }}
+        </div>
+        <div class="col-sm-3 col-sm-offset-1">
+          <strong>Bio:</strong> <a href="{{ quote.author.author_bio }}" target="external"> View bio </a>
+        </div>
       </div>
-      <div class="col-sm-3 col-sm-offset-1">
-        <strong>Source:</strong> <a href="{{ quote.quote_source }}" target="external"> View source </a>
-      </div>
-    </div>
-    <div class="col-xs-12" style="height: 10px;"></div>
-    <div class="row">
-      <div class="col-sm-3 col-sm-offset-3">
-        <strong>Author:</strong> {{ quote.author.author_name }}
-      </div>
-      <div class="col-sm-3 col-sm-offset-1">
-        <strong>Bio:</strong> <a href="{{ quote.author.author_bio }}" target="external"> View bio </a>
-      </div>
-    </div>
+  </div>
 {% endblock %}
