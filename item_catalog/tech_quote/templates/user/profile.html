@@ -1,0 +1,9 @@
+{% from 'components/quote.html' import render_quote %}
+{% from 'components/pager.html' import render_pager %}
+
+{% extends "layout.html" %}
+
+{% block content %}
+  {{ current_user.user_name }}
+  {{ current_user.user_avatar_url }}
+{% endblock %}
