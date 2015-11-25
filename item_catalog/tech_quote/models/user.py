@@ -16,6 +16,7 @@ class User(UserMixin, Model):
 
     user_email = Column(db.String(80), unique=True, nullable=False)
     user_name = Column(db.String(70), nullable=True)
+    user_avatar_url = Column(db.String(200), nullable=False)
     user_github_id = Column(db.Integer, unique=True, nullable=False)
     user_github_login = Column(db.String(80), unique=True, nullable=False)
     user_created = Column(
