@@ -13,7 +13,7 @@ db:
 
 db-clear:
 	@echo "# Clearing tq database"
-	psql tq -c "DELETE FROM quote; DELETE FROM author;"
+	psql tq -c "DELETE FROM quote; DELETE FROM author; DELETE FROM tq_user;"
 
 db-drop:
 	@echo "# Cleaning (dropping) tq database"
