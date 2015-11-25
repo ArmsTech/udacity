@@ -72,7 +72,8 @@ def handle_github_redirect():
             user_email=github_user_data['email'],
             user_name=github_user_data['name'],
             user_github_id=github_user_data['id'],
-            user_github_login=github_user_data['login'])
+            user_github_login=github_user_data['login'],
+            user_avatar_url=github_user_data['avatar_url'])
 
     login_user(user)
     flash("Logged in successfully!", 'success')
