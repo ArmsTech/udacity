@@ -16,7 +16,7 @@
         <h2 style="margin-bottom: -3px;">{{ user.user_name }}</h2>
         <p><span style="font-size: 16px;"><em>aka</em> {{ user.user_github_login }}</span></p>
         <hr />
-        <p>* Joined on <strong>{{ user.user_created }}</strong></p>
+        <p>* Joined on <strong>{{ user.user_created.strftime('%Y-%m-%d') }}</strong></p>
         <p>* Submitted <strong>{{ quotes.total }}</strong> quotes</p>
         <p>* Email at <strong>{{ user.user_email }}</strong></p>
         <p>* Connect with on <a href="https://github.com/{{ user.user_github_login }}">GitHub</a></p>
