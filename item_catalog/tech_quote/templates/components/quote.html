@@ -31,7 +31,7 @@
       </div>
       <a href="{{ quote.author.author_bio }}" target="external" role="button" class="btn btn-default btn-xs"><i class="fa fa-external-link"></i> More about author </a>
       <a href="{{ quote.quote_source }}" target="external" role="button" class="btn btn-default btn-xs"><i class="fa fa-external-link"></i> Source of quote </a>
-      <span class="pull-right">Submitted by <a href="#">{{ quote.user.user_github_login }}</a></span>
+      <span class="pull-right">Submitted by <a href="{{ url_for('user.profile', user_login=quote.user.user_github_login) }}">{{ quote.user.user_github_login }}</a></span>
     </div>
   </div>
 {% endmacro %}
