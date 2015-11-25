@@ -22,7 +22,7 @@ def show_quote(quote_id):
 def show_category(category_id, page=1):
     """Show a quote category."""
     category = Category.query.get_or_404(category_id)
-    quotes = Quote.get_quotes_by_category_with_pagination(category_id, page)
+    quotes = Quote.get_quotes_with_pagination(page, category_id=category_id)
 
     prev_page = url_for(
         'quote.show_category', category_id=category_id, page=quotes.prev_num)

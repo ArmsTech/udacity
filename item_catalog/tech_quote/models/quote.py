@@ -80,17 +80,18 @@ class Quote(Model):
         return unicode(self.user_id) == user.get_id()
 
     @classmethod
-    def get_quotes_with_pagination(cls, page):
-        """Get a number of quotes for a specified page."""
-        quotes_per_page = db.get_app().config['QUOTES_PER_PAGE']
-        return cls.query.order_by(
-            cls.quote_created.desc()).paginate(page, quotes_per_page)
+    def get_quotes_with_pagination(cls, page, **kwargs):
+        """Get a number of quotes for a specified page.
 
-    @classmethod
-    def get_quotes_by_category_with_pagination(cls, category_id, page):
-        """Get a number of quotes by category for a specified page."""
+        Args:
+            page (int): Page of quotes to get.
+            **kwargs (dict): Filters to be applied to query.
+
+        Returns:
+            object: Pagination object to get quotes for page.
+        """
         quotes_per_page = db.get_app().config['QUOTES_PER_PAGE']
-        return cls.query.filter_by(category_id=category_id).order_by(
+        return cls.query.filter_by(**kwargs).order_by(
             cls.quote_created.desc()).paginate(page, quotes_per_page)
 
     def __repr__(self):
