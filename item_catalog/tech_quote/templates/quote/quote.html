@@ -47,7 +47,7 @@
       </div>
       <div class="row">
         <div class="col-sm-3 col-sm-offset-3">
-          <strong>Created:</strong> {{ quote.quote_created }}
+          <strong>Created:</strong> {{ quote.quote_created.strftime('%Y-%m-%d') }}
         </div>
         <div class="col-sm-3 col-sm-offset-1">
           <strong>Submitted by:</strong> {{ quote.user.user_github_login }}
