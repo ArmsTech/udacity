@@ -78,4 +78,5 @@ def handle_github_redirect():
     login_user(user)
     flash("Logged in successfully!", 'success')
 
-    return redirect(url_for('public.homepage'))
+    return redirect(
+        url_for('user.profile', user_login=user.user_github_login))
