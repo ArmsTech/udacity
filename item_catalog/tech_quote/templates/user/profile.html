@@ -20,6 +20,10 @@
         <p>* Submitted <strong>{{ quotes.total }}</strong> quotes</p>
         <p>* Email at <strong>{{ user.user_email }}</strong></p>
         <p>* Connect with on <a href="https://github.com/{{ user.user_github_login }}">GitHub</a></p>
+        <hr />
+        {% if user.user_id == current_user.user_id -%}
+          <a href="#" target="external" role="button" class="btn btn-default"><i class="fa fa-cogs"></i> Settings </a>
+        {%- endif %}
       </div>
     </div>
     <div class="row">
