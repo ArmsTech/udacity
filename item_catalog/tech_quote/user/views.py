@@ -28,7 +28,7 @@ def profile(user_login, page=1):
         prev_page=prev_page, next_page=next_page)
 
 
-@blueprint.route('/<user_login>/settings')
+@blueprint.route('/<user_login>/settings', methods=('GET', 'POST'))
 @login_required
 def settings(user_login):
     """Render a user's profile."""
@@ -36,4 +36,8 @@ def settings(user_login):
 
     form = SettingsForm(request.form, obj=user)
 
+    if request.method == 'POST' and form.user_avatar.name in request.files:
+        if form.validate_on_submit():
+            # Add processing of avatar using Flask-Uploads
+            pass
     return render_template('user/settings.html', form=form, user=user)
