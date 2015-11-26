@@ -1,6 +1,7 @@
 """User views for tech_quote."""
 
 from flask import Blueprint, render_template, url_for
+from flask.ext.login import login_required
 
 from tech_quote.models.user import User
 from tech_quote.models.quote import Quote
@@ -24,3 +25,11 @@ def profile(user_login, page=1):
     return render_template(
         'user/profile.html', user=user, quotes=quotes,
         prev_page=prev_page, next_page=next_page)
+
+
+@blueprint.route('/<user_login>/settings')
+@login_required
+def settings(user_login):
+    """Render a user's profile."""
+    user = User.query.filter_by(user_github_login=user_login).first_or_404()
+    return render_template('user/settings.html', user=user)
