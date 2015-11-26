@@ -1,10 +1,11 @@
 """User views for tech_quote."""
 
-from flask import Blueprint, render_template, url_for
+from flask import Blueprint, render_template, request, url_for
 from flask.ext.login import login_required
 
 from tech_quote.models.user import User
 from tech_quote.models.quote import Quote
+from tech_quote.user.forms import SettingsForm
 
 blueprint = Blueprint('user', __name__, static_folder='../static')
 
@@ -32,4 +33,7 @@ def profile(user_login, page=1):
 def settings(user_login):
     """Render a user's profile."""
     user = User.query.filter_by(user_github_login=user_login).first_or_404()
-    return render_template('user/settings.html', user=user)
+
+    form = SettingsForm(request.form, obj=user)
+
+    return render_template('user/settings.html', form=form, user=user)
