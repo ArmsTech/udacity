@@ -50,16 +50,16 @@
           <strong>Created:</strong> {{ quote.quote_created.strftime('%Y-%m-%d') }}
         </div>
         <div class="col-sm-3 col-sm-offset-1">
-          <strong>Submitted by:</strong> {{ quote.user.user_github_login }}
+          <strong>Submitted by:</strong> <a href="{{ url_for('user.profile', user_login=quote.user.user_github_login) }}">{{ quote.user.user_github_login }}</a>
         </div>
       </div>
       <div class="col-xs-12" style="height: 10px;"></div>
       <div class="row">
         <div class="col-sm-3 col-sm-offset-3">
-          <strong>Category:</strong> {{ quote.category.category_name }}
+          <strong>Category:</strong> <a href="{{ url_for('quote.show_category', category_id=quote.category.category_id) }}">{{ quote.category.category_name }}</a>
         </div>
         <div class="col-sm-3 col-sm-offset-1">
-          <strong>Source:</strong> <a href="{{ quote.quote_source }}" target="external"> View source </a>
+          <strong>Source:</strong> {{ quote.quote_source |urlize(25, true) }}
         </div>
       </div>
       <div class="col-xs-12" style="height: 10px;"></div>
@@ -68,7 +68,7 @@
           <strong>Author:</strong> {{ quote.author.author_name }}
         </div>
         <div class="col-sm-3 col-sm-offset-1">
-          <strong>Bio:</strong> <a href="{{ quote.author.author_bio }}" target="external"> View bio </a>
+          <strong>Bio:</strong> {{ quote.author.author_bio |urlize(25, true) }}
         </div>
       </div>
   </div>
