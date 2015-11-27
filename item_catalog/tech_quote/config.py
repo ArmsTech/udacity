@@ -23,6 +23,7 @@ class DevelopmentConfig(Config):
     ASSETS_DEBUG = True
     DEBUG = True
     QUOTES_PER_PAGE = 3
+    UPLOADS_DEFAULT_DEST = os.path.join(Config.APP_DIR, 'uploads')
 
 
 class ProductionConfig(Config):
@@ -33,3 +34,5 @@ class ProductionConfig(Config):
 
     DEBUG = False
     QUOTES_PER_PAGE = 10
+    # In a production environment we'd store uploads outside the app dir
+    UPLOADS_DEFAULT_DEST = os.path.join(Config.APP_DIR, 'uploads')
