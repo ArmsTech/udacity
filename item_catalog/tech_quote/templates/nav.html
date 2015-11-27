@@ -1,7 +1,10 @@
 <nav class="navbar navbar-default creamdust">
   <div class="container">
     <div class="navbar-header">
-      <a class="navbar-brand" href="{{ url_for('public.homepage') }}">{{ config.SITE_NAME }}</a>
+        <a class="navbar-brand" href="{{ url_for('public.homepage') }}">
+            <span style="padding-right: 5px;"><img alt="Brand" src="/static/images/raven.png" /></span>
+            <em>{{ config.SITE_NAME }}</em>
+        </a>
     </div>
     <ul class="nav navbar-nav navbar-right">
       {% if current_user.is_authenticated -%}
