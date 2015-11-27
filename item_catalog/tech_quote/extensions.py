@@ -11,3 +11,6 @@ migrate = Migrate()
 
 from flask.ext.assets import Environment
 assets = Environment()
+
+from flask.ext.uploads import UploadSet
+avatars = UploadSet('avatars')
