@@ -1,7 +1,7 @@
 {% macro render_quote(quote) %}
   <div class="jumbotron creamdust">
     <blockquote>
-      <p>" <a href="{{ url_for('quote.show_quote', quote_id=quote.quote_id) }}">{{ quote.quote_text }} </a> "</p>
+      <p>" <a href="{{ url_for('quote.quote', quote_id=quote.quote_id) }}">{{ quote.quote_text }} </a> "</p>
       <footer>
         <cite title="Source Title">{{ quote.author.author_name }}</cite>
       </footer>
@@ -27,7 +27,7 @@
     </div>
     <div class="row" style="margin-top: -60px; padding-left: 60px;">
       <div style="padding: 0 0 10px 2px;">
-        <em>Category:</em> <a href="{{ url_for('quote.show_category', category_id=quote.category.category_id) }}">{{ quote.category.category_name }}</a>
+        <em>Category:</em> <a href="{{ url_for('quote.category', category_id=quote.category.category_id) }}">{{ quote.category.category_name }}</a>
       </div>
       <a href="{{ quote.author.author_bio }}" target="external" role="button" class="btn btn-default btn-xs"><i class="fa fa-external-link"></i> More about author </a>
       <a href="{{ quote.quote_source }}" target="external" role="button" class="btn btn-default btn-xs"><i class="fa fa-external-link"></i> Source of quote </a>

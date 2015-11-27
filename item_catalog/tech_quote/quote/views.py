@@ -1,4 +1,4 @@
-"""Quote views for logged-in tech_quote users (add_quote, etc...)."""
+"""Quote views for logged-in tech_quote users (add a quote, etc...)."""
 
 from flask import (
     Blueprint, abort, flash, jsonify,
@@ -35,7 +35,7 @@ def quotes():
 
 
 @blueprint.route('/<int:quote_id>')
-def show_quote(quote_id):
+def quote(quote_id):
     """Show a single quote."""
     quote = Quote.query.get_or_404(quote_id)
     return render_template('quote/quote.html', quote=quote)
@@ -43,15 +43,15 @@ def show_quote(quote_id):
 
 @blueprint.route('/category/<int:category_id>')
 @blueprint.route('/category/<int:category_id>/<int:page>')
-def show_category(category_id, page=1):
+def category(category_id, page=1):
     """Show a quote category."""
     category = Category.query.get_or_404(category_id)
     quotes = Quote.get_quotes_with_pagination(page, category_id=category_id)
 
     prev_page = url_for(
-        'quote.show_category', category_id=category_id, page=quotes.prev_num)
+        'quote.category', category_id=category_id, page=quotes.prev_num)
     next_page = url_for(
-        'quote.show_category', category_id=category_id, page=quotes.next_num)
+        'quote.category', category_id=category_id, page=quotes.next_num)
 
     return render_template(
         'quote/category.html', category=category, quotes=quotes,
@@ -60,7 +60,7 @@ def show_category(category_id, page=1):
 
 @blueprint.route('/add', methods=('GET', 'POST'))
 @login_required
-def add_quote():
+def add():
     """Add a quote."""
     form = QuoteForm(request.form)
 
@@ -84,7 +84,7 @@ def add_quote():
 
 @blueprint.route('/edit/<int:quote_id>', methods=('GET', 'POST'))
 @login_required
-def edit_quote(quote_id):
+def edit(quote_id):
     """Edit a quote."""
     quote = Quote.query.filter_by(quote_id=quote_id).first_or_404()
 
@@ -116,7 +116,7 @@ def edit_quote(quote_id):
 
 @blueprint.route('/delete/<int:quote_id>', methods=('POST',))
 @login_required
-def delete_quote(quote_id):
+def delete(quote_id):
     """Delete a quote."""
     quote = Quote.query.filter_by(quote_id=quote_id).first_or_404()
 
