@@ -3,9 +3,10 @@
 import os
 
 from flask import Flask, render_template
+from flask.ext.uploads import configure_uploads
 
 from tech_quote import public, quote, user
-from tech_quote.extensions import db, login_manager, migrate
+from tech_quote.extensions import avatars, db, login_manager, migrate
 from tech_quote.assets import assets
 
 
@@ -20,6 +21,8 @@ def create_app():
     register_extensions(app)
     register_blueprints(app)
     register_errors(app)
+    # Register app with Flask-Uploads
+    configure_uploads(app, (avatars,))
     return app
 
 
