@@ -1,13 +1,37 @@
 """Quote views for logged-in tech_quote users (add_quote, etc...)."""
 
 from flask import (
-    Blueprint, abort, flash, redirect, request, render_template, url_for)
+    Blueprint, abort, flash, jsonify,
+    redirect, request, render_template, url_for)
 from flask.ext.login import login_required, current_user
 
 from tech_quote.models.quote import Quote, Category
 from tech_quote.quote.forms import QuoteForm
 
 blueprint = Blueprint('quote', __name__, static_folder='../static')
+
+
+@blueprint.route('/api/v1/quotes')
+def quotes():
+    """Get all quotes and return in JSON format."""
+    quotes = []
+
+    for quote in Quote.query.all():
+        quotes.append({
+            'quote': quote.quote_text,
+            'source': quote.quote_source,
+            'created': quote.quote_created,
+            'author': {
+                'name': quote.author.author_name,
+                'bio': quote.author.author_bio
+            },
+            'category': {
+                'name': quote.category.category_name,
+                'description': quote.category.category_description
+            }
+        })
+
+    return jsonify({'quotes': quotes})
 
 
 @blueprint.route('/<int:quote_id>')
