@@ -1,8 +1,12 @@
 """Forms for handling users."""
 
+import re
+
 from flask.ext.wtf import Form
 from wtforms import FileField, TextField
-from wtforms.validators import InputRequired, Length, Regexp
+from wtforms.validators import InputRequired, Length, ValidationError
+
+AVATAR_RE = re.compile(r'^[^\\/]+\.(?:jpg|jpe|jpeg|png|gif|svg|bmp)$')
 
 
 class SettingsForm(Form):
@@ -11,15 +15,31 @@ class SettingsForm(Form):
 
     user_name = TextField(
         'Name', validators=[InputRequired(), Length(1, 200)])
-    user_avatar = FileField('Avatar', [Regexp('jpg')])
+    user_avatar = FileField('Avatar')
 
     def __init__(self, *args, **kwargs):
         """Initialize Form."""
         Form.__init__(self, *args, **kwargs)
 
+    def validate_user_avatar(self, field):
+        """Validate user_avatar.
+
+        This function shouldn't be necessary, but the Regexp validator does
+        not work as advertised for FileFields.
+
+        Args:
+            field (object): Field to validate (user_avatar).
+
+        Raises:
+            ValidationError: When field is not a valid image.
+        """
+        file_name = field.data.filename
+        if file_name and not AVATAR_RE.match(file_name):
+            raise ValidationError("File must be an image")
+
     def get_post_invalid_message(self):
         """Get the default error message for a invalid post request."""
-        field_to_label = {'user_name': 'Name'}
+        field_to_label = {'user_name': 'Name', 'user_avatar': 'Avatar'}
 
         error_fields = sorted(self.errors.keys())
         field_or_fields = 'fields' if len(error_fields) > 1 else 'field'

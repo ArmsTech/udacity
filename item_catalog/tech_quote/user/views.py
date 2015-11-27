@@ -35,7 +35,7 @@ def profile(user_login, page=1):
 def settings(user_login):
     """Render a user's profile settings."""
     user = User.query.filter_by(user_github_login=user_login).first_or_404()
-    form = SettingsForm(request.form, obj=user)
+    form = SettingsForm(obj=user)
 
     if request.method == 'POST':
         if form.validate_on_submit():
