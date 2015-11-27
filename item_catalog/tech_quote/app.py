@@ -3,7 +3,7 @@
 import os
 
 from flask import Flask, render_template
-from flask.ext.uploads import configure_uploads
+from flask.ext.uploads import configure_uploads, patch_request_class
 
 from tech_quote import public, quote, user
 from tech_quote.extensions import avatars, db, login_manager, migrate
@@ -21,8 +21,10 @@ def create_app():
     register_extensions(app)
     register_blueprints(app)
     register_errors(app)
-    # Register app with Flask-Uploads
+    # Register app with Flask-Uploads and limit upload size to 16MB
     configure_uploads(app, (avatars,))
+    patch_request_class(app)
+
     return app
 
 
