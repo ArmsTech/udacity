@@ -31,14 +31,6 @@ def logout():
     return redirect(url_for('public.index'))
 
 
-# NOTE: Not necessary (yet)
-# @blueprint.record_once
-# def record_params(state):
-#     """Store app.config in blueprint when blueprint is registered on app."""
-#     app = state.app
-#     blueprint.config = {key: value for key, value in app.config.iteritems()}
-
-
 @blueprint.route('/')
 @blueprint.route('/quotes')
 @blueprint.route('/quotes/<int:page>')
