@@ -18,19 +18,21 @@
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="page-header">
-        <h1><small>Quotes from this category</small></h1>
-      </div>
-    </div>
-    {% for quote in quotes.items %}
+    {% if quotes.total > 0 %}
       <div class="row">
-        {{ render_quote(quote) }}
+        <div class="page-header">
+          <h1><small>Quotes from this category</small></h1>
+        </div>
       </div>
-      <div class="col-xs-12" style="height: 30px;"></div>
-    {% endfor %}
-    <div class="row">
-      {{ render_pager(quotes, prev_page, next_page) }}
-    </div>
+      {% for quote in quotes.items %}
+        <div class="row">
+          {{ render_quote(quote) }}
+        </div>
+        <div class="col-xs-12" style="height: 30px;"></div>
+      {% endfor %}
+      <div class="row">
+        {{ render_pager(quotes, prev_page, next_page) }}
+      </div>
+    {% endif %} 
   </div>
 {% endblock %}
