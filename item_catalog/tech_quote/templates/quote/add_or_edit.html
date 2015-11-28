@@ -55,6 +55,7 @@
             {{ form.author_name(class="form-control", placeholder="Tim Peters") }}
             <script type="text/javascript">
               $('#author_name').selectize({
+                  plugins: ['restore_on_backspace'],
                   create: true,
                   placeholder: 'Tim Peters',
                   maxItems: 1
