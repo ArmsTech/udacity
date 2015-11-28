@@ -1,4 +1,4 @@
-.PHONY: clean clean-pyc db db-clear db-drop db-upgrade dev shell
+.PHONY: clean clean-pyc db db-clear db-drop db-upgrade dev install shell
 
 clean: clean-pyc
 
@@ -26,6 +26,12 @@ db-upgrade:
 dev:
 	@echo "# Starting web server (development)"
 	honcho start dev_server
+
+install:
+	@echo "# Installing application"
+	pip install -r requirements.txt
+	db
+	upgrade
 
 shell:
 	@echo "# Starting shell"
