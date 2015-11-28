@@ -8,6 +8,7 @@ from tech_quote.database import Column, Model, db
 
 
 class User(UserMixin, Model):
+
     """A user of the tq app."""
 
     __tablename__ = 'tq_user'
@@ -44,6 +45,7 @@ class User(UserMixin, Model):
 
 
 class Role(Model):
+
     """A role for a tq user."""
 
     __tablename__ = 'role'

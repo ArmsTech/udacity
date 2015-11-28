@@ -35,5 +35,7 @@ class CRUDMixin(object):
 
 
 class Model(CRUDMixin, db.Model):
+
     """Base db.Model class with a CRUD mixin."""
+
     __abstract__ = True

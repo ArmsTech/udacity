@@ -5,6 +5,14 @@ from flask import render_template, request
 
 
 def with_template(template=None):
+    """Decorate function with render_template functionality.
+
+    Args:
+        template (str): Template name to render if different than default.
+
+    Returns:
+        func: A function for rendering a Flask template.
+    """
     def decorator(f):
         @wraps(f)
         def decorated_function(*args, **kwargs):
