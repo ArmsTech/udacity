@@ -12,14 +12,10 @@ From Udacity:
 Quick Start
 -----------
 
-TODO: Update quick start
-
-1. Clone vagrant environment: `git clone https://github.com/udacity/fullstack-nanodegree-vm.git fullstack`
-2. Navigate to fullstack: `cd fullstack`
-3. Bring up vagrant VM: `vagrant up`
-4. SSH into vagrant VM: `vagrant ssh`
-7. Clone tournament repo (in VM): `git clone https://github.com/ArmsTech/udacity.git`
-8. Navigate to item_catalog `cd udacity/item_catalog`
+1. `git clone https://github.com/brenj/fullstack-nanodegree-vm.git fullstack && cd fullstack/vagrant`
+2. `vagrant up`
+3. `vagrant ssh`
+4. `cd /vagrant/udacity/item_catalog/`
 
 Requirements
 ------------
