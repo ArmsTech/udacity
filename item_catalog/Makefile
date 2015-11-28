@@ -1,4 +1,4 @@
-.PHONY: clean clean-pyc db db-clear db-drop db-upgrade dev install shell
+.PHONY: clean clean-pyc db db-clear db-drop db-upgrade dev install prod shell
 
 clean: clean-pyc
 
@@ -32,6 +32,10 @@ install:
 	pip install -r requirements.txt
 	db
 	upgrade
+
+prod:
+	@echo "# Starting web server (production)"
+	honcho start prod_server
 
 shell:
 	@echo "# Starting shell"
