@@ -16,16 +16,15 @@ Quick Start
 2. `vagrant up`
 3. `vagrant ssh`
 4. `cd /vagrant/udacity/item_catalog/`
+5. `virtualenv venv && . venv/bin/activate`
+6. `. bin/set-env-vars.sh` (after updating configuration values in `.env`, see Configuration)
+7. `make install`
+8. `make prod`
 
 Requirements
 ------------
 
-TODO: Update requirements
-
 * Vagrant
-* VirtualBox
-* Python >= 2.7
-* Linux, Mac OS X
 
 Grading (by Udacity)
 --------------------
