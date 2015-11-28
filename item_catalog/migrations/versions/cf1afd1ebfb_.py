@@ -1,13 +1,13 @@
 """Add some seed data.
 
-Revision ID: 1e5ff49ec9ef
+Revision ID: cf1afd1ebfb
 Revises: None
-Create Date: 2015-11-14 03:59:07.240035
+Create Date: 2015-11-28 21:19:04.587643
 
 """
 
 # revision identifiers, used by Alembic.
-revision = '1e5ff49ec9ef'
+revision = 'cf1afd1ebfb'
 down_revision = None
 
 from alembic import op
