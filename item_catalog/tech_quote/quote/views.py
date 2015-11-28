@@ -79,7 +79,7 @@ def add():
                 user_id=current_user.user_id)
 
             flash("Quote created", 'success')
-            return redirect(url_for('public.homepage'))
+            return redirect(url_for('public.index'))
         else:
             flash(form.get_post_invalid_message(), 'danger')
 
@@ -111,7 +111,7 @@ def edit(quote_id):
             quote.save()
 
             flash("Quote updated", 'success')
-            return redirect(url_for('public.homepage'))
+            return redirect(url_for('public.index'))
         else:
             flash(form.get_post_invalid_message(), 'danger')
 
@@ -127,6 +127,6 @@ def delete(quote_id):
     if quote.is_owned_by(current_user):
         quote.delete()
         flash("Quote deleted", 'success')
-        return redirect(url_for('public.homepage'))
+        return redirect(url_for('public.index'))
     else:
         abort(401)

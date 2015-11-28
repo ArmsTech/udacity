@@ -1,17 +1,19 @@
 """Public views for tech_quote (homepage, etc...)."""
 
-from flask import (
-    Blueprint, flash, redirect, request, render_template, url_for)
+from flask import Blueprint, flash, redirect, request, url_for
 from flask.ext.login import login_user, logout_user, login_required
 
 from tech_quote.extensions import login_manager
 from tech_quote.models.quote import Quote
 from tech_quote.models.user import User
 from tech_quote.oauth.providers import GitHubSignIn
+from tech_quote.utils import with_template
 
-blueprint = Blueprint('public', __name__, static_folder='../static')
+blueprint = Blueprint(
+    'public', __name__, static_folder='../static',
+    template_folder='templates/public')
 
-login_manager.login_view = 'public.homepage'
+login_manager.login_view = 'public.index'
 login_manager.login_message_category = 'danger'
 
 
@@ -26,7 +28,7 @@ def load_user(user_id):
 def logout():
     """User will be logged out, and their session will be cleaned up."""
     logout_user()
-    return redirect(url_for('public.homepage'))
+    return redirect(url_for('public.index'))
 
 
 # NOTE: Not necessary (yet)
@@ -40,16 +42,15 @@ def logout():
 @blueprint.route('/')
 @blueprint.route('/quotes')
 @blueprint.route('/quotes/<int:page>')
-def homepage(page=1):
+@with_template()
+def index(page=1):
     """Render TQ Homepage."""
     quotes = Quote.get_quotes_with_pagination(page)
 
-    prev_page = url_for('public.homepage', page=quotes.prev_num)
-    next_page = url_for('public.homepage', page=quotes.next_num)
+    prev_page = url_for('public.index', page=quotes.prev_num)
+    next_page = url_for('public.index', page=quotes.next_num)
 
-    return render_template(
-        'public/index.html', quotes=quotes,
-        prev_page=prev_page, next_page=next_page)
+    return dict(quotes=quotes, prev_page=prev_page, next_page=next_page)
 
 
 @blueprint.route('/login/oauth/github')
