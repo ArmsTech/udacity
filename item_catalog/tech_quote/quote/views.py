@@ -1,14 +1,16 @@
 """Quote views for logged-in tech_quote users (add a quote, etc...)."""
 
 from flask import (
-    Blueprint, abort, flash, jsonify,
-    redirect, request, render_template, url_for)
+    Blueprint, abort, flash, jsonify, redirect, request, url_for)
 from flask.ext.login import login_required, current_user
 
 from tech_quote.models.quote import Quote, Category
 from tech_quote.quote.forms import QuoteForm
+from tech_quote.utils import with_template
 
-blueprint = Blueprint('quote', __name__, static_folder='../static')
+blueprint = Blueprint(
+    'quote', __name__, static_folder='../static',
+    template_folder='templates/quote')
 
 
 @blueprint.route('/api/v1/quotes')
@@ -35,14 +37,16 @@ def quotes():
 
 
 @blueprint.route('/<int:quote_id>')
+@with_template()
 def quote(quote_id):
     """Show a single quote."""
     quote = Quote.query.get_or_404(quote_id)
-    return render_template('quote/quote.html', quote=quote)
+    return dict(quote=quote)
 
 
 @blueprint.route('/category/<int:category_id>')
 @blueprint.route('/category/<int:category_id>/<int:page>')
+@with_template()
 def category(category_id, page=1):
     """Show a quote category."""
     category = Category.query.get_or_404(category_id)
@@ -53,13 +57,14 @@ def category(category_id, page=1):
     next_page = url_for(
         'quote.category', category_id=category_id, page=quotes.next_num)
 
-    return render_template(
-        'quote/category.html', category=category, quotes=quotes,
+    return dict(
+        category=category, quotes=quotes,
         prev_page=prev_page, next_page=next_page)
 
 
 @blueprint.route('/add', methods=('GET', 'POST'))
 @login_required
+@with_template('quote/add_or_edit.html')
 def add():
     """Add a quote."""
     form = QuoteForm(request.form)
@@ -78,12 +83,12 @@ def add():
         else:
             flash(form.get_post_invalid_message(), 'danger')
 
-    return render_template(
-        'quote/add_or_edit.html', form=form, form_action='add')
+    return dict(form=form, form_action='add')
 
 
 @blueprint.route('/edit/<int:quote_id>', methods=('GET', 'POST'))
 @login_required
+@with_template('quote/add_or_edit.html')
 def edit(quote_id):
     """Edit a quote."""
     quote = Quote.query.filter_by(quote_id=quote_id).first_or_404()
@@ -110,8 +115,7 @@ def edit(quote_id):
         else:
             flash(form.get_post_invalid_message(), 'danger')
 
-    return render_template(
-        'quote/add_or_edit.html', quote=quote, form=form, form_action='edit')
+    return dict(quote=quote, form=form, form_action='edit')
 
 
 @blueprint.route('/delete/<int:quote_id>', methods=('POST',))
