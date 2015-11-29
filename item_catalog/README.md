@@ -29,4 +29,14 @@ Requirements
 Grading (by Udacity)
 --------------------
 
-TODO: Add grading
+Criteria       |Highest Grade Possible  |Grade Recieved
+---------------|------------------------|--------------
+API Endpoints  |Exceeds Specifications  |TBD
+CRUD: Create   |Exceeds Specifications  |TBD
+CRUD: Read     |Exceeds Specifications  |TBD
+CRUD: Update   |Exceeds Specifications  |TBD
+CRUD: Delete   |Exceeds Specifications  |TBD
+Authentication & Authorization   |Exceeds Specifications  |TBD
+Code Quality   |Meets Specifications  |TBD
+Comments       |Meets Specifications  |TBD
+Documentation  |Meets Specifications    |TBD
