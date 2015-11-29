@@ -25,13 +25,13 @@
     <div class="row">
       {{ render_quote(quote) }}
     </div>
-    <div class="row" style="margin-top: -60px; padding-left: 60px;">
-      <div style="padding: 0 0 10px 2px;">
+    <div class="row quote-details-row">
+      <div class="category-link">
         <em>Category:</em> <a href="{{ url_for('quote.category', category_id=quote.category.category_id) }}">{{ quote.category.category_name }}</a>
       </div>
       <a href="{{ quote.author.author_bio }}" target="external" role="button" class="btn btn-default btn-xs"><i class="fa fa-external-link"></i> More about author </a>
       <a href="{{ quote.quote_source }}" target="external" role="button" class="btn btn-default btn-xs"><i class="fa fa-external-link"></i> Source of quote </a>
-      <span class="pull-right" style="padding-right: 100px;">Submitted by <a href="{{ url_for('user.profile', user_login=quote.user.user_github_login) }}">{{ quote.user.user_github_login }}</a></span>
+      <span class="pull-right" class="submitted-link">Submitted by <a href="{{ url_for('user.profile', user_login=quote.user.user_github_login) }}">{{ quote.user.user_github_login }}</a></span>
     </div>
   </div>
 {% endmacro %}

@@ -1,15 +1,15 @@
 <nav class="navbar navbar-default creamdust">
   <div class="container">
     <div class="navbar-header">
-        <a class="navbar-brand" href="{{ url_for('public.index') }}">
-            <span style="padding-right: 5px;"><img alt="Brand" src="/static/images/raven.png" /></span>
-            <em>{{ config.SITE_NAME }}</em>
-        </a>
+      <a class="navbar-brand" href="{{ url_for('public.index') }}">
+          <span class="brand-icon"><img alt="Brand" src="/static/images/raven.png" /></span>
+          <em>{{ config.SITE_NAME }}</em>
+      </a>
     </div>
     <ul class="nav navbar-nav navbar-right">
       {% if current_user.is_authenticated -%}
         <div class="btn-group navbar-left">
-            <a href="{{ url_for('quote.add') }}" role="button" class="btn btn-default navbar-btn" data-toggle="tooltip" data-placement="bottom" title="Add a quote"><i class="fa fa-quote-left fa-lg"></i></a>
+          <a href="{{ url_for('quote.add') }}" role="button" class="btn btn-default navbar-btn" data-toggle="tooltip" data-placement="bottom" title="Add a quote"><i class="fa fa-quote-left fa-lg"></i></a>
         </div>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle ellipsis username-width" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Welcome, {{ current_user.user_github_login }} <span class="caret"></span></a>
@@ -24,9 +24,9 @@
       {% else %}
         <li>
           <form method="GET" action="{{ url_for('public.login_with_github') }}" role="form">
-              <button type="submit" class="btn btn-social btn-github navbar-btn navbar-right">
-                <span class="fa fa-github"></span> Sign in with GitHub
-              </button>
+            <button type="submit" class="btn btn-social btn-github navbar-btn navbar-right">
+              <span class="fa fa-github"></span> Sign in with GitHub
+            </button>
           </form>
         </li>
       {%- endif %}

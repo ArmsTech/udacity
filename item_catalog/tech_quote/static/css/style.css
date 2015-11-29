@@ -61,6 +61,44 @@ blockquote a:visited {
   padding-top: 5px !important;
 }
 
+.brand-icon {
+  padding-right: 5px;
+}
+
+.error-header {
+  margin-bottom: -20px;
+}
+
+.quote-details-row {
+  margin-top: -60px;
+  padding-left: 60px;
+}
+
+.category-link {
+  padding: 0 0 10px 2px;
+}
+
+.submitted-link {
+  padding-right: 100px;
+}
+
+.profile-username {
+  margin-top: -3px;
+  margin-bottom: -3px;
+}
+
+.profile-login-size {
+  font-size: 16px;
+}
+
+.form-header {
+  margin-bottom: 0px;
+}
+
+.form-header-small {
+  margin-top: 0px;
+}
+
 #wrap {
   min-height: 100%;
 }

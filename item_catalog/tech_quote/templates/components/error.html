@@ -1,9 +1,8 @@
 {% macro render_error_page(code_message, extended_message, home_message) %}
-  <div class="col-xs-12" style="height: 25px;"></div>
   <div class="container">
     <div class="row">
       <div class="page-header">
-        <h1 style="margin-bottom: -20px;">{{ code_message }}</h1>
+        <h1 class="error-header">{{ code_message }}</h1>
         <h1><small>{{ extended_message }}</small></h1>
       </div>
       <p><a href="{{ url_for('public.index') }}">{{ home_message }}</a></p>

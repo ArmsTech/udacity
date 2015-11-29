@@ -1,40 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>
-      {% block title %}
-          {{ config.SITE_NAME }}
-      {% endblock %}
-    </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>
+    {% block title %}
+      {{ config.SITE_NAME }}
+    {% endblock %}
+  </title>
 
-    {% assets "js_all" -%}
-        <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-    {%- endassets %}
-    {% assets "css_all" -%}
-        <link rel="stylesheet" href="{{ ASSET_URL }}">
-    {%- endassets %}
+  {% assets "js_all" -%}
+    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+  {%- endassets %}
+  {% assets "css_all" -%}
+    <link rel="stylesheet" href="{{ ASSET_URL }}">
+  {%- endassets %}
 
-    <script type="text/javascript">
-        $(document).ready(function() {
-          $('[data-toggle="tooltip"]').tooltip()
-        });
-    </script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('[data-toggle="tooltip"]').tooltip()
+    });
+  </script>
 
-    <link href='https://fonts.googleapis.com/css?family=Ubuntu:300' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Ubuntu:300' rel='stylesheet' type='text/css'>
 </head>
 <body>
-    <div id="wrap">
-      <div id="main">
-        {% include 'nav.html' %}
-        {% include 'components/flash.html' %}
-        {% block content %}{% endblock %}
-      </div>
+  <div id="wrap">
+    <div id="main">
+      {% include 'nav.html' %}
+      <div class="col-xs-12" style="height: 25px;"></div>
+      {% include 'components/flash.html' %}
+      {% block content %}{% endblock %}
     </div>
-    <div class="col-xs-12" style="height: 50px;"></div>
-    <div id="footer">
-      {% include 'footer.html' %}
-    </div>
+  </div>
+  <div class="col-xs-12" style="height: 50px;"></div>
+  <div id="footer">
+    {% include 'footer.html' %}
+  </div>
 </body>
 </html>

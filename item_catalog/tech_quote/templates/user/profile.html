@@ -4,7 +4,6 @@
 {% extends "layout.html" %}
 
 {% block content %}
-  <div class="col-xs-12" style="height: 25px;"></div>
   <div class="container">
     <div class="row">
       <div class="col-md-3">
@@ -13,8 +12,8 @@
         </a>
       </div>
       <div class="col-md-4">
-        <h2 style="margin-top: -3px; margin-bottom: -3px;">{{ user.user_name }}</h2>
-        <p><span style="font-size: 16px;"><em>aka</em> {{ user.user_github_login }}</span></p>
+        <h2 class="profile-username">{{ user.user_name }}</h2>
+        <p><span class="profile-login-size"><em>aka</em> {{ user.user_github_login }}</span></p>
         <hr />
         <p>* Joined on <strong>{{ user.user_created.strftime('%Y-%m-%d') }}</strong></p>
         <p>* Submitted <strong>{{ quotes.total }}</strong> quotes</p>
