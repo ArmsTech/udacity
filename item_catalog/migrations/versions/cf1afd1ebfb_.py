@@ -14,7 +14,7 @@ from alembic import op
 import sqlalchemy as sa
 from sqlalchemy.sql import table, column
 
-from tech_quote.categories import JAVASCRIPT, PYTHON
+from tech_quote.categories import ALL_CATEGORIES
 
 category_table = table(
     'category',
@@ -25,7 +25,7 @@ category_table = table(
 
 
 def upgrade():
-    op.bulk_insert(category_table, [PYTHON, JAVASCRIPT])
+    op.bulk_insert(category_table, ALL_CATEGORIES)
 
 
 def downgrade():
