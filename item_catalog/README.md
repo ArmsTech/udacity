@@ -9,6 +9,16 @@ From Udacity:
 > authentication system. Registered users will have the ability to post,
 > edit, and delete their own items.
 
+Tech Quote (TQ) hosts technology-related quotes, specifically quotes relating
+to programming languages. The TQ application meets all requirements for
+project 3 by implementing the following pages and features:
+
+* OAuth2 login via GitHub
+
+The following extensions, tools, and patterns were leveraged:
+
+* Flask-Migrate (alembic) to manage database migrations
+
 Requirements
 ------------
 
