@@ -35,7 +35,7 @@
       <div class="col-xs-12" style="height:25px;"></div>
       <div class="row row-10-gutter">
         <div class="col-md-1 col-md-offset-6 col-10-gutter">
-          <a class="btn btn-default btn-block" href="{{ url_for('user.profile', user_login=user.user_github_login) }}" role="button">Cancel</a>
+          <a class="btn btn-default btn-block" href="{{ request.referrer }}" role="button">Cancel</a>
         </div>
         <div class="col-md-1 col-10-gutter">
           <button type="submit" class="btn btn-success btn-block">Save</button>
