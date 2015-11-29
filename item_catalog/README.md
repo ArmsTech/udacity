@@ -9,6 +9,35 @@ From Udacity:
 > authentication system. Registered users will have the ability to post,
 > edit, and delete their own items.
 
+Requirements
+------------
+
+* [Vagrant](http://www.vagrantup.com/downloads.html)
+
+Configuration
+-------------
+
+All configuration is accomplished by environmental variables.
+The following variables are available:
+
+APP_SETTINGS
+  Configuration object to be used to run application.
+  
+DATABASE_URI
+  Database connection string to connect to application database.
+  
+GITHUB_ID
+  OAuth2 client id provided by GitHub for access to API.
+  
+GITHUB_SECRET
+  OAuth2 client secret provided by GitHub for access to API.
+  
+TQ_SECRET
+  A byte string which is the master key by which all values are encoded.
+  Set to a sufficiently long string of characters that is difficult to
+  guess or bruteforce (recommended at least 16 characters) for example
+  the output of os.urandom(16).
+  
 Quick Start
 -----------
 
@@ -20,11 +49,6 @@ Quick Start
 6. `. bin/set-env-vars.sh` (after updating configuration values in `.env`, see Configuration)
 7. `make install`
 8. `make prod`
-
-Requirements
-------------
-
-* Vagrant
 
 Grading (by Udacity)
 --------------------
