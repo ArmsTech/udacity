@@ -42,10 +42,15 @@ project by implementing the following:
 * Code is well organized and self-documenting adhering to both PEP8 and PEP257
 * Images can be uploaded by a user
 
-**Extensions**: Assets, Login, Migrate, Script, SQLAlchemy, Uploads, and WTF  
-**Patterns**: Packages, Blueprints, Application factory, 
-View decorators (login & template rendering), Template inheritance, Message flashing,
-and Custom error pages
+**Flask Extensions**: Assets, Login, Migrate, Script, SQLAlchemy, Uploads,
+    and WTF
+
+**Flask Patterns**: Packages, Blueprints, Application factory,
+    View decorators (login & template rendering), Template inheritance,
+    Message flashing, and Custom error pages
+
+**CSS/JS Libraries**:  Bootstrap v3, Bootstrap Social, Selectize.js,
+    Font-Awesome
 
 Requirements
 ------------
@@ -76,8 +81,8 @@ The following variables are available:
   guess or bruteforce (recommended at least 16 characters) for example
   the output of os.urandom(16).
 
-Quick Start
------------
+Install
+-------
 
 1. `git clone https://github.com/brenj/fullstack-nanodegree-vm.git fullstack && cd fullstack/vagrant`
 2. `vagrant up`
@@ -86,7 +91,7 @@ Quick Start
 5. `virtualenv venv && . venv/bin/activate`
 6. `. bin/set-env-vars.sh` (after updating configuration values in `.env`, see Configuration)
 7. `make install`
-8. `make prod`
+8. `make prod` or `make dev` (depending on the desired configuration)
 
 Grading (by Udacity)
 --------------------
