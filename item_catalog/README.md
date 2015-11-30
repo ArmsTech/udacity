@@ -14,31 +14,36 @@ to programming languages. The TQ application meets all requirements for
 the Item Catalog project by implementing the following:
 
 * JSON API endpoint at `quote/api/v1/quotes`
+```javascript
+// JSON endpoint payload example
+{
+	"quotes": [{
+		"author": {
+			"bio": "http://stackoverflow.com/users/2705542/tim-peters",
+			"name": "Tim Peters"
+		},
+		"category": {
+			"description": "Python is a widely used general-purpose, high-level programming language. Its design philosophy emphasizes code readability, and its syntax allows programmers to express concepts in fewer lines of code than would be possible in languages such as C++ or Java. The language provides constructs intended to enable clear programs on both a small and large scale.",
+			"name": "Python"
+		},
+		"created": "Sun, 29 Nov 2015 22:18:01 GMT",
+		"quote": "Special cases aren't special enough to break the rules.",
+		"source": "https://www.python.org/dev/peps/pep-0020/"
+	}, ... ]
+}
+```
 * Data is read from a PostgreSQL database using SQLAlchemy
-* Forms exist for adding/editing data with validation and CSRF protection
-  with WTForms
+* Forms exist for adding/editing data with server-side validation and
+  CSRF protection with WTForms
 * Data created by a user can can be deleted by (only) that user as a POST
   request and with CSRF protection
 * OAuth2 login via GitHub
 * Code is well organized and self-documenting adhering to both PEP8 and PEP257
 
-The following Flask extensions and patterns were leveraged:
-
-* Flask-Assets
-* Flask-Login
-* Flask-Migrate
-* Flask-Script
-* Flask-SQLAlchemy
-* Flask-Uploads
-* Flask-WTF
-
-* Packages
-* Blueprints
-* Application factory
-* View decorators (login & template rendering)
-* Template inheritance
-* Message flashing
-* Custom error pages
+**Extensions**: Assets, Login, Migrate, Script, SQLAlchemy, Uploads, and WTF  
+**Patterns**: Packages, Blueprints, Application factory, 
+View decorators (login & template rendering), Template inheritance, Message flashing,
+and Custom error pages
 
 Requirements
 ------------
