@@ -11,11 +11,12 @@ From Udacity:
 
 Tech Quote (TQ) hosts technology-related quotes, specifically quotes relating
 to programming languages. The TQ application meets all requirements for
-the Item Catalog project by implementing the following:
+the [Item Catalog](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004) 
+project by implementing the following:
 
 * JSON API endpoint at `quote/api/v1/quotes`
 ```javascript
-// JSON endpoint payload example
+// quote/api/v1/quotes payload example
 {
 	"quotes": [{
 		"author": {
@@ -39,6 +40,7 @@ the Item Catalog project by implementing the following:
   request and with CSRF protection
 * OAuth2 login via GitHub
 * Code is well organized and self-documenting adhering to both PEP8 and PEP257
+* Images can be uploaded by a user
 
 **Extensions**: Assets, Login, Migrate, Script, SQLAlchemy, Uploads, and WTF  
 **Patterns**: Packages, Blueprints, Application factory, 
