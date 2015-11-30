@@ -9,7 +9,7 @@ from tech_quote.database import Column, Model, db
 
 class User(UserMixin, Model):
 
-    """A user of the tq app."""
+    """A user of the TQ app."""
 
     __tablename__ = 'tq_user'
 
@@ -26,27 +26,46 @@ class User(UserMixin, Model):
     user_is_admin = Column(db.Boolean(), default=False)
 
     def __init__(self, **kwargs):
-        """Create instance for User."""
+        """Create instance of User.
+
+        Args:
+            **kwargs: Keyword arguments for creating a User.
+        """
         super(User, self).__init__(**kwargs)
 
     @classmethod
     def by_github_id(cls, github_id):
-        """Get a user by a specified github_id."""
+        """Get a user by a specified github_id.
+
+        Args:
+            github_id (str): GitHub login id of user to get.
+
+        Returns:
+            object: An instance of `User` with specified id or None.
+        """
         return cls.query.filter_by(user_github_id=github_id).one_or_none()
 
     def get_id(self):
-        """Get unicode id that uniquely identifies a User."""
+        """Get unicode id that uniquely identifies a User.
+
+        Returns:
+            unicode: Id used to identify a `User`.
+        """
         return unicode(self.user_id)
 
     def __repr__(self):
-        """Represent User instance as a string."""
+        """Represent User instance as a string.
+
+        Returns:
+            str: Representation of a User object.
+        """
         return '<User({0}, {1})>'.format(
             self.user_email, self.user_github_login)
 
 
 class Role(Model):
 
-    """A role for a tq user."""
+    """A role for a TQ user."""
 
     __tablename__ = 'role'
 
@@ -57,10 +76,18 @@ class Role(Model):
     user_id = Column(db.Integer, db.ForeignKey('tq_user.user_id'))
     user = db.relationship(User, backref='role')
 
-    def __init__(self, name, **kwargs):
-        """Create instance for Role."""
-        super(Role, self).__init__(role_name=name, **kwargs)
+    def __init__(self, **kwargs):
+        """Create instance of Role.
+
+        Args:
+            **kwargs: Keyword arguments for creating a Role.
+        """
+        super(Role, self).__init__(**kwargs)
 
     def __repr__(self):
-        """Represent Role instance as a string."""
+        """Represent Role instance as a string.
+
+        Returns:
+            str: Representation of a Role object.
+        """
         return '<Role({0})>'.format(self.role_name)

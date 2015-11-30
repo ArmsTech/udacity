@@ -1,7 +1,7 @@
 """Public views for tech_quote (homepage, etc...)."""
 
 from flask import Blueprint, flash, redirect, request, url_for
-from flask.ext.login import login_user, logout_user, login_required
+from flask.ext.login import login_required, login_user, logout_user
 
 from tech_quote.extensions import login_manager
 from tech_quote.models.quote import Quote
@@ -19,14 +19,25 @@ login_manager.login_message_category = 'danger'
 
 @login_manager.user_loader
 def load_user(user_id):
-    """Reload the user object from the user ID stored in the session."""
+    """Reload the user object from the user ID stored in the session.
+
+    Args:
+        user_id (int): Id of `User` to load.
+
+    Returns:
+        object: `User` with id `user_id`.
+    """
     return User.query.get(user_id)
 
 
 @blueprint.route("/logout")
 @login_required
 def logout():
-    """User will be logged out, and their session will be cleaned up."""
+    """User will be logged out, and their session will be cleaned up.
+
+    Returns:
+        object: Response object to redirect client to homepage (index).
+    """
     logout_user()
     return redirect(url_for('public.index'))
 
@@ -36,7 +47,14 @@ def logout():
 @blueprint.route('/quotes/<int:page>')
 @with_template()
 def index(page=1):
-    """Render TQ Homepage."""
+    """Render TQ Homepage.
+
+    Args:
+        page (int): Page of quotes to render. Defaults to page 1.
+
+    Returns:
+        dict: Keyword arguments to be rendered with public/index.html.
+    """
     quotes = Quote.get_quotes_with_pagination(page)
 
     prev_page = url_for('public.index', page=quotes.prev_num)
@@ -47,13 +65,25 @@ def index(page=1):
 
 @blueprint.route('/login/oauth/github')
 def login_with_github():
-    """Log a user in with GitHub OAuth credentials."""
+    """Log a user in with GitHub OAuth credentials.
+
+    Returns:
+        object: Response object to redirect client to GitHub auth URL.
+    """
     return redirect(GitHubSignIn().service.get_authorize_url())
 
 
 @blueprint.route('/login/oauth/github/authorized')
 def handle_github_redirect():
-    """Handle redirect from GitHub access request (/login/oauth/github')."""
+    """Handle redirect from GitHub access request (/login/oauth/github').
+
+    Once a user authorizes access to their github account this function will
+    be called to create a new user in TQ (if they don't already exist), log
+    the user into the app, and send them to their profile.
+
+    Returns:
+        object: Response object to redirect client to user/profile page.
+    """
     code = request.args['code']
 
     session = GitHubSignIn().service.get_auth_session(data={'code': code})

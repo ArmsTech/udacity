@@ -29,7 +29,11 @@ def create_app():
 
 
 def register_extensions(app):
-    """Register flask extensions."""
+    """Register flask extensions.
+
+    Args:
+        app (object): Flask application object.
+    """
     db.init_app(app)
     assets.init_app(app)
     login_manager.init_app(app)
@@ -37,14 +41,22 @@ def register_extensions(app):
 
 
 def register_blueprints(app):
-    """Register flask blueprints."""
+    """Register flask blueprints.
+
+    Args:
+        app (object): Flask application object.
+    """
     app.register_blueprint(public.views.blueprint)
     app.register_blueprint(user.views.blueprint, url_prefix='/user')
     app.register_blueprint(quote.views.blueprint, url_prefix='/quote')
 
 
 def register_errors(app):
-    """Register flask error handlers."""
+    """Register flask error handlers.
+
+    Args:
+        app (object): Flask application object.
+    """
     def render_error(error):
         error_code = getattr(error, 'code', 500)
         return render_template(

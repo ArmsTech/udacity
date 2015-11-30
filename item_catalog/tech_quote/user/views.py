@@ -18,7 +18,15 @@ blueprint = Blueprint(
 @blueprint.route('/<user_login>/<int:page>')
 @with_template()
 def profile(user_login, page=1):
-    """Render a user's profile."""
+    """Render a user's profile.
+
+    Args:
+        user_login (str): `User` login of user to render profile for.
+        page (int): Page of user's quotes to render. Defaults to page 1.
+
+    Returns:
+        dict: Keyword arguments for user/profile.html
+    """
     user = User.query.filter_by(user_github_login=user_login).first_or_404()
     quotes = Quote.get_quotes_with_pagination(
         page, user_id=user.user_id)
@@ -36,7 +44,14 @@ def profile(user_login, page=1):
 @login_required
 @with_template()
 def settings(user_login):
-    """Render a user's profile settings."""
+    """Render a user's profile settings.
+
+    Args:
+        user_login (str): `User` login of user to render settings for.
+
+    Returns:
+        dict: Keyword arguments for user/settings.html
+    """
     user = User.query.filter_by(user_github_login=user_login).first_or_404()
     form = SettingsForm(obj=user)
 

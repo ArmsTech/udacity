@@ -8,7 +8,7 @@ from tech_quote.models.user import User
 
 class Author(Model):
 
-    """An author in the tq app."""
+    """An author in the TQ app."""
 
     __tablename__ = 'author'
 
@@ -19,18 +19,26 @@ class Author(Model):
         db.DateTime, nullable=False, default=datetime.utcnow)
 
     def __init__(self, **kwargs):
-        """Create instance for Author."""
+        """Create instance of Author.
+
+        Args:
+            **kwargs: Keyword arguments for creating an Author.
+        """
         super(Author, self).__init__(**kwargs)
 
     def __repr__(self):
-        """Represent Author instance as a string."""
+        """Represent Author instance as a string.
+
+        Returns:
+            str: Representation of an Author object.
+        """
         return '<Author author_id={0}, author_name={1}>'.format(
             self.author_id, self.author_name)
 
 
 class Category(Model):
 
-    """A category in the tq app."""
+    """A category in the TQ app."""
 
     __tablename__ = 'category'
 
@@ -40,18 +48,26 @@ class Category(Model):
     category_icon_url = Column(db.String(200), nullable=False)
 
     def __init__(self, **kwargs):
-        """Create instance for Category."""
+        """Create instance of Category.
+
+        Args:
+            **kwargs: Keyword arguments for creating an Category.
+        """
         super(Category, self).__init__(**kwargs)
 
     def __repr__(self):
-        """Represent Category instance as a string."""
+        """Represent Category instance as a string.
+
+        Returns:
+            str: Representation of a Category object.
+        """
         return '<Category category_id={0}, category_name={1}>'.format(
             self.category_id, self.category_name)
 
 
 class Quote(Model):
 
-    """A quote in the tq app."""
+    """A quote in the TQ app."""
 
     __tablename__ = 'quote'
 
@@ -72,11 +88,22 @@ class Quote(Model):
     user = db.relationship(User, backref='quote')
 
     def __init__(self, **kwargs):
-        """Create instance for Quote."""
+        """Create instance of Quote.
+
+        Args:
+            **kwargs: Keyword arguments for creating a Quote.
+        """
         super(Quote, self).__init__(**kwargs)
 
     def is_owned_by(self, user):
-        """Whether quote is owned by provided user object."""
+        """Whether quote is owned by provided user object.
+
+        Args:
+            user (object): User to check against.
+
+        Returns:
+            bool: Whether quote is owned by `user`.
+        """
         return unicode(self.user_id) == user.get_id()
 
     @classmethod
@@ -85,7 +112,7 @@ class Quote(Model):
 
         Args:
             page (int): Page of quotes to get.
-            **kwargs (dict): Filters to be applied to query.
+            **kwargs: Filters to be applied to query.
 
         Returns:
             object: Pagination object to get quotes for page.
@@ -95,6 +122,10 @@ class Quote(Model):
             cls.quote_created.desc()).paginate(page, quotes_per_page)
 
     def __repr__(self):
-        """Represent Quote instance as a string."""
+        """Represent Quote instance as a string.
+
+        Returns:
+            str: Representation of a Quote object.
+        """
         return '<Quote quote_id={0}, quote_text={1}>'.format(
             self.quote_id, self.quote_text)

@@ -1,4 +1,4 @@
-"""Flask extensions used by tech_quote."""
+"""Flask extensions (most of them) used by tech_quote."""
 
 from flask.ext.login import LoginManager
 login_manager = LoginManager()

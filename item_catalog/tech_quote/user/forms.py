@@ -17,10 +17,6 @@ class SettingsForm(Form):
         'Name', validators=[InputRequired(), Length(1, 200)])
     user_avatar = FileField('Avatar')
 
-    def __init__(self, *args, **kwargs):
-        """Initialize Form."""
-        Form.__init__(self, *args, **kwargs)
-
     def validate_user_avatar(self, field):
         """Validate user_avatar.
 
@@ -38,7 +34,11 @@ class SettingsForm(Form):
             raise ValidationError("File must be an image")
 
     def get_post_invalid_message(self):
-        """Get the default error message for a invalid post request."""
+        """Get the default error message for a invalid post request.
+
+        Returns:
+            str: Message including invalid field names.
+        """
         field_to_label = {'user_name': 'Name', 'user_avatar': 'Avatar'}
 
         error_fields = sorted(self.errors.keys())

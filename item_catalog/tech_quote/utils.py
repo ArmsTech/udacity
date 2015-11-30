@@ -1,6 +1,7 @@
 """Utilities for TQ application."""
 
 from functools import wraps
+
 from flask import render_template, request
 
 
@@ -8,7 +9,8 @@ def with_template(template=None):
     """Decorate function with render_template functionality.
 
     Args:
-        template (str): Template name to render if different than default.
+        template (Optional[str]): Template name to render if different than
+            default. Default is None.
 
     Returns:
         func: A function for rendering a Flask template.

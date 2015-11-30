@@ -15,7 +15,11 @@ blueprint = Blueprint(
 
 @blueprint.route('/api/v1/quotes')
 def quotes():
-    """Get all quotes and return in JSON format."""
+    """Get all quotes and return in JSON format.
+
+    Returns:
+        str: All quotes for all users.
+    """
     quotes = []
 
     for quote in Quote.query.all():
@@ -39,7 +43,14 @@ def quotes():
 @blueprint.route('/<int:quote_id>')
 @with_template()
 def quote(quote_id):
-    """Show a single quote."""
+    """Show a single quote.
+
+    Args:
+        quote_id (int): Id of quote to show.
+
+    Returns:
+        dict: Keyword arguments for quote/quote.html
+    """
     quote = Quote.query.get_or_404(quote_id)
     return dict(quote=quote)
 
@@ -48,7 +59,15 @@ def quote(quote_id):
 @blueprint.route('/category/<int:category_id>/<int:page>')
 @with_template()
 def category(category_id, page=1):
-    """Show a quote category."""
+    """Show a quote category.
+
+    Args:
+        category_id (int): Id of caterogy to show.
+        page (int): Page of quotes to render. Defaults to page 1.
+
+    Returns:
+        dict: Keyword arguments for quote/category.html
+    """
     category = Category.query.get_or_404(category_id)
     quotes = Quote.get_quotes_with_pagination(page, category_id=category_id)
 
@@ -66,7 +85,11 @@ def category(category_id, page=1):
 @login_required
 @with_template('quote/add_or_edit.html')
 def add():
-    """Add a quote."""
+    """Add a quote.
+
+    Returns:
+        dict: Keyword arguments for quote/add_or_edit.html
+    """
     form = QuoteForm(request.form)
 
     if request.method == 'POST':
@@ -90,7 +113,14 @@ def add():
 @login_required
 @with_template('quote/add_or_edit.html')
 def edit(quote_id):
-    """Edit a quote."""
+    """Edit a quote.
+
+    Args:
+        quote_id (int): Id of quote to edit.
+
+    Returns:
+        dict: Keyword arguments for quote/add_or_edit.html
+    """
     quote = Quote.query.filter_by(quote_id=quote_id).first_or_404()
 
     form = QuoteForm(
@@ -121,7 +151,14 @@ def edit(quote_id):
 @blueprint.route('/delete/<int:quote_id>', methods=('POST',))
 @login_required
 def delete(quote_id):
-    """Delete a quote."""
+    """Delete a quote.
+
+    Args:
+        quote_id (int): Id of quote to delete.
+
+    Returns:
+        object: Response object to redirect client to where they came from.
+    """
     quote = Quote.query.filter_by(quote_id=quote_id).first_or_404()
 
     if quote.is_owned_by(current_user):

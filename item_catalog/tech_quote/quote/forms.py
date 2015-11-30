@@ -16,7 +16,15 @@ class DynamicSelectField(SelectField):
     """SelectField that allows user-added select field options."""
 
     def pre_validate(self, form):
-        """Skip pre-validation (ensuring choice is in choices)."""
+        """Skip pre-validation (ensuring choice is in choices).
+
+        This is for a special SelectField that uses selectize.js and requires
+        custom validation. Given the way the field works, the default
+        validation causes problems, so we skip it here.
+
+        Args:
+            form (object): The form to validate.
+        """
         pass
 
 
@@ -34,7 +42,12 @@ class QuoteForm(Form):
         'Biography', validators=[InputRequired(), Length(1, 200), URL()])
 
     def __init__(self, *args, **kwargs):
-        """Initialize Form and set category choices."""
+        """Initialize Form and set category choices.
+
+        Args:
+            *args: Variable length argument list for Initializing a form.
+            **kwargs: Keyword arguments for Initializing a form.
+        """
         Form.__init__(self, *args, **kwargs)
 
         categories = Category.query.with_entities(
@@ -50,7 +63,17 @@ class QuoteForm(Form):
             [EMPTY_OPTION] + self.stringify_choices(authors))
 
     def validate_author(self, field):
-        """Validate author hybrid select/text field."""
+        """Validate author hybrid select/text field.
+
+        Args:
+            field (object): Author field to validate.
+
+        Returns:
+            bool: Whether author field is valid or None.
+
+        Raises:
+            ValidationError: If field is found to be invalid.
+        """
         author = field.data
         try:
             # Is it an id?
@@ -65,11 +88,25 @@ class QuoteForm(Form):
                 raise ValidationError("Author must not be a number")
 
     def stringify_choices(self, choices):
-        """Convert int ids to str representations."""
+        """Convert int ids to str representations.
+
+        Args:
+            choices (list): Choices to be stringified.
+
+        Returns:
+            list: Choices in string form.
+        """
         return map(lambda (id_, value): (str(id_), value), choices)
 
     def get_selected_author_id(self):
-        """Get the selected author_id on the current form."""
+        """Get the selected author_id on the current form.
+
+        An author can be selected from a select field or added from that same
+        field. This function handles both those cases.
+
+        Returns:
+            int: Id of author selected or added.
+        """
         try:
             # New or existing (id of existing) author?
             int(self.author_name.data)
@@ -84,7 +121,11 @@ class QuoteForm(Form):
         return author_id
 
     def get_post_invalid_message(self):
-        """Get the default error message for a invalid post request."""
+        """Get the default error message for a invalid post request.
+
+        Returns:
+            str: Message including invalid field names.
+        """
         field_to_label = {
             'quote_text': 'Quotation', 'quote_source': 'Source',
             'category_name': 'Category', 'author_name': 'Author',
