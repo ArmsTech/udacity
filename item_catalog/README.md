@@ -11,13 +11,34 @@ From Udacity:
 
 Tech Quote (TQ) hosts technology-related quotes, specifically quotes relating
 to programming languages. The TQ application meets all requirements for
-project 3 by implementing the following pages and features:
+the Item Catalog project by implementing the following:
 
+* JSON API endpoint at `quote/api/v1/quotes`
+* Data is read from a PostgreSQL database using SQLAlchemy
+* Forms exist for adding/editing data with validation and CSRF protection
+  with WTForms
+* Data created by a user can can be deleted by (only) that user as a POST
+  request and with CSRF protection
 * OAuth2 login via GitHub
+* Code is well organized and self-documenting adhering to both PEP8 and PEP257
 
-The following extensions, tools, and patterns were leveraged:
+The following Flask extensions and patterns were leveraged:
 
-* Flask-Migrate (alembic) to manage database migrations
+* Flask-Assets
+* Flask-Login
+* Flask-Migrate
+* Flask-Script
+* Flask-SQLAlchemy
+* Flask-Uploads
+* Flask-WTF
+
+* Packages
+* Blueprints
+* Application factory
+* View decorators (login & template rendering)
+* Template inheritance
+* Message flashing
+* Custom error pages
 
 Requirements
 ------------
