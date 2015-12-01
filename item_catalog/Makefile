@@ -30,8 +30,8 @@ dev:
 install:
 	@echo "# Installing application"
 	pip install -r requirements.txt
-	db
-	upgrade
+	make db
+	make db-upgrade
 
 prod:
 	@echo "# Starting web server (production)"
