@@ -27,6 +27,13 @@ dev:
 	@echo "# Starting web server (development)"
 	honcho start dev_server
 
+doc:
+	@echo "# Generating Sphinx HTML documentation"
+	sphinx-apidoc -o docs/source tech_quote  --force
+	$(MAKE) -C docs clean
+	$(MAKE) -C docs html
+	xdg-open docs/_build/html/index.html
+
 install:
 	@echo "# Installing application"
 	pip install -r requirements.txt
