@@ -4,3 +4,7 @@
 [Ll]ocal
 venv/
 uploads
+docs/_build/
+docs/source/
+tech_quote/static/.webassets-cache/
+tech_quote/static/gen/
