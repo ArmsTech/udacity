@@ -105,12 +105,12 @@ Grading (by Udacity)
 
 Criteria       |Highest Grade Possible  |Grade Recieved
 ---------------|------------------------|--------------
-API Endpoints  |Exceeds Specifications  |TBD
-CRUD: Create   |Exceeds Specifications  |TBD
-CRUD: Read     |Exceeds Specifications  |TBD
-CRUD: Update   |Exceeds Specifications  |TBD
-CRUD: Delete   |Exceeds Specifications  |TBD
-Authentication & Authorization   |Exceeds Specifications  |TBD
-Code Quality   |Meets Specifications  |TBD
-Comments       |Meets Specifications  |TBD
-Documentation  |Meets Specifications    |TBD
+API Endpoints  |Exceeds Specifications  |Meets Specifications
+CRUD: Create   |Exceeds Specifications  |Exceeds Specifications
+CRUD: Read     |Exceeds Specifications  |Exceeds Specifications
+CRUD: Update   |Exceeds Specifications  |Exceeds Specifications
+CRUD: Delete   |Exceeds Specifications  |Exceeds Specifications
+Authentication & Authorization   |Meets Specifications  |Meets Specifications
+Code Quality   |Meets Specifications  |Meets Specifications
+Comments       |Meets Specifications  |Meets Specifications
+Documentation  |Meets Specifications    |Meets Specifications
