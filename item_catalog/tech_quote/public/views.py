@@ -16,6 +16,8 @@ blueprint = Blueprint(
 login_manager.login_view = 'public.index'
 login_manager.login_message_category = 'danger'
 
+GH_PRIVATE_EMAIL_DOMAIN = 'users.noreply.github.com'
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -91,8 +93,12 @@ def handle_github_redirect():
 
     user = User.by_github_id(github_user_data['id'])
     if user is None:
+        # If user email is private, email from API will be None
+        user_email = github_user_data['email'] or ''.join([
+            github_user_data['login'], '@', GH_PRIVATE_EMAIL_DOMAIN])
+
         user = User.create(
-            user_email=github_user_data['email'],
+            user_email=user_email,
             user_name=github_user_data['name'],
             user_github_id=github_user_data['id'],
             user_github_login=github_user_data['login'],
