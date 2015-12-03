@@ -99,7 +99,7 @@ def handle_github_redirect():
 
         user = User.create(
             user_email=user_email,
-            user_name=github_user_data['name'],
+            user_name=github_user_data['name'] or '',
             user_github_id=github_user_data['id'],
             user_github_login=github_user_data['login'],
             user_avatar_url=github_user_data['avatar_url'])

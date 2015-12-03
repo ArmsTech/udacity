@@ -12,8 +12,12 @@
         </a>
       </div>
       <div class="col-md-4">
-        <h2 class="profile-username">{{ user.user_name }}</h2>
-        <p><span class="profile-login-size"><em>aka</em> {{ user.user_github_login }}</span></p>
+        {% if user.user_name -%}
+          <h2 class="profile-username">{{ user.user_name }}</h2>
+          <p><span class="profile-login-size"><em>aka</em> {{ user.user_github_login }}</span></p>
+        {% else %}
+          <h2 class="profile-username">{{ user.user_github_login }}</h2>
+        {%- endif %}
         <hr />
         <p>* Joined on <strong>{{ user.user_created.strftime('%Y-%m-%d') }}</strong></p>
         <p>* Submitted <strong>{{ quotes.total }}</strong> quotes</p>
