@@ -38,8 +38,8 @@ Install
 3. `vagrant ssh`
 4. `cd /vagrant/udacity/tournament_results/`
 5. `virtualenv venv && . venv/bin/activate`
-6. `make install`
-7. `PYTHONPATH=/vagrant/udacity/tournament_results/tournament` (add package to path)
+6. `pip install -r requirements.txt`
+7. `export PYTHONPATH=/vagrant/udacity/tournament_results/tournament` (add package to path)
 8. `python tournament/functional_tests/tournament/test_tournament.py` (run the test suite)
 
 Requirements
