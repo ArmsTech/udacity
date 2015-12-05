@@ -15,7 +15,7 @@ and demonstrates familiarity with:
 
 * Database design and normalization
 * SQL statements (DML and DDL)
-* PostgreSQL and the Python adapter Psycopg2
+* PostgreSQL and the Python adapter `psycopg2`
 * Development of an API backed by a database
 * Use of functional tests to validate results
 
@@ -30,27 +30,22 @@ Tournament rules and design:
 
 _More on Swiss-style tournament system:_ http://en.wikipedia.org/wiki/Swiss-system_tournament
 
-Quick Start
------------
+Install
+-------
 
-1. Clone vagrant environment: `git clone https://github.com/udacity/fullstack-nanodegree-vm.git fullstack`
-2. Navigate to fullstack: `cd fullstack`
-3. Bring up vagrant VM: `vagrant up`
-4. SSH into vagrant VM: `vagrant ssh`
-5. Install dependencies: `sudo apt-get install libpq-dev python-dev`
-6. Upgrade psycopg2 (>= 2.5): `sudo pip install -U psycopg2`
-7. Clone tournament repo (in VM): `git clone https://github.com/ArmsTech/udacity.git`
-8. Navigate to tournament_results `cd udacity/tournament_results`
-9. Add tournament package to path: `PYTHONPATH=/vagrant/udacity/tournament_results/tournament`
-10. Run test suite: `python tournament/functional_tests/tournament/test_tournament.py`
+1. `git clone https://github.com/brenj/fullstack-nanodegree-vm.git fullstack && cd fullstack/vagrant`
+2. `vagrant up`
+3. `vagrant ssh`
+4. `cd /vagrant/udacity/tournament_results/`
+5. `virtualenv venv && . venv/bin/activate`
+6. `make install`
+7. `PYTHONPATH=/vagrant/udacity/tournament_results/tournament` (add package to path)
+8. `python tournament/functional_tests/tournament/test_tournament.py` (run the test suite)
 
 Requirements
 ------------
 
-* Vagrant
-* VirtualBox
-* Python >= 2.7
-* Linux, Mac OS X
+* [Vagrant](http://www.vagrantup.com/downloads.html)
 
 Grading (by Udacity)
 --------------------
