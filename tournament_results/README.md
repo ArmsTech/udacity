@@ -30,6 +30,10 @@ Tournament rules and design:
 
 _More on Swiss-style tournament system:_ http://en.wikipedia.org/wiki/Swiss-system_tournament
 
+The `original_files` folder contains the files provided by Udacity for this
+project, unchanged. Changes were made to conform to Python's standards and best
+practices.
+
 Install
 -------
 
