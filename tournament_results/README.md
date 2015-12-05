@@ -10,20 +10,23 @@ From Udacity:
 > round: players are not eliminated, and each player should be paired with
 > another player with the same number of wins, or as close as possible.
 
-The project demonstrates familiarity with:
-* database design and normalization
+This tournament database meets (and exceeds) all requirements for the [Tournament Results](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004) project,
+and demonstrates familiarity with:
+
+* Database design and normalization
 * SQL statements (DML and DDL)
 * PostgreSQL and the Python adapter Psycopg2
-* development of an API backed by a database
-* use of functional tests to validate results
+* Development of an API backed by a database
+* Use of functional tests to validate results
 
-Tournament Rules:
-* players compete against other players of similar rank
-* players cannot play the same opponent more than once
-* players can recieve byes (free win), but only once per tournament
-* individual games in a round can result in a tie (win for both players)
-* players with the same number of wins are ranked by Opponent Match Wins
-* players can play in multiple tournaments
+Tournament rules and design:
+
+1. Players compete against other players of similar rank
+2. Players cannot play the same opponent more than once
+3. Players can receive byes (a free win), but only once per tournament
+4. Individual games in a round can result in a tie (win for both players)
+5. Players with the same number of wins are ranked by Opponent Match Wins
+6. Players can play in multiple tournaments
 
 _More on Swiss-style tournament system:_ http://en.wikipedia.org/wiki/Swiss-system_tournament
 
