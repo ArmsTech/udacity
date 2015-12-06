@@ -67,23 +67,19 @@ class ConferenceApi(remote.Service):
         if not user:
             raise endpoints.UnauthorizedException('Authorization required')
 
-        # step 2. get user id by calling getUserId(user)
-        # step 3. create a new key of kind Profile from the id
+        user_id = getUserId(user)
+        user_key = ndb.Key(Profile, user_id)
 
-        # TODO 3
-        # get the entity from datastore by using get() on the key
-        profile = None
+        profile = user_key.get()
         if not profile:
-            profile = Profile(
-                key = None, # TODO 1 step 4. replace with the key from step 3
-                displayName = user.nickname(), 
-                mainEmail= user.email(),
-                teeShirtSize = str(TeeShirtSize.NOT_SPECIFIED),
-            )
-            # TODO 2
-            # save the profile to datastore
+            profile=Profile(
+                key=user_key,
+                displayName=user.nickname(),
+                mainEmail=user.email(),
+                teeShirtSize=str(TeeShirtSize.NOT_SPECIFIED))
+            profile.put()
 
-        return profile      # return Profile
+        return profile
 
 
     def _doProfile(self, save_request=None):
