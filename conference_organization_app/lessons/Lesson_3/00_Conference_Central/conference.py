@@ -29,6 +29,8 @@ from models import TeeShirtSize
 
 from settings import WEB_CLIENT_ID
 
+from utils import getUserId
+
 EMAIL_SCOPE = endpoints.EMAIL_SCOPE
 API_EXPLORER_CLIENT_ID = endpoints.API_EXPLORER_CLIENT_ID
 
@@ -65,9 +67,6 @@ class ConferenceApi(remote.Service):
         if not user:
             raise endpoints.UnauthorizedException('Authorization required')
 
-        # TODO 1
-        # step 1. copy utils.py from additions folder to this folder
-        #         and import getUserId from it
         # step 2. get user id by calling getUserId(user)
         # step 3. create a new key of kind Profile from the id
 
