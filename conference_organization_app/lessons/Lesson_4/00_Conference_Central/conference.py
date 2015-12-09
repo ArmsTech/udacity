@@ -243,5 +243,19 @@ class ConferenceApi(remote.Service):
             items=[self._copyConferenceToForm(conf, displayName) for conf in conferences]
         )
 
+    @endpoints.method(message_types.VoidMessage, ConferenceForms,
+            path='filterPlayground',
+            http_method='GET', name='filterPlayground')
+    def filterPlayground(self, request):
+        q = Conference.query()
+        query = q.filter(
+            ndb.AND(
+                Conference.city == 'London',
+                Conference.topics.IN(('Medical Innovations',))))
+
+        return ConferenceForms(
+            items=[self._copyConferenceToForm(conf, "") for conf in query]
+        )
+
 # registers API
 api = endpoints.api_server([ConferenceApi]) 
