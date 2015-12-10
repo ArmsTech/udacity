@@ -229,7 +229,7 @@ class ConferenceApi(remote.Service):
                 name='queryConferences')
     def queryConferences(self, request):
         """Query for conferences."""
-        conferences = Conference.query()
+        conferences = self._getQuery(request)
 
         # return individual ConferenceForm object per Conference
         return ConferenceForms(
