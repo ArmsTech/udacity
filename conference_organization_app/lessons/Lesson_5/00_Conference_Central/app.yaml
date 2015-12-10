@@ -45,3 +45,7 @@ libraries:
 # pycrypto library used for OAuth2 (req'd for authenticated APIs)
 - name: pycrypto
   version: latest
+
+- url: /crons/set_announcement
+  script: main.app
+  login: admin
