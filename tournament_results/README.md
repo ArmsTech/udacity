@@ -34,6 +34,11 @@ The `original_files` folder contains the files provided by Udacity for this
 project, unchanged. Changes were made to conform to Python's standards and best
 practices.
 
+Model
+-----
+
+![ER Model](https://raw.githubusercontent.com/brenj/udacity/master/tournament_results/docs/erd.png)
+
 Install
 -------
 
