@@ -125,3 +125,15 @@ class Session(ndb.Model):
     type_of_session = ndb.StringProperty()
     date = ndb.DateProperty()
     start_time= ndb.TimeProperty()
+
+
+class SessionMessage(messages.Message):
+
+    """ProtoRPC message for a session."""
+
+    name = messages.StringField(1, required=True)
+    highlights = messages.StringField(2)
+    speaker = messages.StringField(3)
+    duration = messages.StringField(4)
+    type_of_session = messages.StringField(5)
+    date_and_start_time = messages.DateTimeField(6)
