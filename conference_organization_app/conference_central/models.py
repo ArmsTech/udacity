@@ -118,10 +118,10 @@ class Session(ndb.Model):
 
     """A session (e.g. talk, workshop) given at a `Conference`."""
 
-     name = ndb.StringProperty(required=True)
-     highlights = ndb.StringProperty()
-     speaker = ndb.StringProperty()
-     duration = ndb.StringProperty()
-     type_of_session = ndb.StringProperty()
-     date = ndb.DateProperty()
-     start_time= ndb.TimeProperty()
+    name = ndb.StringProperty(required=True)
+    highlights = ndb.StringProperty()
+    speaker = ndb.StringProperty()
+    duration = ndb.StringProperty()
+    type_of_session = ndb.StringProperty()
+    date = ndb.DateProperty()
+    start_time= ndb.TimeProperty()
