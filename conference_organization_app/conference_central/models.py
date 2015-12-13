@@ -60,6 +60,8 @@ class Conference(ndb.Model):
     endDate         = ndb.DateProperty()
     maxAttendees    = ndb.IntegerProperty()
     seatsAvailable  = ndb.IntegerProperty()
+    # sessions added by brenj
+    sessions = ndb.StructuredProperty(Session, repeated=True)
 
 class ConferenceForm(messages.Message):
     """ConferenceForm -- Conference outbound form message"""
