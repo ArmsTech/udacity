@@ -137,3 +137,10 @@ class SessionMessage(messages.Message):
     duration = messages.StringField(4)
     type_of_session = messages.StringField(5)
     date_and_start_time = messages.DateTimeField(6)
+
+
+class SessionsMessage(messages.Message):
+
+    """ProtoRPC message for a collection of sessions."""
+
+    sessions = messages.MessageField(SessionMessage, 1, repeated=True)
