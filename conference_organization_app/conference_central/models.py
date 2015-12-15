@@ -48,6 +48,45 @@ class BooleanMessage(messages.Message):
     """BooleanMessage-- outbound Boolean value message"""
     data = messages.BooleanField(1)
 
+# begin: brenj additions to models.py
+#####################################
+
+class Session(ndb.Model):
+
+    """A session (e.g. talk, workshop) given at a `Conference`."""
+
+    name = ndb.StringProperty(required=True)
+    highlights = ndb.StringProperty()
+    speaker = ndb.StringProperty()
+    duration = ndb.StringProperty()
+    type_of_session = ndb.StringProperty()
+    date = ndb.DateProperty()
+    start_time= ndb.TimeProperty()
+
+
+class SessionMessage(messages.Message):
+
+    """ProtoRPC message for a session."""
+
+    name = messages.StringField(1, required=True)
+    highlights = messages.StringField(2)
+    speaker = messages.StringField(3)
+    duration = messages.StringField(4)
+    type_of_session = messages.StringField(5)
+    date = messages.StringField(6)
+    start_time = messages.StringField(7)
+
+
+class SessionsMessage(messages.Message):
+
+    """ProtoRPC message for a collection of sessions."""
+
+    sessions = messages.MessageField(SessionMessage, 1, repeated=True)
+
+# end: brenj additions to models.py
+###################################
+
+
 class Conference(ndb.Model):
     """Conference -- Conference object"""
     name            = ndb.StringProperty(required=True)
@@ -109,38 +148,3 @@ class ConferenceQueryForm(messages.Message):
 class ConferenceQueryForms(messages.Message):
     """ConferenceQueryForms -- multiple ConferenceQueryForm inbound form message"""
     filters = messages.MessageField(ConferenceQueryForm, 1, repeated=True)
-
-
-# brenj additions to models.py
-##############################
-
-class Session(ndb.Model):
-
-    """A session (e.g. talk, workshop) given at a `Conference`."""
-
-    name = ndb.StringProperty(required=True)
-    highlights = ndb.StringProperty()
-    speaker = ndb.StringProperty()
-    duration = ndb.StringProperty()
-    type_of_session = ndb.StringProperty()
-    date = ndb.DateProperty()
-    start_time= ndb.TimeProperty()
-
-
-class SessionMessage(messages.Message):
-
-    """ProtoRPC message for a session."""
-
-    name = messages.StringField(1, required=True)
-    highlights = messages.StringField(2)
-    speaker = messages.StringField(3)
-    duration = messages.StringField(4)
-    type_of_session = messages.StringField(5)
-    date_and_start_time = messages.DateTimeField(6)
-
-
-class SessionsMessage(messages.Message):
-
-    """ProtoRPC message for a collection of sessions."""
-
-    sessions = messages.MessageField(SessionMessage, 1, repeated=True)
