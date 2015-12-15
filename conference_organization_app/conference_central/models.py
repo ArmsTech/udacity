@@ -57,11 +57,11 @@ class Session(ndb.Model):
 
     name = ndb.StringProperty(required=True)
     highlights = ndb.StringProperty()
-    speaker = ndb.StringProperty()
+    speaker = ndb.StringProperty(required=True)
     duration = ndb.StringProperty()
     type_of_session = ndb.StringProperty()
-    date = ndb.DateProperty()
-    start_time= ndb.TimeProperty()
+    date = ndb.DateProperty(required=True)
+    start_time= ndb.TimeProperty(required=True)
 
 
 class SessionMessage(messages.Message):
@@ -70,11 +70,11 @@ class SessionMessage(messages.Message):
 
     name = messages.StringField(1, required=True)
     highlights = messages.StringField(2)
-    speaker = messages.StringField(3)
+    speaker = messages.StringField(3, required=True)
     duration = messages.StringField(4)
     type_of_session = messages.StringField(5)
-    date = messages.StringField(6)
-    start_time = messages.StringField(7)
+    date = messages.StringField(6, required=True)
+    start_time = messages.StringField(7,required=True)
 
 
 class SessionsMessage(messages.Message):
