@@ -589,11 +589,16 @@ class ConferenceApi(remote.Service):
 
         # Logged-in user; can add sessions to this conference
 
-        Session(
+        session = Session(
             name=request.name, highlights=request.highlights,
             speaker=request.speaker, duration=request.duration,
             type_of_session=request.type_of_session,
-            date=date, start_time=start_time).put()
+            date=date, start_time=start_time)
+
+        session.put()
+
+        conference.sessions.append(session)
+        conference.put()
 
         return SessionMessage(
             name=request.name, highlights=request.highlights,
