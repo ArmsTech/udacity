@@ -551,5 +551,55 @@ class ConferenceApi(remote.Service):
             items=[self._copyConferenceToForm(conf, "") for conf in q]
         )
 
+    SESSION_RESOURCE = endpoints.ResourceContainer(
+        SessionMessage,
+        conference=messages.StringField(1)
+    )
+
+    @endpoints.method(
+        SESSION_RESOURCE, SessionMessage,
+        path='conference/{conference}/session',
+        http_method='POST', name='createSession')
+    def create_session(self, request):
+        """Create a new session for a specified conference."""
+        try:
+            date = datetime.strptime(request.date, "%Y-%m-%d").date()
+        except ValueError:
+            raise endpoints.BadRequestException(
+                "Date must be in format YYYY-MM-DD.")
+        try:
+            start_time = datetime.strptime(request.start_time, '%H:%M').time()
+        except ValueError:
+            raise endpoints.BadRequestException(
+                "Time must be in format HH-MM.")
+
+        user = endpoints.get_current_user()
+        if not user:
+            raise endpoints.UnauthorizedException("Authorization required.")
+
+        conference = ndb.Key(urlsafe=request.conference).get()
+        if not conference:
+            raise endpoints.NotFoundException(
+                "No conference found with key: {0}.".format(
+                    request.conference))
+
+        if getUserId(user) != conference.organizerUserId:
+            raise endpoints.ForbiddenException(
+                "Only the conference organizer can add sessions.")
+
+        # Logged-in user; can add sessions to this conference
+
+        Session(
+            name=request.name, highlights=request.highlights,
+            speaker=request.speaker, duration=request.duration,
+            type_of_session=request.type_of_session,
+            date=date, start_time=start_time).put()
+
+        return SessionMessage(
+            name=request.name, highlights=request.highlights,
+            speaker=request.speaker, duration=request.duration,
+            type_of_session=request.type_of_session,
+            date=request.date, start_time=request.start_time)
+
 
 api = endpoints.api_server([ConferenceApi]) # register API
