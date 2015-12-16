@@ -611,5 +611,19 @@ class ConferenceApi(remote.Service):
         conference=messages.StringField(1)
     )
 
+    @endpoints.method(
+        SESSIONS_RESOURCE, SessionsMessage,
+        path='conference/{conference}/sessions', name='getConferenceSessions')
+    def get_conference_sessions(self, request):
+        """Get all sessions for a specified conference."""
+        conference = ndb.Key(urlsafe=request.conference).get()
+        if not conference:
+            raise endpoints.NotFoundException(
+                "No conference found with key: {0}.".format(
+                    request.conference))
+
+        # Convert ndb to message
+        return SessionsMessage(sessions=conference.sessions)
+
 
 api = endpoints.api_server([ConferenceApi]) # register API
