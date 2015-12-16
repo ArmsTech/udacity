@@ -51,19 +51,6 @@ class BooleanMessage(messages.Message):
 # begin: brenj additions to models.py
 #####################################
 
-class Session(ndb.Model):
-
-    """A session (e.g. talk, workshop) given at a `Conference`."""
-
-    name = ndb.StringProperty(required=True)
-    highlights = ndb.StringProperty()
-    speaker = ndb.StringProperty(required=True)
-    duration = ndb.StringProperty()
-    type_of_session = ndb.StringProperty()
-    date = ndb.DateProperty(required=True)
-    start_time= ndb.TimeProperty(required=True)
-
-
 class SessionMessage(messages.Message):
 
     """ProtoRPC message for a session."""
@@ -82,6 +69,19 @@ class SessionsMessage(messages.Message):
     """ProtoRPC message for a collection of sessions."""
 
     sessions = messages.MessageField(SessionMessage, 1, repeated=True)
+
+
+class Session(ndb.Model):
+
+    """A session (e.g. talk, workshop) given at a `Conference`."""
+
+    name = ndb.StringProperty(required=True)
+    highlights = ndb.StringProperty()
+    speaker = ndb.StringProperty(required=True)
+    duration = ndb.StringProperty()
+    type_of_session = ndb.StringProperty()
+    date = ndb.DateProperty(required=True)
+    start_time= ndb.TimeProperty(required=True)
 
 # end: brenj additions to models.py
 ###################################
