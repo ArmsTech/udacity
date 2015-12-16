@@ -606,5 +606,10 @@ class ConferenceApi(remote.Service):
             type_of_session=request.type_of_session,
             date=request.date, start_time=request.start_time)
 
+    SESSIONS_RESOURCE = endpoints.ResourceContainer(
+        message_types.VoidMessage,
+        conference=messages.StringField(1)
+    )
+
 
 api = endpoints.api_server([ConferenceApi]) # register API
