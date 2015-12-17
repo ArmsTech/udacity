@@ -595,7 +595,8 @@ class ConferenceApi(remote.Service):
 
         session = Session(
             name=request.name, highlights=request.highlights,
-            speaker=request.speaker, duration=request.duration,
+            speaker=Speaker(name=request.speaker.name),
+            duration=request.duration,
             type_of_session=request.type_of_session,
             date=date, start_time=start_time)
 
