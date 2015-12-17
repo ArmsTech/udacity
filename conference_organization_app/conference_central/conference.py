@@ -653,5 +653,21 @@ class ConferenceApi(remote.Service):
                 session.to_message() for session in conference.sessions if
                 session.type_of_session == request.type_of_session])
 
+    SESSIONS_BY_SPEAKER_RESOURCE = endpoints.ResourceContainer(
+        message_types.VoidMessage,
+        speaker=messages.StringField(1)
+    )
+
+    @endpoints.method(
+        SESSIONS_BY_SPEAKER_RESOURCE, SessionsMessage,
+        path='conference/sessions/{speaker}', name='getSessionsBySpeaker')
+    def get_sessions_by_speaker(self, request):
+        """Get all sessions for a specified speaker."""
+        sessions = Session.query().filter(
+            Session.speaker.name == request.speaker)
+
+        return SessionsMessage(
+            sessions=[session.to_message() for session in sessions])
+
 
 api = endpoints.api_server([ConferenceApi]) # register API
