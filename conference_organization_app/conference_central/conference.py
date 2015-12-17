@@ -622,8 +622,8 @@ class ConferenceApi(remote.Service):
                 "No conference found with key: {0}.".format(
                     request.conference))
 
-        # Convert ndb to message
-        return SessionsMessage(sessions=conference.sessions)
+        return SessionsMessage(
+            sessions=[session.to_message() for session in conference.sessions])
 
 
 api = endpoints.api_server([ConferenceApi]) # register API
