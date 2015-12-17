@@ -51,13 +51,20 @@ class BooleanMessage(messages.Message):
 # begin: brenj additions to models.py
 #####################################
 
+class SpeakerMessage(messages.Message):
+
+    """ProtoRPC message for a speaker."""
+
+    name = messages.StringField(1, required=True)
+
+
 class SessionMessage(messages.Message):
 
     """ProtoRPC message for a session."""
 
     name = messages.StringField(1, required=True)
     highlights = messages.StringField(2)
-    speaker = messages.StringField(3, required=True)
+    speaker = messages.MessageField(SpeakerMessage, 3, required=True)
     duration = messages.StringField(4)
     type_of_session = messages.StringField(5)
     date = messages.StringField(6, required=True)
@@ -71,25 +78,36 @@ class SessionsMessage(messages.Message):
     sessions = messages.MessageField(SessionMessage, 1, repeated=True)
 
 
+class Speaker(ndb.Model):
+
+    """A speaker at a conference session."""
+
+    name = ndb.StringProperty(required=True)
+
+    def to_message(self):
+        """Convert a ndb speaker to a speaker message."""
+        return SpeakerMessage(name=self.name)
+
+
 class Session(ndb.Model):
 
     """A session (e.g. talk, workshop) given at a `Conference`."""
 
     name = ndb.StringProperty(required=True)
     highlights = ndb.StringProperty()
-    speaker = ndb.StringProperty(required=True)
+    speaker = ndb.StructuredProperty(Speaker, required=True)
     duration = ndb.StringProperty()
     type_of_session = ndb.StringProperty()
     date = ndb.DateProperty(required=True)
     start_time= ndb.TimeProperty(required=True)
 
     def to_message(self):
-        """Convert a ndb session to a message session."""
+        """Convert a ndb session to a session message."""
         return SessionMessage(
-            name=self.name, highlights=self.highlights, speaker=self.speaker,
-            duration=self.duration, type_of_session=self.type_of_session,
-            date=str(self.date), start_time=str(self.start_time))
-
+            name=self.name, highlights=self.highlights,
+            speaker=self.speaker.to_message(), duration=self.duration,
+            type_of_session=self.type_of_session, date=str(self.date),
+            start_time=str(self.start_time))
 
 
 # end: brenj additions to models.py
