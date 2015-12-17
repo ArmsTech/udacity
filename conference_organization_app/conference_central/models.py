@@ -83,6 +83,15 @@ class Session(ndb.Model):
     date = ndb.DateProperty(required=True)
     start_time= ndb.TimeProperty(required=True)
 
+    def to_message(self):
+        """Convert a ndb session to a message session."""
+        return SessionMessage(
+            name=self.name, highlights=self.highlights, speaker=self.speaker,
+            duration=self.duration, type_of_session=self.type_of_session,
+            date=str(self.date), start_time=str(self.start_time))
+
+
+
 # end: brenj additions to models.py
 ###################################
 
