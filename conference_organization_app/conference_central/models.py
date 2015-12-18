@@ -62,13 +62,14 @@ class SessionMessage(messages.Message):
 
     """ProtoRPC message for a session."""
 
-    name = messages.StringField(1, required=True)
-    highlights = messages.StringField(2)
-    speaker = messages.MessageField(SpeakerMessage, 3, required=True)
-    duration = messages.StringField(4)
-    type_of_session = messages.StringField(5)
-    date = messages.StringField(6, required=True)
-    start_time = messages.StringField(7,required=True)
+    id = messages.StringField(1)
+    name = messages.StringField(2, required=True)
+    highlights = messages.StringField(3)
+    speaker = messages.MessageField(SpeakerMessage, 4, required=True)
+    duration = messages.StringField(5)
+    type_of_session = messages.StringField(6)
+    date = messages.StringField(7, required=True)
+    start_time = messages.StringField(8,required=True)
 
 
 class SessionsMessage(messages.Message):
