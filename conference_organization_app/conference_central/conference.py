@@ -593,21 +593,22 @@ class ConferenceApi(remote.Service):
 
         # Logged-in user; can add sessions to this conference
 
-        session = Session(
-            name=request.name, highlights=request.highlights,
+        allocated_id = ndb.Model.allocate_ids(
+            size=1, parent=conference.key)[0]
+        session_key = ndb.Key(Session, allocated_id, parent=conference.key)
+
+        Session(
+            id=session_key.id(), name=request.name,
+            highlights=request.highlights,
             speaker=Speaker(name=request.speaker.name),
             duration=request.duration,
             type_of_session=request.type_of_session,
-            date=date, start_time=start_time)
-
-        session.put()
-
-        conference.sessions.append(session)
-        conference.put()
+            date=date, start_time=start_time).put()
 
         return SessionMessage(
-            name=request.name, highlights=request.highlights,
-            speaker=request.speaker, duration=request.duration,
+            id=session_key.urlsafe(), name=request.name,
+            highlights=request.highlights, speaker=request.speaker,
+            duration=request.duration,
             type_of_session=request.type_of_session,
             date=request.date, start_time=request.start_time)
 
