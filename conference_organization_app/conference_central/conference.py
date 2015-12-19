@@ -724,4 +724,28 @@ class ConferenceApi(remote.Service):
 
         return self._get_wishlist_sessions_as_message(profile)
 
+    SESSIONS_DELETE_FROM_WISHLIST = endpoints.ResourceContainer(
+        message_types.VoidMessage,
+        session=messages.StringField(1)
+    )
+
+    @endpoints.method(
+        SESSIONS_DELETE_FROM_WISHLIST, SessionsMessage,
+        http_method='DELETE', path='profile/wish/{session}',
+        name='deleteSessionInWishlist')
+    def delete_session_in_wishlist(self, request):
+        """Delete a session from a user's wishlist."""
+        profile = self._getProfileFromUser()
+
+        # Make sure the session to be deleted exists
+        session = ndb.Key(urlsafe=request.session).get()
+        if not session:
+            raise endpoints.NotFoundException(
+                "No session found with key: {0}.".format(request.session))
+
+        profile.sessions_wishlist.remove(session.key.urlsafe())
+        profile.put()
+
+        return self._get_wishlist_sessions_as_message(profile)
+
 api = endpoints.api_server([ConferenceApi]) # register API
