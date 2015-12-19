@@ -557,8 +557,7 @@ class ConferenceApi(remote.Service):
 
     SESSION_CONFERENCE_REQUEST = endpoints.ResourceContainer(
         SessionMessage,
-        conference=messages.StringField(1)
-    )
+        conference=messages.StringField(1))
 
     @endpoints.method(
         SESSION_CONFERENCE_REQUEST, SessionMessage,
@@ -610,8 +609,7 @@ class ConferenceApi(remote.Service):
 
     CONFERENCE_REQUEST = endpoints.ResourceContainer(
         message_types.VoidMessage,
-        conference=messages.StringField(1)
-    )
+        conference=messages.StringField(1))
 
     @endpoints.method(
         CONFERENCE_REQUEST, SessionsMessage,
@@ -632,8 +630,7 @@ class ConferenceApi(remote.Service):
     SESSIONS_BY_TYPE_REQUEST = endpoints.ResourceContainer(
         message_types.VoidMessage,
         conference=messages.StringField(1),
-        type_of_session=messages.StringField(2)
-    )
+        type_of_session=messages.StringField(2))
 
     @endpoints.method(
         SESSIONS_BY_TYPE_REQUEST, SessionsMessage,
@@ -656,8 +653,7 @@ class ConferenceApi(remote.Service):
 
     SESSIONS_BY_SPEAKER_REQUEST = endpoints.ResourceContainer(
         message_types.VoidMessage,
-        speaker=messages.StringField(1)
-    )
+        speaker=messages.StringField(1))
 
     @endpoints.method(
         SESSIONS_BY_SPEAKER_REQUEST, SessionsMessage,
@@ -672,8 +668,7 @@ class ConferenceApi(remote.Service):
 
     SESSION_REQUEST = endpoints.ResourceContainer(
         message_types.VoidMessage,
-        session=messages.StringField(1)
-    )
+        session=messages.StringField(1))
 
     @endpoints.method(
         SESSION_REQUEST, SessionsMessage,
