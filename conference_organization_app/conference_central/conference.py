@@ -629,6 +629,7 @@ class ConferenceApi(remote.Service):
                     request.conference))
 
         conference_sessions = Session.query(ancestor=conference.key).fetch()
+
         return SessionsMessage(
             sessions=[session.to_message() for session in conference_sessions])
 
@@ -650,9 +651,11 @@ class ConferenceApi(remote.Service):
                 "No conference found with key: {0}.".format(
                     request.conference))
 
+        conference_sessions = Session.query(ancestor=conference.key).fetch()
+
         return SessionsMessage(
             sessions=[
-                session.to_message() for session in conference.sessions if
+                session.to_message() for session in conference_sessions if
                 session.type_of_session == request.type_of_session])
 
     SESSIONS_BY_SPEAKER_RESOURCE = endpoints.ResourceContainer(
