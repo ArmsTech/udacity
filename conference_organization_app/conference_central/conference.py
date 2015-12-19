@@ -676,7 +676,7 @@ class ConferenceApi(remote.Service):
     )
 
     @endpoints.method(
-        SESSIONS_ADD_TO_WISHLIST, SessionMessage,
+        SESSIONS_ADD_TO_WISHLIST, SessionsMessage,
         http_method='POST', path='profile/wish/{session}',
         name='addSessionToWishlist')
     def add_session_to_wishlist(self, request):
