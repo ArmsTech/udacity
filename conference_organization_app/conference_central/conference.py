@@ -598,11 +598,7 @@ class ConferenceApi(remote.Service):
         if not user:
             raise endpoints.UnauthorizedException("Authorization required.")
 
-        conference = ndb.Key(urlsafe=request.conference).get()
-        if not conference:
-            raise endpoints.NotFoundException(
-                "No conference found with key: {0}.".format(
-                    request.conference))
+        conference = self._get_entity_by_key(request.conference)
 
         if getUserId(user) != conference.organizerUserId:
             raise endpoints.ForbiddenException(
@@ -634,12 +630,7 @@ class ConferenceApi(remote.Service):
         path='conference/{conference}/sessions', name='getConferenceSessions')
     def get_conference_sessions(self, request):
         """Get all sessions for a specified conference."""
-        conference = ndb.Key(urlsafe=request.conference).get()
-        if not conference:
-            raise endpoints.NotFoundException(
-                "No conference found with key: {0}.".format(
-                    request.conference))
-
+        conference = self._get_entity_by_key(request.conference)
         conference_sessions = Session.query(ancestor=conference.key).fetch()
 
         return SessionsMessage(
@@ -656,12 +647,7 @@ class ConferenceApi(remote.Service):
         name='getConferenceSessionsByType')
     def get_conference_sessions_by_type(self, request):
         """Get all sessions for a conference by the specified type."""
-        conference = ndb.Key(urlsafe=request.conference).get()
-        if not conference:
-            raise endpoints.NotFoundException(
-                "No conference found with key: {0}.".format(
-                    request.conference))
-
+        conference = self._get_entity_by_key(request.conference)
         conference_sessions = Session.query(ancestor=conference.key).fetch()
 
         return SessionsMessage(
@@ -696,11 +682,7 @@ class ConferenceApi(remote.Service):
         """Add a session to a user's wishlist."""
         profile = self._getProfileFromUser()
 
-        # Make sure the session to be added exists
-        session = ndb.Key(urlsafe=request.session).get()
-        if not session:
-            raise endpoints.NotFoundException(
-                "No session found with key: {0}.".format(request.session))
+        session = self._get_entity_by_key(request.session)
 
         # Make sure session hasn't already been added
         if session.key.urlsafe() in profile.sessions_wishlist:
@@ -745,11 +727,7 @@ class ConferenceApi(remote.Service):
         """Delete a session from a user's wishlist."""
         profile = self._getProfileFromUser()
 
-        # Make sure the session to be deleted exists
-        session = ndb.Key(urlsafe=request.session).get()
-        if not session:
-            raise endpoints.NotFoundException(
-                "No session found with key: {0}.".format(request.session))
+        session = self._get_entity_by_key(request.session)
 
         profile.sessions_wishlist.remove(session.key.urlsafe())
         profile.put()
