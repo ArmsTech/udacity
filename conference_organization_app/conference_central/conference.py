@@ -556,6 +556,23 @@ class ConferenceApi(remote.Service):
             items=[self._copyConferenceToForm(conf, "") for conf in q]
         )
 
+    def _get_entity_by_key(self, urlsafe_key):
+        """Get an existing entity from a specified key."""
+        try:
+            entity = ndb.Key(urlsafe=urlsafe_key).get()
+        except Exception as error:
+            # All kinds of errors can happen with user-provided keys
+            logging.error(
+                "Failure getting entity using key: "{0}", {1}".format(
+                    urlsafe_key, str(error)))
+            entity = None
+
+        if not entity:
+            raise endpoints.NotFoundException(
+                "No entity found with key: {0}.".format(urlsafe_key))
+
+        return entity
+
     SESSION_CONFERENCE_REQUEST = endpoints.ResourceContainer(
         SessionMessage,
         conference=messages.StringField(1))
