@@ -555,13 +555,13 @@ class ConferenceApi(remote.Service):
             items=[self._copyConferenceToForm(conf, "") for conf in q]
         )
 
-    SESSION_RESOURCE = endpoints.ResourceContainer(
+    SESSION_CONFERENCE_REQUEST = endpoints.ResourceContainer(
         SessionMessage,
         conference=messages.StringField(1)
     )
 
     @endpoints.method(
-        SESSION_RESOURCE, SessionMessage,
+        SESSION_CONFERENCE_REQUEST, SessionMessage,
         path='conference/{conference}/session',
         http_method='POST', name='createSession')
     def create_session(self, request):
@@ -608,13 +608,13 @@ class ConferenceApi(remote.Service):
 
         return session.to_message()
 
-    SESSIONS_RESOURCE = endpoints.ResourceContainer(
+    CONFERENCE_REQUEST = endpoints.ResourceContainer(
         message_types.VoidMessage,
         conference=messages.StringField(1)
     )
 
     @endpoints.method(
-        SESSIONS_RESOURCE, SessionsMessage,
+        CONFERENCE_REQUEST, SessionsMessage,
         path='conference/{conference}/sessions', name='getConferenceSessions')
     def get_conference_sessions(self, request):
         """Get all sessions for a specified conference."""
@@ -629,14 +629,14 @@ class ConferenceApi(remote.Service):
         return SessionsMessage(
             sessions=[session.to_message() for session in conference_sessions])
 
-    SESSIONS_BY_TYPE_RESOURCE = endpoints.ResourceContainer(
+    SESSIONS_BY_TYPE_REQUEST = endpoints.ResourceContainer(
         message_types.VoidMessage,
         conference=messages.StringField(1),
         type_of_session=messages.StringField(2)
     )
 
     @endpoints.method(
-        SESSIONS_BY_TYPE_RESOURCE, SessionsMessage,
+        SESSIONS_BY_TYPE_REQUEST, SessionsMessage,
         path='conference/{conference}/sessions/{type_of_session}',
         name='getConferenceSessionsByType')
     def get_conference_sessions_by_type(self, request):
@@ -654,13 +654,13 @@ class ConferenceApi(remote.Service):
                 session.to_message() for session in conference_sessions if
                 session.type_of_session == request.type_of_session])
 
-    SESSIONS_BY_SPEAKER_RESOURCE = endpoints.ResourceContainer(
+    SESSIONS_BY_SPEAKER_REQUEST = endpoints.ResourceContainer(
         message_types.VoidMessage,
         speaker=messages.StringField(1)
     )
 
     @endpoints.method(
-        SESSIONS_BY_SPEAKER_RESOURCE, SessionsMessage,
+        SESSIONS_BY_SPEAKER_REQUEST, SessionsMessage,
         path='conference/sessions/{speaker}', name='getSessionsBySpeaker')
     def get_sessions_by_speaker(self, request):
         """Get all sessions for a specified speaker."""
@@ -670,13 +670,13 @@ class ConferenceApi(remote.Service):
         return SessionsMessage(
             sessions=[session.to_message() for session in sessions])
 
-    SESSIONS_ADD_TO_WISHLIST = endpoints.ResourceContainer(
+    SESSION_REQUEST = endpoints.ResourceContainer(
         message_types.VoidMessage,
         session=messages.StringField(1)
     )
 
     @endpoints.method(
-        SESSIONS_ADD_TO_WISHLIST, SessionsMessage,
+        SESSION_REQUEST, SessionsMessage,
         http_method='POST', path='profile/wish/{session}',
         name='addSessionToWishlist')
     def add_session_to_wishlist(self, request):
@@ -724,13 +724,8 @@ class ConferenceApi(remote.Service):
 
         return self._get_wishlist_sessions_as_message(profile)
 
-    SESSIONS_DELETE_FROM_WISHLIST = endpoints.ResourceContainer(
-        message_types.VoidMessage,
-        session=messages.StringField(1)
-    )
-
     @endpoints.method(
-        SESSIONS_DELETE_FROM_WISHLIST, SessionsMessage,
+        SESSION_REQUEST, SessionsMessage,
         http_method='DELETE', path='profile/wish/{session}',
         name='deleteSessionInWishlist')
     def delete_session_in_wishlist(self, request):
