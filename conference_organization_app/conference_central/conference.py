@@ -697,7 +697,31 @@ class ConferenceApi(remote.Service):
         profile.sessions_wishlist.append(session.key.urlsafe())
         profile.put()
 
-        return session.to_message()
+        # Return the new, complete wishlist
+        return self._get_wishlist_sessions_as_message(profile)
 
+    def _get_wishlist_sessions(self, profile):
+        """Get the wishlist sessions for a specified user (profile)."""
+        session_wishlist_keys = [
+            ndb.Key(urlsafe=urlsafe_session_key) for
+            urlsafe_session_key in profile.sessions_wishlist]
+
+        return ndb.get_multi(session_wishlist_keys)
+
+    def _get_wishlist_sessions_as_message(self, profile):
+        """Get the wishlist sessions as a SessionsMessage."""
+        wishlist_sessions = self._get_wishlist_sessions(profile)
+        return SessionsMessage(
+            sessions=[wishlist_session.to_message() for
+                      wishlist_session in wishlist_sessions])
+
+    @endpoints.method(
+        message_types.VoidMessage, SessionsMessage,
+        path='profile/wishes', name='getSessionsInWishlist')
+    def get_sessions_in_wishlist(self, request):
+        """Get all sessions from a user's wishlist."""
+        profile = self._getProfileFromUser()
+
+        return self._get_wishlist_sessions_as_message(profile)
 
 api = endpoints.api_server([ConferenceApi]) # register API
