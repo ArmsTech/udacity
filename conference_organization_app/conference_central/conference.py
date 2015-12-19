@@ -597,20 +597,16 @@ class ConferenceApi(remote.Service):
             size=1, parent=conference.key)[0]
         session_key = ndb.Key(Session, allocated_id, parent=conference.key)
 
-        Session(
+        session = Session(
             key=session_key, name=request.name,
             highlights=request.highlights,
             speaker=Speaker(name=request.speaker.name),
             duration=request.duration,
             type_of_session=request.type_of_session,
-            date=date, start_time=start_time).put()
+            date=date, start_time=start_time)
+        session.put()
 
-        return SessionMessage(
-            id=session_key.urlsafe(), name=request.name,
-            highlights=request.highlights, speaker=request.speaker,
-            duration=request.duration,
-            type_of_session=request.type_of_session,
-            date=request.date, start_time=request.start_time)
+        return session.to_message()
 
     SESSIONS_RESOURCE = endpoints.ResourceContainer(
         message_types.VoidMessage,
