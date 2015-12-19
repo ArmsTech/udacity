@@ -598,7 +598,7 @@ class ConferenceApi(remote.Service):
         session_key = ndb.Key(Session, allocated_id, parent=conference.key)
 
         Session(
-            id=session_key.id(), name=request.name,
+            key=session_key, name=request.name,
             highlights=request.highlights,
             speaker=Speaker(name=request.speaker.name),
             duration=request.duration,
@@ -628,8 +628,9 @@ class ConferenceApi(remote.Service):
                 "No conference found with key: {0}.".format(
                     request.conference))
 
+        conference_sessions = Session.query(ancestor=conference.key).fetch()
         return SessionsMessage(
-            sessions=[session.to_message() for session in conference.sessions])
+            sessions=[session.to_message() for session in conference_sessions])
 
     SESSIONS_BY_TYPE_RESOURCE = endpoints.ResourceContainer(
         message_types.VoidMessage,
