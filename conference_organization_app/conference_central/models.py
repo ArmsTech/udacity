@@ -105,7 +105,7 @@ class Session(ndb.Model):
     def to_message(self):
         """Convert a ndb session to a session message."""
         return SessionMessage(
-            name=self.name, highlights=self.highlights,
+            id=self.key.urlsafe(), name=self.name, highlights=self.highlights,
             speaker=self.speaker.to_message(), duration=self.duration,
             type_of_session=self.type_of_session, date=str(self.date),
             start_time=str(self.start_time))
