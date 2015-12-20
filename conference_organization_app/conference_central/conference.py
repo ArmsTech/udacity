@@ -648,12 +648,13 @@ class ConferenceApi(remote.Service):
     def get_conference_sessions_by_type(self, request):
         """Get all sessions for a conference by the specified type."""
         conference = self._get_entity_by_key(request.conference)
-        conference_sessions = Session.query(ancestor=conference.key).fetch()
+        conference_sessions_by_type = (
+            Session.query(ancestor=conference.key).filter(
+                Session.type_of_session == request.type_of_session).fetch())
 
         return SessionsMessage(
-            sessions=[
-                session.to_message() for session in conference_sessions if
-                session.type_of_session == request.type_of_session])
+            sessions=[session.to_message() for
+                      session in conference_sessions_by_type])
 
     SESSIONS_BY_SPEAKER_REQUEST = endpoints.ResourceContainer(
         message_types.VoidMessage,
