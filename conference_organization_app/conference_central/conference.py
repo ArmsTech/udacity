@@ -563,7 +563,7 @@ class ConferenceApi(remote.Service):
         except Exception as error:
             # All kinds of errors can happen with user-provided keys
             logging.error(
-                "Failure getting entity using key: "{0}", {1}".format(
+                "Failure getting entity using key: '{0}', {1}".format(
                     urlsafe_key, str(error)))
             entity = None
 
