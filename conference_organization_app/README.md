@@ -38,6 +38,14 @@ Sessions, in the context of this project, are blocks of time at a conference for
 
 A speaker is an individual who provides the content for a session at a conference. Rather than defining the speaker property as a `StringProperty`, I decided to use `StructuredProperty` instead. The reason for this is that we may want to store more information about a speaker than just his or her name (e.g. for a speaker page on the `Conference Central` website). Also, a speaker may participate in more than one session at a conference, and storing/updating a `StringProperty` across multiple sessions is less efficient and more error-prone.
 
+##### Add Sessions to User Wishlist
+
+To support a User Wishlist I created:
+
+* Properties: `sessions_wishlist` in the `Profile` model
+* Endpoints: `add_session_to_wishlist`, `get_sessions_in_wishlist`, `delete_session_in_wishlist`
+* Helpers: `_get_wishlist_sessions`, `_get_wishlist_sessions_as_message`
+
 Install
 -------
 
