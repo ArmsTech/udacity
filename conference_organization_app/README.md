@@ -59,7 +59,7 @@ Query 1:
 * To plan their day, users of the `Conference Central` application may be interested in seeing sessions available for a given conference on a particular day with results ordered by time.
 
 ```python
-sessions = Session.query(ancestor=conference.key).filter(                                                       
+sessions = Session.query(ancestor=conference.key).filter(
     Session.date == request.date).order(Session.start_time).fetch()
 ```
 
@@ -76,8 +76,15 @@ Query 2:
 
 * `Conference Central` users may want to see all the sessions at a conference that are interactive.
 
-> Let’s say that you don't like workshops and you don't like sessions after 7 pm. How would you handle a query for all non-workshop sessions before 7 pm? What is the problem for implementing this query? What ways to solve it did you think of?
+```python
+# Assuming `workshop`, `hackathon`, and `lab` are the only interactive
+# session types
+sessions = Session.query(
+    Session.type_of_session.IN(
+        ('workshop', 'hackathon', 'lab'))).fetch()
+```
 
+> Let’s say that you don't like workshops and you don't like sessions after 7 pm. How would you handle a query for all non-workshop sessions before 7 pm? What is the problem for implementing this query? What ways to solve it did you think of?
 
 
 Install
