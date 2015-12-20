@@ -12,11 +12,25 @@ Supporting Course:
 
 *  [Developing Scalable Apps in Python](https://www.udacity.com/course/developing-scalable-apps-in-python--ud858)
 
-**Important Note**:
+**Important Note**
 
 The deliverable for this project is largely in the form of API endpoints for Conference Central, an application code-base provided by Udacity. These endpoints were created using Google Cloud Endpoints on the Google App Engine platform, and are only accessible using the Google API explorer. Integrating these endpoints into the Conference Central front-end is not part of this project. 
 
-Most of the code in this project was provided by Udacity and does not reflect my coding style or abilities. To highlight my contributions I have included references in this README to the functions, classes, etc... that I created.
+Most of the code in this project was provided by Udacity and does not reflect my coding style or abilities. To highlight my contributions I have included references in this README to the functions, classes, etc... that I created to complete the project.
+
+Tasks
+-----
+
+##### Add Sessions to a Conference
+
+To support Sessions I created:
+
+* NDB Models: `Session`, `Speaker`
+* Messages: `SessionMessage`, `SessionsMessage`, `SpeakerMessage`
+* Endpoints: `create_session`, `get_conference_sessions`, `get_conference_sessions_by_type`, `get_sessions_by_speaker`
+* Helpers: `_get_entity_by_key`
+
+Models and Messages can be found in [models.py](https://github.com/brenj/udacity/blob/master/conference_organization_app/conference_central/models.py#L52), and endpoints (with related code) can be found in [conference.py](https://github.com/brenj/udacity/blob/master/conference_organization_app/conference_central/conference.py#L559).
 
 Install
 -------
