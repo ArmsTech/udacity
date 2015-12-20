@@ -23,7 +23,7 @@ Tasks
 
 ##### Add Sessions to a Conference
 
-To support Sessions I created:
+To support sessions I created:
 
 * NDB Models: `Session`, `Speaker`
 * Messages: `SessionMessage`, `SessionsMessage`, `SpeakerMessage`
@@ -40,11 +40,45 @@ A speaker is an individual who provides the content for a session at a conferenc
 
 ##### Add Sessions to User Wishlist
 
-To support a User Wishlist I created:
+To support a user wishlist I created:
 
 * Properties: `sessions_wishlist` in the `Profile` model
 * Endpoints: `add_session_to_wishlist`, `get_sessions_in_wishlist`, `delete_session_in_wishlist`
 * Helpers: `_get_wishlist_sessions`, `_get_wishlist_sessions_as_message`
+
+##### Work on indexes and queries
+
+> Make sure the indexes support the type of queries required by the new Endpoints methods.
+
+No additions to `index.yaml` are needed for my implementation of the endpoints methods in tasks one and two. Only the indexes that `Datastore` automatically predefines for each property of each kind are required.
+
+> Think about other types of queries that would be useful for this application. Describe the purpose of 2 new queries and write the code that would perform them.
+
+Query 1:
+
+* To plan their day, users of the `Conference Central` application may be interested in seeing sessions available for a given conference on a particular day with results ordered by time.
+
+```python
+sessions = Session.query(ancestor=conference.key).filter(                                                       
+    Session.date == request.date).order(Session.start_time).fetch()
+```
+
+This query would require the following entry in `index.yaml`:
+
+```yaml
+- kind: Session
+  properties:
+  - name: date
+  - name: start_time
+```
+ 
+Query 2:
+
+* `Conference Central` users may want to see all the sessions at a conference that are interactive.
+
+> Let’s say that you don't like workshops and you don't like sessions after 7 pm. How would you handle a query for all non-workshop sessions before 7 pm? What is the problem for implementing this query? What ways to solve it did you think of?
+
+
 
 Install
 -------
