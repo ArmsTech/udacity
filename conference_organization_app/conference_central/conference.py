@@ -556,6 +556,9 @@ class ConferenceApi(remote.Service):
             items=[self._copyConferenceToForm(conf, "") for conf in q]
         )
 
+    # begin: brenj additions to conference.py
+    #########################################
+
     def _get_entity_by_key(self, urlsafe_key):
         """Get an existing entity from a specified key."""
         try:
@@ -734,5 +737,8 @@ class ConferenceApi(remote.Service):
         profile.put()
 
         return self._get_wishlist_sessions_as_message(profile)
+
+    # end: brenj additions to conference.py
+    #######################################
 
 api = endpoints.api_server([ConferenceApi]) # register API
