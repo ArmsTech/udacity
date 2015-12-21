@@ -86,6 +86,52 @@ sessions = Session.query(
 
 > Let’s say that you don't like workshops and you don't like sessions after 7 pm. How would you handle a query for all non-workshop sessions before 7 pm? What is the problem for implementing this query? What ways to solve it did you think of?
 
+If you were to implement this query the straightforward way you'd recieve an error like this:
+
+ ```python
+ BadRequestError: Cannot have inequality filters on multiple properties
+ ```
+
+This error is due to a restriction on `Datastore` queries whereby inequality filters are limited to at most one property; we would be using two. The reason for this restriction has to do with how `Datastore` works (index-based query mechanism). On a basic level `Datastore` queries rely on potential results being adjacent to one another to avoid scanning an entire index (very inefficient), so operations that require this are disallowed.
+
+Here are some ways to work around this restriction:
+
+* Create a `BooleanProperty` on `Session` to show whether the session occurs before or after 7 PM. That way you would only need to query for one inequality.
+
+```python
+sessions = Session.query().filter(
+    Session.type_of_session != 'workshop').filter(
+        Session.is_after_7pm == True).fetch()
+```
+
+* Query for all sessions that are not workshops, then filter those results programmatically by comparing each session’s time.
+
+```python
+sessions = Session.query().filter(
+    Session.type_of_session != 'workshop').fetch()
+seven_pm = datetime.strptime('19:00', '%H:%M').time()
+sessions = [session for session in sessions if session.start_time <= seven_pm]
+```
+
+* Determine all non-workshop session types (by hard-coding or querying), and then search for all sessions where type of session is in non-workshop types and occurs before or at 7 PM.
+
+```python
+seven_pm = datetime.strptime('19:00', '%H:%M').time()
+sessions = Session.query(
+    Session.type_of_session.IN(NON_WORKSHOP_TYPES)).filter(
+        Session.start_time <= seven_pm).fetch()
+```
+
+This solution also requires an additional index:
+
+```yaml
+- kind: Session
+  properties:
+  - name: type_of_session
+  - name: start_time
+```
+
+This solution is implemented in the endpoint: `get_sessions_nonworkshop_before_7pm`
 
 Install
 -------
