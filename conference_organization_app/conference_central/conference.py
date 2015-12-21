@@ -665,7 +665,7 @@ class ConferenceApi(remote.Service):
 
     @endpoints.method(
         SESSIONS_BY_SPEAKER_REQUEST, SessionsMessage,
-        path='conference/sessions/{speaker}', name='getSessionsBySpeaker')
+        path='sessions/{speaker}', name='getSessionsBySpeaker')
     def get_sessions_by_speaker(self, request):
         """Get all sessions for a specified speaker."""
         sessions = Session.query().filter(
@@ -737,6 +737,29 @@ class ConferenceApi(remote.Service):
         profile.put()
 
         return self._get_wishlist_sessions_as_message(profile)
+
+    @endpoints.method(
+        message_types.VoidMessage, SessionsMessage,
+        path='sessions/filter', name='getSessionsNonWorkshopBefore7pm')
+    def get_sessions_nonworkshop_before_7pm(self, request):
+        """Get all non-workshop sessions occurring before or at 7PM."""
+        # Ideally we would hard-code a list of supported session types
+        non_workshop_sessions = Session.query().filter(
+            Session.type_of_session != 'workshop').fetch(
+            projection=[Session.type_of_session])
+        # Get the unique "list" of actual session types
+        non_workshop_sessions = set([
+            session.type_of_session for
+            session in non_workshop_sessions if session.type_of_session])
+
+        seven = datetime.strptime('19:00', '%H:%M').time()
+
+        sessions = Session.query(
+            Session.type_of_session.IN(non_workshop_sessions)).filter(
+            Session.start_time <= seven).fetch()
+
+        return SessionsMessage(
+            sessions=[session.to_message() for session in sessions])
 
     # end: brenj additions to conference.py
     #######################################
