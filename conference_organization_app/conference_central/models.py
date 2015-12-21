@@ -99,7 +99,7 @@ class Session(ndb.Model):
     highlights = ndb.StringProperty()
     speaker = ndb.StructuredProperty(Speaker, required=True)
     duration = ndb.StringProperty()
-    type_of_session = ndb.StringProperty()
+    type_of_session = ndb.StringProperty(default='talk')
     date = ndb.DateProperty(required=True)
     start_time= ndb.TimeProperty(required=True)
 
