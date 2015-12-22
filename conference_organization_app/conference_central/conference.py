@@ -630,7 +630,8 @@ class ConferenceApi(remote.Service):
 
     @endpoints.method(
         CONFERENCE_REQUEST, SessionsMessage,
-        path='conference/{conference}/sessions', name='getConferenceSessions')
+        path='conference/{conference}/sessions', name='getConferenceSessions',
+        http_method='GET')
     def get_conference_sessions(self, request):
         """Get all sessions for a specified conference."""
         conference = self._get_entity_by_key(request.conference)
@@ -647,7 +648,7 @@ class ConferenceApi(remote.Service):
     @endpoints.method(
         SESSIONS_BY_TYPE_REQUEST, SessionsMessage,
         path='conference/{conference}/sessions/{type_of_session}',
-        name='getConferenceSessionsByType')
+        name='getConferenceSessionsByType', http_method='GET')
     def get_conference_sessions_by_type(self, request):
         """Get all sessions for a conference by the specified type."""
         conference = self._get_entity_by_key(request.conference)
@@ -665,7 +666,8 @@ class ConferenceApi(remote.Service):
 
     @endpoints.method(
         SESSIONS_BY_SPEAKER_REQUEST, SessionsMessage,
-        path='sessions/{speaker}', name='getSessionsBySpeaker')
+        path='sessions/{speaker}', name='getSessionsBySpeaker',
+        http_method='GET')
     def get_sessions_by_speaker(self, request):
         """Get all sessions for a specified speaker."""
         sessions = Session.query().filter(
@@ -716,7 +718,8 @@ class ConferenceApi(remote.Service):
 
     @endpoints.method(
         message_types.VoidMessage, SessionsMessage,
-        path='profile/wishes', name='getSessionsInWishlist')
+        path='profile/wishes', name='getSessionsInWishlist',
+        http_method='GET')
     def get_sessions_in_wishlist(self, request):
         """Get all sessions from a user's wishlist."""
         profile = self._getProfileFromUser()
@@ -740,7 +743,8 @@ class ConferenceApi(remote.Service):
 
     @endpoints.method(
         message_types.VoidMessage, SessionsMessage,
-        path='sessions/filter', name='getSessionsNonWorkshopBefore7pm')
+        path='sessions/filter', name='getSessionsNonWorkshopBefore7pm',
+        http_method='GET')
     def get_sessions_nonworkshop_before_7pm(self, request):
         """Get all non-workshop sessions occurring before or at 7PM."""
         # Ideally we would hard-code a list of supported session types
