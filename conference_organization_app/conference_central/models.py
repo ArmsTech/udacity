@@ -108,8 +108,12 @@ class Speaker(ndb.Model):
     name = ndb.StringProperty(required=True)
 
     def to_message(self):
-        """Convert a ndb speaker to a speaker message."""
-        return SpeakerMessage(name=self.name)
+        """Convert a ndb speaker to a speaker response message."""
+        return SpeakerResponseMessage(id=self.key.urlsafe(), name=self.name)
+
+    def session_set(self):
+        """Set of sessions speaker is participating in."""
+        return Session.query(Session.speaker_key == self.key)
 
 
 class Session(ndb.Model):
