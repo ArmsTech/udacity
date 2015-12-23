@@ -26,8 +26,8 @@ Tasks
 To support sessions I created:
 
 * NDB Models: `Session`, `Speaker`
-* Messages: `SessionMessage`, `SessionsMessage`, `SpeakerMessage`
-* Endpoints: `create_session`, `get_conference_sessions`, `get_conference_sessions_by_type`, `get_sessions_by_speaker`
+* Messages: `SessionRequestMessage`, `SessionResponseMessage`, `SessionsResponseMessage`, `SpeakerRequestMessage`, `SpeakerResponseMessage`
+* Endpoints: `create_session`, `create_speaker`, `get_conference_sessions`, `get_conference_sessions_by_type`, `get_sessions_by_speaker`
 * Helpers: `_get_entity_by_key`
 
 Models and messages can be found in [models.py](https://github.com/brenj/udacity/blob/master/conference_organization_app/conference_central/models.py#L52), and endpoints (with related code) can be found in [conference.py](https://github.com/brenj/udacity/blob/master/conference_organization_app/conference_central/conference.py#L559).
@@ -132,6 +132,23 @@ This solution also requires an additional index:
 ```
 
 This solution is implemented in the endpoint: `get_sessions_nonworkshop_before_7pm`
+
+##### Add a Task
+
+To support getting a featured speaker I created:
+
+Endpoints: `get_featured_speaker`
+Handlers: `StoreFeaturedSpeaker`
+
+This solution also requires an additional index:
+
+```yaml
+- kind: Session
+  ancestor: yes
+  properties:
+  - name: speaker_key
+  - name: name
+```
 
 Install
 -------
