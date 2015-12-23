@@ -736,7 +736,8 @@ class ConferenceApi(remote.Service):
         wishlist_sessions = self._get_wishlist_sessions(profile)
         return SessionsMessage(
             sessions=[wishlist_session.to_message() for
-                      wishlist_session in wishlist_sessions])
+                      wishlist_session in wishlist_sessions if
+                      wishlist_session])
 
     @endpoints.method(
         message_types.VoidMessage, SessionsMessage,
