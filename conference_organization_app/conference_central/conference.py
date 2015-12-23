@@ -643,6 +643,12 @@ class ConferenceApi(remote.Service):
             date=date, start_time=start_time)
         session.put()
 
+        taskqueue.add(
+            params={
+                'speaker_key': speaker.key.urlsafe(),
+                'conference_key': conference.key.urlsafe()},
+            url='/tasks/store_featured_speaker')
+
         return session.to_message()
 
     CONFERENCE_REQUEST = endpoints.ResourceContainer(
