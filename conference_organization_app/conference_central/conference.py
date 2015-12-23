@@ -38,10 +38,12 @@ from models import ConferenceQueryForm
 from models import ConferenceQueryForms
 from models import TeeShirtSize
 from models import Session
-from models import SessionMessage
-from models import SessionsMessage
+from models import SessionRequestMessage
+from models import SessionResponseMessage
+from models import SessionsResponseMessage
 from models import Speaker
-from models import SpeakerMessage
+from models import SpeakerRequestMessage
+from models import SpeakerResponseMessage
 
 from settings import WEB_CLIENT_ID
 from settings import ANDROID_CLIENT_ID
