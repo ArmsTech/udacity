@@ -135,10 +135,10 @@ This solution is implemented in the endpoint: `get_sessions_nonworkshop_before_7
 
 ##### Add a Task
 
-To support getting a featured speaker I created:
+To support a featured speaker I created:
 
-Endpoints: `get_featured_speaker`
-Handlers: `StoreFeaturedSpeaker`
+* Endpoints: `get_featured_speaker`
+* Handlers: `StoreFeaturedSpeaker`
 
 This solution also requires an additional index:
 
