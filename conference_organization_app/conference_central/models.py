@@ -52,18 +52,19 @@ class BooleanMessage(messages.Message):
 # begin: brenj additions to models.py
 #####################################
 
-class SpeakerMessage(messages.Message):
+class SpeakerRequestMessage(messages.Message):
 
-    """ProtoRPC message for a speaker."""
+    """ProtoRPC request message for a speaker."""
 
     name = messages.StringField(1, required=True)
 
 
-class SessionMessage(messages.Message):
+class SpeakerResponseMessage(messages.Message):
 
-    """ProtoRPC message for a session."""
+    """ProtoRPC response message for a speaker."""
 
-    id = messages.StringField(1)
+    id = messages.StringField(1, required=True)
+    name = messages.StringField(2, required=True)
     name = messages.StringField(2, required=True)
     highlights = messages.StringField(3)
     speaker = messages.MessageField(SpeakerMessage, 4, required=True)
