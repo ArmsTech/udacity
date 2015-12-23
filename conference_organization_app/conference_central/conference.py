@@ -596,11 +596,11 @@ class ConferenceApi(remote.Service):
         return speaker.to_message()
 
     SESSION_CONFERENCE_REQUEST = endpoints.ResourceContainer(
-        SessionMessage,
+        SessionRequestMessage,
         conference=messages.StringField(1))
 
     @endpoints.method(
-        SESSION_CONFERENCE_REQUEST, SessionMessage,
+        SESSION_CONFERENCE_REQUEST, SessionResponseMessage,
         path='conference/{conference}/session',
         http_method='POST', name='createSession')
     def create_session(self, request):
@@ -649,7 +649,7 @@ class ConferenceApi(remote.Service):
         conference=messages.StringField(1))
 
     @endpoints.method(
-        CONFERENCE_REQUEST, SessionsMessage,
+        CONFERENCE_REQUEST, SessionsResponseMessage,
         path='conference/{conference}/sessions', name='getConferenceSessions',
         http_method='GET')
     def get_conference_sessions(self, request):
@@ -657,7 +657,7 @@ class ConferenceApi(remote.Service):
         conference = self._get_entity_by_key(request.conference)
         conference_sessions = Session.query(ancestor=conference.key).fetch()
 
-        return SessionsMessage(
+        return SessionsResponseMessage(
             sessions=[session.to_message() for session in conference_sessions])
 
     SESSIONS_BY_TYPE_REQUEST = endpoints.ResourceContainer(
@@ -666,7 +666,7 @@ class ConferenceApi(remote.Service):
         type_of_session=messages.StringField(2))
 
     @endpoints.method(
-        SESSIONS_BY_TYPE_REQUEST, SessionsMessage,
+        SESSIONS_BY_TYPE_REQUEST, SessionsResponseMessage,
         path='conference/{conference}/sessions/{type_of_session}',
         name='getConferenceSessionsByType', http_method='GET')
     def get_conference_sessions_by_type(self, request):
@@ -676,7 +676,7 @@ class ConferenceApi(remote.Service):
             Session.query(ancestor=conference.key).filter(
                 Session.type_of_session == request.type_of_session).fetch())
 
-        return SessionsMessage(
+        return SessionsResponseMessage(
             sessions=[session.to_message() for
                       session in conference_sessions_by_type])
 
@@ -703,7 +703,7 @@ class ConferenceApi(remote.Service):
         session=messages.StringField(1))
 
     @endpoints.method(
-        SESSION_REQUEST, SessionsMessage,
+        SESSION_REQUEST, SessionsResponseMessage,
         http_method='POST', path='profile/wish/{session}',
         name='addSessionToWishlist')
     def add_session_to_wishlist(self, request):
@@ -732,15 +732,16 @@ class ConferenceApi(remote.Service):
         return ndb.get_multi(session_wishlist_keys)
 
     def _get_wishlist_sessions_as_message(self, profile):
-        """Get the wishlist sessions as a SessionsMessage."""
+        """Get the wishlist sessions as a SessionsResponseMessage."""
         wishlist_sessions = self._get_wishlist_sessions(profile)
-        return SessionsMessage(
+
+        return SessionsResponseMessage(
             sessions=[wishlist_session.to_message() for
                       wishlist_session in wishlist_sessions if
                       wishlist_session])
 
     @endpoints.method(
-        message_types.VoidMessage, SessionsMessage,
+        message_types.VoidMessage, SessionsResponseMessage,
         path='profile/wishes', name='getSessionsInWishlist',
         http_method='GET')
     def get_sessions_in_wishlist(self, request):
@@ -750,7 +751,7 @@ class ConferenceApi(remote.Service):
         return self._get_wishlist_sessions_as_message(profile)
 
     @endpoints.method(
-        SESSION_REQUEST, SessionsMessage,
+        SESSION_REQUEST, SessionsResponseMessage,
         http_method='DELETE', path='profile/wish/{session}',
         name='deleteSessionInWishlist')
     def delete_session_in_wishlist(self, request):
@@ -765,7 +766,7 @@ class ConferenceApi(remote.Service):
         return self._get_wishlist_sessions_as_message(profile)
 
     @endpoints.method(
-        message_types.VoidMessage, SessionsMessage,
+        message_types.VoidMessage, SessionsResponseMessage,
         path='sessions/filter', name='getSessionsNonWorkshopBefore7pm',
         http_method='GET')
     def get_sessions_nonworkshop_before_7pm(self, request):
@@ -785,7 +786,7 @@ class ConferenceApi(remote.Service):
             Session.type_of_session.IN(non_workshop_sessions)).filter(
             Session.start_time <= seven).fetch()
 
-        return SessionsMessage(
+        return SessionsResponseMessage(
             sessions=[session.to_message() for session in sessions])
 
     # end: brenj additions to conference.py
