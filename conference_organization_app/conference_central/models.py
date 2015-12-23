@@ -122,7 +122,7 @@ class Session(ndb.Model):
 
     name = ndb.StringProperty(required=True)
     highlights = ndb.StringProperty()
-    speaker = ndb.StructuredProperty(Speaker, required=True)
+    speaker_key = ndb.KeyProperty(kind=Speaker, required=True)
     duration = ndb.StringProperty()
     type_of_session = ndb.StringProperty(default='talk')
     date = ndb.DateProperty(required=True)
@@ -130,9 +130,10 @@ class Session(ndb.Model):
 
     def to_message(self):
         """Convert a ndb session to a session message."""
-        return SessionMessage(
+        speaker = self.speaker_key.get()
+        return SessionResponseMessage(
             id=self.key.urlsafe(), name=self.name, highlights=self.highlights,
-            speaker=self.speaker.to_message(), duration=self.duration,
+            speaker=speaker.to_message(), duration=self.duration,
             type_of_session=self.type_of_session, date=str(self.date),
             start_time=str(self.start_time))
 
