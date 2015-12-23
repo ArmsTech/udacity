@@ -682,18 +682,20 @@ class ConferenceApi(remote.Service):
 
     SESSIONS_BY_SPEAKER_REQUEST = endpoints.ResourceContainer(
         message_types.VoidMessage,
-        speaker=messages.StringField(1))
+        speaker_key=messages.StringField(1))
 
     @endpoints.method(
-        SESSIONS_BY_SPEAKER_REQUEST, SessionsMessage,
-        path='sessions/{speaker}', name='getSessionsBySpeaker',
+        SESSIONS_BY_SPEAKER_REQUEST, SessionsResponseMessage,
+        path='sessions/{speaker_key}', name='getSessionsBySpeaker',
         http_method='GET')
     def get_sessions_by_speaker(self, request):
         """Get all sessions for a specified speaker."""
-        sessions = Session.query().filter(
-            Session.speaker.name == request.speaker)
+        speaker = self._get_entity_by_key(request.speaker_key)
 
-        return SessionsMessage(
+        # Get all the sessions by `speaker`
+        sessions = speaker.session_set()
+
+        return SessionsResponseMessage(
             sessions=[session.to_message() for session in sessions])
 
     SESSION_REQUEST = endpoints.ResourceContainer(
