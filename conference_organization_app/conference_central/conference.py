@@ -626,6 +626,8 @@ class ConferenceApi(remote.Service):
             raise endpoints.ForbiddenException(
                 "Only the conference organizer can add sessions.")
 
+        speaker = self._get_entity_by_key(request.speaker_key)
+
         # Logged-in user; can add sessions to this conference
 
         allocated_id = ndb.Model.allocate_ids(
@@ -634,8 +636,7 @@ class ConferenceApi(remote.Service):
 
         session = Session(
             key=session_key, name=request.name,
-            highlights=request.highlights,
-            speaker=Speaker(name=request.speaker.name),
+            highlights=request.highlights, speaker_key=speaker.key,
             duration=request.duration,
             type_of_session=request.type_of_session,
             date=date, start_time=start_time)
