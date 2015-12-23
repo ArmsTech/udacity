@@ -94,11 +94,11 @@ class SessionResponseMessage(messages.Message):
     start_time = messages.StringField(8, required=True)
 
 
-class SessionsMessage(messages.Message):
+class SessionsResponseMessage(messages.Message):
 
     """ProtoRPC message for a collection of sessions."""
 
-    sessions = messages.MessageField(SessionMessage, 1, repeated=True)
+    sessions = messages.MessageField(SessionResponseMessage, 1, repeated=True)
 
 
 class Speaker(ndb.Model):
