@@ -55,6 +55,7 @@ from utils import getUserId
 EMAIL_SCOPE = endpoints.EMAIL_SCOPE
 API_EXPLORER_CLIENT_ID = endpoints.API_EXPLORER_CLIENT_ID
 MEMCACHE_ANNOUNCEMENTS_KEY = "RECENT_ANNOUNCEMENTS"
+MEMCACHE_FEATURED_SPEAKER = "FEATURED_SPEAKER"
 ANNOUNCEMENT_TPL = ('Last chance to attend! The following conferences '
                     'are nearly sold out: %s')
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -788,6 +789,14 @@ class ConferenceApi(remote.Service):
 
         return SessionsResponseMessage(
             sessions=[session.to_message() for session in sessions])
+
+    @endpoints.method(
+        message_types.VoidMessage, StringMessage,
+        path='speaker/featured', name='getFeaturedSpeaker', http_method='GET')
+    def get_featured_speaker(self, request):
+        """Get the speaker to feature from memcache."""
+        return StringMessage(
+            data=memcache.get(MEMCACHE_FEATURED_SPEAKER) or "")
 
     # end: brenj additions to conference.py
     #######################################
