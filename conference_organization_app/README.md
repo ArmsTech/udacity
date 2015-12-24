@@ -32,7 +32,7 @@ To support sessions I created:
 * Endpoints: `create_session`, `create_speaker`, `get_conference_sessions`, `get_conference_sessions_by_type`, `get_sessions_by_speaker`
 * Helpers: `_get_entity_by_key`
 
-Models and messages can be found in [models.py](https://github.com/brenj/udacity/blob/master/conference_organization_app/conference_central/models.py#L52), and endpoints (with related code) can be found in [conference.py](https://github.com/brenj/udacity/blob/master/conference_organization_app/conference_central/conference.py#L559).
+Models and messages can be found in [models.py](https://github.com/brenj/udacity/blob/master/conference_organization_app/conference_central/models.py#L52), and endpoints (with related code) can be found in [conference.py](https://github.com/brenj/udacity/blob/master/conference_organization_app/conference_central/conference.py#L562).
 
 > Explain in a couple of paragraphs your design choices for session and speaker implementation.
 
@@ -144,6 +144,8 @@ To support a featured speaker I created:
 
 * Endpoints: `get_featured_speaker`
 * Handlers: `StoreFeaturedSpeaker`
+
+Handlers can be found in [main.py](https://github.com/brenj/udacity/blob/master/conference_organization_app/conference_central/main.py#L45)
 
 This solution also requires an additional index:
 
