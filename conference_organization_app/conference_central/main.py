@@ -42,6 +42,9 @@ class SendConfirmationEmailHandler(webapp2.RequestHandler):
         )
 
 
+# begin: brenj additions to main.py
+###################################
+
 class StoreFeaturedSpeaker(webapp2.RequestHandler):
 
     """Handle storing a featured speaker."""
@@ -64,6 +67,9 @@ class StoreFeaturedSpeaker(webapp2.RequestHandler):
             featured_speaker_message = "{0}: {1}".format(
                 speaker.name, ', '.join(session_names))
             memcache.set(MEMCACHE_FEATURED_SPEAKER, featured_speaker_message)
+
+# end: brenj additions to main.py
+#################################
 
 
 app = webapp2.WSGIApplication([
