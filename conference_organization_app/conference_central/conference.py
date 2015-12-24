@@ -787,11 +787,11 @@ class ConferenceApi(remote.Service):
             session.type_of_session for
             session in non_workshop_sessions if session.type_of_session])
 
-        seven = datetime.strptime('19:00', '%H:%M').time()
+        seven_pm = datetime.strptime('19:00', '%H:%M').time()
 
         sessions = Session.query(
             Session.type_of_session.IN(non_workshop_sessions)).filter(
-            Session.start_time <= seven).fetch()
+            Session.start_time <= seven_pm).fetch()
 
         return SessionsResponseMessage(
             sessions=[session.to_message() for session in sessions])
