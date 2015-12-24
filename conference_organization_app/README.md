@@ -156,12 +156,14 @@ This solution also requires an additional index:
 Install
 -------
 
-* Pending
+*  Navigate to [Conference Central](https://digital-splicer-114902.appspot.com/)
+*  Log into `Conference Central`
+*  Navigate to [Conference API v1](https://apis-explorer.appspot.com/apis-explorer/?base=https://digital-splicer-114902.appspot.com/_ah/api#p/conference/v1/)
 
 Requirements
 ------------
 
-* Pending
+* [Google Account](https://accounts.google.com/SignUp?hl=en)
 
 Grading (by Udacity)
 --------------------
