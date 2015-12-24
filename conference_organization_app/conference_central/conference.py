@@ -615,7 +615,7 @@ class ConferenceApi(remote.Service):
             start_time = datetime.strptime(request.start_time, '%H:%M').time()
         except ValueError:
             raise endpoints.BadRequestException(
-                "Time must be in format HH-MM.")
+                "Time must be in format HH-MM (24 hour clock).")
 
         user = endpoints.get_current_user()
         if not user:
