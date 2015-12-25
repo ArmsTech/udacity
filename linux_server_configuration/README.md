@@ -21,17 +21,20 @@ Server Configuration
 
 Append the hostname to the local host line in `/etc/hosts`.
 
-```sh
+```bash
 root@ip-10-20-26-132:~# hostname
 ip-10-20-26-132
 root@ip-10-20-26-132:~# vi /etc/hosts
 ```
 
-`127.0.0.1 localhost ip-10-20-26-132`
+```bash
+# /etc/hosts
+127.0.0.1 localhost ip-10-20-26-132
+```
 
 Add a user `grader` and give user sudo access. `grader` can run any command from any terminal as any user without providing a password.
 
-```sh
+```bash
 root@ip-10-20-26-132:~# adduser grader
 root@ip-10-20-26-132:~# echo "grader ALL=(ALL) NOPASSWD:ALL" >/etc/sudoers.d/grader
 root@ip-10-20-26-132:~# su -l grader
@@ -42,5 +45,7 @@ sudo ls -a /root
 .  ..  .bash_history  .bashrc  .cache  .profile  .ssh  .viminfo
 ```
 
+Resources
+---------
 
-
+* [Sudoers File](https://www.garron.me/en/linux/visudo-command-sudoers-file-sudo-default-editor.html)
