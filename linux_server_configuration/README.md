@@ -19,7 +19,7 @@ Server Details
 Server Configuration
 --------------------
 
-Append the hostname to the local host line in `/etc/hosts`.
+Append the hostname to the localhost line in `/etc/hosts`.
 
 ```bash
 root@ip-10-20-26-132:~# hostname
@@ -32,7 +32,7 @@ root@ip-10-20-26-132:~# vi /etc/hosts
 127.0.0.1 localhost ip-10-20-26-132
 ```
 
-Add a user `grader` and give user sudo access. `grader` can run any command from any terminal as any user without providing a password.
+Add a user `grader` and give user sudo access. `grader` can run any command from any terminal as any user without providing a password. It is a best practice to use `visudo` to edit the sudoers file, but we are leveraging Ubuntu's include directive and we have root access (without sudo).
 
 ```bash
 root@ip-10-20-26-132:~# adduser grader
