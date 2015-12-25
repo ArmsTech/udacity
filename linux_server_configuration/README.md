@@ -37,6 +37,7 @@ Add a user `grader` and give user sudo access. `grader` can run any command from
 ```bash
 root@ip-10-20-26-132:~# adduser grader
 root@ip-10-20-26-132:~# echo "grader ALL=(ALL) NOPASSWD:ALL" >/etc/sudoers.d/grader
+root@ip-10-20-26-132:~# chmod 0440 /etc/sudoers.d/grader
 root@ip-10-20-26-132:~# su -l grader
 grader@ip-10-20-26-132:~$ ls -a /root
 ls: cannot open directory /root: Permission denied
