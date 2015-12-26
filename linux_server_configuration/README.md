@@ -46,6 +46,30 @@ sudo ls -a /root
 .  ..  .bash_history  .bashrc  .cache  .profile  .ssh  .viminfo
 ```
 
+Use `ssh-keygen` on host computer to generate private and public keys. Copy public key to the remote (AWS) server and include in `~/.ssh/authorized_keys` with the correct permissions, owner, and group.
+
+```bash
+brenj@ubuntu:~$ scp -i ~/.ssh/udacity_key.rsa /home/brenj/.ssh/id_rsa.pub root@52.27.202.14:/home/grader/
+brenj@ubuntu:~$ ssh -i ~/.ssh/udacity_key.rsa root@52.27.202.14
+root@ip-10-20-26-132:~# cd /home/grader/
+root@ip-10-20-26-132:/home/grader# ls -a
+.  ..  .bash_history  .bash_logout  .bashrc  id_rsa.pub  .profile  .viminfo
+root@ip-10-20-26-132:/home/grader# chown grader:grader id_rsa.pub
+root@ip-10-20-26-132:/home/grader# ls -l id_rsa.pub 
+-rw-r--r-- 1 grader grader 388 Dec 26 19:56 id_rsa.pub
+root@ip-10-20-26-132:/home/grader# mkdir .ssh
+root@ip-10-20-26-132:/home/grader# chown grader:grader .ssh
+root@ip-10-20-26-132:/home/grader# mv id_rsa.pub .ssh/authorized_keys
+root@ip-10-20-26-132:/home/grader# chmod 700 .ssh/
+root@ip-10-20-26-132:/home/grader# chmod 644 .ssh/authorized_keys
+root@ip-10-20-26-132:/home/grader# exit
+logout
+Connection to 52.27.202.14 closed.
+brenj@ubuntu:~$ ssh -i ~/.ssh/id_rsa grader@52.27.202.14
+grader@ip-10-20-26-132:~$ whoami
+grader
+```
+
 Resources
 ---------
 
