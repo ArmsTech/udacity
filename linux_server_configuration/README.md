@@ -70,6 +70,35 @@ grader@ip-10-20-26-132:~$ whoami
 grader
 ```
 
+Update the SSH daemon configuration to improve security. Change the default to SSH port, set `PasswordAuthentication` and `PermitRootLogin` to `no`, and use `AllowUsers` to create a white-list of who (only `grader`) can log into the server via SSH. Then restart the SSH service to use new config settings.
+
+```bash
+grader@ip-10-20-26-132:~$ sudo vi /etc/ssh/sshd_config
+```
+
+```bash
+# /etc/ssh/sshd_config updates
+Port 2200
+PasswordAuthentication no
+PermitRootLogin no
+AllowUsers grader
+```
+
+```bash
+grader@ip-10-20-26-132:~$ sudo service ssh restart
+ssh stop/waiting
+ssh start/running, process 7251
+grader@ip-10-20-26-132:~$ exit
+logout
+Connection to 52.27.202.14 closed.
+brenj@ubuntu:~$ ssh -p 2200 -i ~/.ssh/udacity_key.rsa root@52.27.202.14
+Permission denied (publickey).
+brenj@ubuntu:~$ ssh -p 2200 -i ~/.ssh/udacity_key.rsa grader@52.27.202.14
+grader@ip-10-20-26-132:~$ whoami
+grader
+```
+
+
 Resources
 ---------
 
