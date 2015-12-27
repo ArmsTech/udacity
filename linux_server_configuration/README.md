@@ -98,6 +98,48 @@ grader@ip-10-20-26-132:~$ whoami
 grader
 ```
 
+Using `ufw`, the front-end to iptables on Ubuntu, configure the firewall to continue allowing remote administration as well as host a web server. All other incoming requests should be denied while still allowing all outgoing connections.
+
+```bash
+grader@ip-10-20-26-132:~$ sudo ufw status                                                                                   
+Status: inactive
+grader@ip-10-20-26-132:~$ sudo ufw default deny incoming
+Default incoming policy changed to 'deny'
+(be sure to update your rules accordingly)
+grader@ip-10-20-26-132:~$ sudo ufw default allow outgoing
+Default outgoing policy changed to 'allow'
+(be sure to update your rules accordingly)
+grader@ip-10-20-26-132:~$ sudo ufw allow 2200/tcp
+Rules updated
+Rules updated (v6)
+grader@ip-10-20-26-132:~$ sudo ufw allow www
+Rules updated
+Rules updated (v6)
+grader@ip-10-20-26-132:~$ sudo ufw show added
+Added user rules (see 'ufw status' for running firewall):
+ufw allow 2200/tcp
+ufw allow 80/tcp
+grader@ip-10-20-26-132:~$ sudo ufw enable
+Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
+Firewall is active and enabled on system startup
+grader@ip-10-20-26-132:~$ sudo ufw status
+Status: active
+
+To                         Action      From
+--                         ------      ----
+2200/tcp                   ALLOW       Anywhere
+80/tcp                     ALLOW       Anywhere
+2200/tcp (v6)              ALLOW       Anywhere (v6)
+80/tcp (v6)                ALLOW       Anywhere (v6)
+
+grader@ip-10-20-26-132:~$ exit
+logout
+Connection to 52.27.202.14 closed.
+brenj@ubuntu:~$ ssh -p 2200 -i ~/.ssh/udacity_key.rsa grader@52.27.202.14
+grader@ip-10-20-26-132:~$ whoami
+grader
+```
+
 
 Resources
 ---------
