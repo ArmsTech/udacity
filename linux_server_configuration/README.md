@@ -140,8 +140,48 @@ grader@ip-10-20-26-132:~$ whoami
 grader
 ```
 
+> Amazon Linux instances are set to the UTC (Coordinated Universal Time) time zone by default ... 
+Server time is already set to UTC by default. Install NTP and verify that the default NTP configuration is working correctly. Note that to query NTP there is no need to add any firewall rules; requests to UDP port 123 are already allowed.
+
+```bash
+grader@ip-10-20-26-132:~$ date
+Sun Dec 27 22:41:13 UTC 2015
+grader@ip-10-20-26-132:~$ sudo apt-get install ntp
+grader@ip-10-20-26-132:~$ ls /etc/init.d/ntp 
+/etc/init.d/ntp
+grader@ip-10-20-26-132:~$ sudo service ntp start
+ * Starting NTP server ntpd
+   ...done.
+grader@ip-10-20-26-132:~$ ps -ef |grep ntpd
+ntp       9140     1  0 22:36 ?        00:00:00 /usr/sbin/ntpd -p /var/run/ntpd.pid -g -u 106:111
+grader@ip-10-20-26-132:~$ ntpdc -c peers                                                                                       
+     remote           local      st poll reach  delay   offset    disp
+=======================================================================
+=juniperberry.ca 10.20.26.132     2   64  377 0.13980 -0.022473 0.07472
+=jtsage.com      10.20.26.132     2   64  377 0.05084 -0.015281 0.03854
+=utcnist2.colora 10.20.26.132     1   64  377 0.03374 -0.015065 0.04233
+*time-a.timefreq 10.20.26.132     1   64  377 0.03178 -0.024041 0.05214
+=time-c.nist.gov 10.20.26.132     1   64  227 0.14331  0.015765 0.04695
+grader@ip-10-20-26-132:~$ ntpdc -c sysinfo
+system peer:          time-a.timefreq.bldrdoc.gov
+system peer mode:     client
+leap indicator:       00
+stratum:              2
+precision:            -23
+root distance:        0.03178 s
+root dispersion:      0.04543 s
+reference ID:         [132.163.4.101]
+reference time:       da2aeabf.a089e515  Sun, Dec 27 2015 22:54:55.627
+system flags:         auth monitor ntp kernel stats 
+jitter:               0.005783 s
+stability:            0.000 ppm
+broadcastdelay:       0.000000 s
+authdelay:            0.000000 s
+```
+
 
 Resources
 ---------
 
 * [Sudoers File](https://www.garron.me/en/linux/visudo-command-sudoers-file-sudo-default-editor.html)
+* [AWS NTP](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/set-time.html)
