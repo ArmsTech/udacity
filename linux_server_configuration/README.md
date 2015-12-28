@@ -261,8 +261,82 @@ Vary: Accept-Encoding
 Content-Type: text/html
 ```
 
-```bash
+Install [TechQuote](https://github.com/brenj/udacity/tree/master/item_catalog) dependencies and application on server.
 
+```bash
+grader@ip-10-20-26-132:~$ sudo apt-get install git python-pip libpq-dev python-dev
+grader@ip-10-20-26-132:~$ sudo pip install virtualenv
+Downloading/unpacking virtualenv
+  Downloading virtualenv-13.1.2-py2.py3-none-any.whl (1.7MB): 1.7MB downloaded
+Installing collected packages: virtualenv
+Successfully installed virtualenv
+Cleaning up...
+grader@ip-10-20-26-132:~$ git clone https://github.com/brenj/udacity.git
+Cloning into 'udacity'...
+remote: Counting objects: 3733, done.
+remote: Compressing objects: 100% (30/30), done.
+remote: Total 3733 (delta 16), reused 0 (delta 0), pack-reused 3694
+Receiving objects: 100% (3733/3733), 2.37 MiB | 0 bytes/s, done.
+Resolving deltas: 100% (2214/2214), done.
+Checking connectivity... done.
+grader@ip-10-20-26-132:~$ sudo cp -r udacity/item_catalog /var/www/tq
+grader@ip-10-20-26-132:~$ ls /var/www/tq/
+bin  bower.json  docs  Makefile  manage.py  migrations  Procfile  README.md  requirements.txt  tech_quote
+grader@ip-10-20-26-132:~$ rm -rf udacity/
+grader@ip-10-20-26-132:~$ sudo chown -R grader:grader /var/www/tq
+grader@ip-10-20-26-132:~$ cd /var/www/tq/
+grader@ip-10-20-26-132:/var/www/tq$ virtualenv venv && . venv/bin/activate
+New python executable in venv/bin/python
+Installing setuptools, pip, wheel...done.
+grader@ip-10-20-26-132:/var/www/tq$ vi .env 
+```
+
+```bash
+# /var/www/tq/.env
+APP_SETTINGS=tech_quote.config.ProductionConfig
+DATABASE_URI=postgresql+psycopg2:///tq
+GITHUB_ID='<id>'
+GITHUB_SECRET='<secret>'
+TQ_SECRET='<secret>'
+```
+
+```bash
+(venv)grader@ip-10-20-26-132:/var/www/tq$ . bin/set-env-vars.sh
+(venv)grader@ip-10-20-26-132:/var/www/tq$ echo $APP_SETTINGS
+tech_quote.config.ProductionConfig
+(venv)grader@ip-10-20-26-132:/var/www/tq$ make install
+(venv)grader@ip-10-20-26-132:/var/www/tq$ psql tq
+psql (9.3.10)
+Type "help" for help.
+
+tq=> \d
+                   List of relations
+ Schema |           Name           |   Type   | Owner  
+--------+--------------------------+----------+--------
+ public | alembic_version          | table    | grader
+ public | author                   | table    | grader
+ public | author_author_id_seq     | sequence | grader
+ public | category                 | table    | grader
+ public | category_category_id_seq | sequence | grader
+ public | quote                    | table    | grader
+ public | quote_quote_id_seq       | sequence | grader
+ public | role                     | table    | grader
+ public | role_role_id_seq         | sequence | grader
+ public | tq_user                  | table    | grader
+ public | tq_user_user_id_seq      | sequence | grader
+(11 rows)
+
+tq=> \q
+(venv)grader@ip-10-20-26-132:/var/www/tq$ make prod
+# Starting web server (production)
+honcho start prod_server
+21:43:01 system        | prod_server.1 started (pid=25296)
+21:43:02 prod_server.1 | /var/www/tq/venv/local/lib/python2.7/site-packages/flask_sqlalchemy/__init__.py:800: UserWarning: SQLA
+LCHEMY_TRACK_MODIFICATIONS adds significant overhead and will be disabled by default in the future.  Set it to True to suppress
+ this warning.
+21:43:02 prod_server.1 |   warnings.warn('SQLALCHEMY_TRACK_MODIFICATIONS adds significant overhead and will be disabled by defa
+ult in the future.  Set it to True to suppress this warning.')
+21:43:02 prod_server.1 |  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
 ```
 
 Resources
