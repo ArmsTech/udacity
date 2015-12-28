@@ -240,6 +240,31 @@ No relations found.
 grader=> \q
 ```
 
+Install `Apache` and `mod-wsgi`, ensure `mod-wsgi` is enabled, and verify that server is reachable at port 80.
+
+```bash
+grader@ip-10-20-26-132:~$ sudo apt-get install apache2 libapache2-mod-wsgi
+grader@ip-10-20-26-132:~$ sudo a2enmod wsgi 
+Module wsgi already enabled
+grader@ip-10-20-26-132:~$ exit
+logout
+Connection to 52.27.202.14 closed.
+brenj@ubuntu:~$ curl -I http://52.27.202.14
+HTTP/1.1 200 OK
+Date: Mon, 28 Dec 2015 19:42:55 GMT
+Server: Apache/2.4.7 (Ubuntu)
+Last-Modified: Mon, 28 Dec 2015 18:34:39 GMT
+ETag: "2cf6-527f98ec40c88"
+Accept-Ranges: bytes
+Content-Length: 11510
+Vary: Accept-Encoding
+Content-Type: text/html
+```
+
+```bash
+
+```
+
 Resources
 ---------
 
