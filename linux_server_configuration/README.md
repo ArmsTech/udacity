@@ -193,6 +193,35 @@ grader@ip-10-20-26-132:~$ sudo crontab -e
 0 0 * * 0 apt-get update && { date; apt-get -qy upgrade; } >>/var/log/apt/auto-updates.log
 ```
 
+Install `fail2ban` to monitor unsuccessful login attempts and ban IP addresses with too many failures.
+
+```bash
+grader@ip-10-20-26-132:~$ sudo apt-get install fail2ban
+grader@ip-10-20-26-132:~$ sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
+grader@ip-10-20-26-132:~$ sudo vi /etc/fail2ban/jail.local
+```
+
+```bash
+# /etc/fail2ban/jail.local updates
+[ssh]
+
+enabled  = true
+port     = 2200
+filter   = sshd
+logpath  = /var/log/auth.log
+maxretry = 6
+```
+
+```bash
+grader@ip-10-20-26-132:~$ sudo service fail2ban restart
+ * Restarting authentication failure monitor fail2ban
+   ...done.
+grader@ip-10-20-26-132:~$ sudo iptables -S |grep fail2ban
+-N fail2ban-ssh
+-A INPUT -p tcp -m multiport --dports 2200 -j fail2ban-ssh
+-A fail2ban-ssh -j RETURN
+```
+
 Resources
 ---------
 
