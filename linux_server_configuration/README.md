@@ -180,6 +180,18 @@ broadcastdelay:       0.000000 s
 authdelay:            0.000000 s
 ```
 
+Update all of the installed packages and set up a Cron job to periodically update software (every Sunday).
+
+```bash
+grader@ip-10-20-26-132:~$ sudo apt-get update
+grader@ip-10-20-26-132:~$ sudo apt-get upgrade
+grader@ip-10-20-26-132:~$ sudo crontab -e
+```
+
+```bash
+# root crontab
+0 0 * * 0 apt-get update && { date; apt-get -qy upgrade; } >>/var/log/apt/auto-updates.log
+```
 
 Resources
 ---------
