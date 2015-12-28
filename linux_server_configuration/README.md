@@ -222,6 +222,24 @@ grader@ip-10-20-26-132:~$ sudo iptables -S |grep fail2ban
 -A fail2ban-ssh -j RETURN
 ```
 
+Application Configuration
+-------------------------
+
+Install and configure `postgres` database. By creating a `postgres` user and database with the name `grader`, we provide authentication for any connections from the same machine (which is all we need for this application).
+
+```bash
+grader@ip-10-20-26-132:~$ sudo apt-get install postgresql
+grader@ip-10-20-26-132:~$ sudo -u postgres createuser --createdb grader
+grader@ip-10-20-26-132:~$ sudo -u postgres createdb grader
+grader@ip-10-20-26-132:~$ psql
+psql (9.3.10)
+Type "help" for help.
+
+grader=> \d
+No relations found.
+grader=> \q
+```
+
 Resources
 ---------
 
