@@ -448,6 +448,13 @@ brenj@ubuntu:~$ curl http://52.27.202.14 |head -13
   </title>
 ```
 
+Install `glances` to monitor Tech Quote application.
+
+```console
+grader@ip-10-20-26-132:~$ sudo pip install glances
+grader@ip-10-20-26-132:~$ glances
+```
+
 Resources
 ---------
 
