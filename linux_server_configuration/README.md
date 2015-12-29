@@ -225,19 +225,20 @@ grader@ip-10-20-26-132:~$ sudo iptables -S |grep fail2ban
 Application Configuration
 -------------------------
 
-Install and configure `postgres` database. By creating a `postgres` user and database with the name `grader`, we provide authentication for any connections from the same machine (which is all we need for this application).
+Install and configure `postgres` database. By creating a `postgres` user and database with the name `grader`, we provide authentication for any connections from the same machine (which is all we need for this application). Also, add a password so that Apache can connect by URI.
 
 ```bash
 grader@ip-10-20-26-132:~$ sudo apt-get install postgresql
 grader@ip-10-20-26-132:~$ sudo -u postgres createuser --createdb grader
 grader@ip-10-20-26-132:~$ sudo -u postgres createdb grader
-grader@ip-10-20-26-132:~$ psql
+grader@ip-10-20-26-132:~$ sudo -u postgres psql
 psql (9.3.10)
 Type "help" for help.
 
-grader=> \d
-No relations found.
-grader=> \q
+postgres=# \password grader
+Enter new password: 
+Enter it again: 
+postgres=# \q
 ```
 
 Install `Apache` and `mod-wsgi`, ensure `mod-wsgi` is enabled, and verify that server is reachable at port 80.
@@ -367,6 +368,51 @@ grader@ip-10-20-26-132:/var/www/tq$ sudo a2ensite tq
 Enabling site tq.
 To activate the new configuration, you need to run:
   service apache2 reload
+```
+
+Add WSGI application file. Include the `tech_quote` package, environment variables, secret key, and add reference to site packages directory for the virtual environment.
+
+```bash
+grader@ip-10-20-26-132:/var/www/tq$ vi tq.wsgi
+grader@ip-10-20-26-132:/var/www/tq$ cat tq.wsgi 
+import logging
+import os
+import site
+import sys
+
+logging.basicConfig(stream=sys.stderr)
+sys.path.append('/var/www/tq/')
+
+VIRTUAL_ENVIRONMENT = '/var/www/tq/venv'
+site.addsitedir(
+    os.path.join(VIRTUAL_ENVIRONMENT, 'lib/python2.7/site-packages'))
+
+os.environ['APP_SETTINGS'] = 'tech_quote.config.ProductionConfig'
+os.environ['DATABASE_URI'] = 'postgresql+psycopg2://grader:<password>@localhost/tq'
+os.environ['GITHUB_ID'] = '<id>'
+os.environ['GITHUB_SECRET'] = '<secret>'
+os.environ['TQ_SECRET'] = '<secret>'
+
+from tech_quote.app import create_app
+
+application = create_app()
+application.secret_key = 'secret'
+```
+
+Allow Apache to write to static directory and image uploads directory.
+
+```bash
+grader@ip-10-20-26-132:/var/www/tq$ sudo chmod -R 775 tech_quote/static/
+grader@ip-10-20-26-132:/var/www/tq$ sudo chown -R grader:www-data tech_quote/static/
+```
+
+Update the Authorization callback URL on GitHub, restart the Apache server, and validate site is up.
+
+```bash
+grader@ip-10-20-26-132:/var/www/tq$ sudo service apache2 restart
+ * Restarting web server apache2
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 127.0.0.1. Set the 'ServerName' directive globally to suppress this message
+   ...done.
 ```
 
 Resources
