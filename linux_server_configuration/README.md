@@ -405,7 +405,7 @@ os.environ['TQ_SECRET'] = '<secret>'
 from tech_quote.app import create_app
 
 application = create_app()
-application.secret_key = 'secret'
+application.secret_key = '<secret>'
 ```
 
 Allow Apache to write to static directory and image uploads directory.
