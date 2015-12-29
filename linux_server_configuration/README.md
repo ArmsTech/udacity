@@ -422,3 +422,4 @@ Resources
 * [AWS NTP](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/set-time.html)
 * [Fail2Ban](https://help.ubuntu.com/community/Fail2ban)
 * [Postgresql](https://help.ubuntu.com/community/PostgreSQL)
+* [Apache+WSGI](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps)
