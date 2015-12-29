@@ -378,8 +378,8 @@ Add WSGI application file. Include the `tech_quote` package, environment variabl
 grader@ip-10-20-26-132:/var/www/tq$ vi tq.wsgi
 ```
 
+**/var/www/tq/tq.wsgi**
 ```python
-# /var/www/tq/tq.wsgi 
 import logging
 import os
 import site
