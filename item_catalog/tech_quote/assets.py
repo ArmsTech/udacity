@@ -11,7 +11,7 @@ CSS = (
     'css/style.css')
 
 JS = (
-    'libs/jQuery/dist/jquery.js',
+    'libs/jquery/dist/jquery.js',
     'libs/bootstrap/dist/js/bootstrap.js',
     'libs/selectize/dist/js/standalone/selectize.js',
     'js/app.js')
