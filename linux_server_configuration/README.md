@@ -345,7 +345,7 @@ ult in the future.  Set it to True to suppress this warning.')
 (venv)grader@ip-10-20-26-132:/var/www/tq$ deactivate
 ```
 
-Add and enable a new `Apache` virtual host.
+Add and enable a new `Apache` virtual host. Do not allow directory indexes and do not allow configuration to be overridden by `.htaccess` files.
 
 ```console
 (venv)grader@ip-10-20-26-132:/var/www/tq$ sudo vi /etc/apache2/sites-available/tq.conf
@@ -357,19 +357,20 @@ Add and enable a new `Apache` virtual host.
   ServerName 52.27.202.14
   ServerAdmin grader@52.27.202.14
   WSGIScriptAlias / /var/www/tq/tq.wsgi
-  <Directory /var/www/tq/tech_quote/>
-        Order allow,deny
-        Allow from all
+  <Directory /var/www/tq>
+    Options -Indexes
+    AllowOverride None
+    Order deny,allow
+    Allow from all
   </Directory>
   Alias /static /var/www/tq/tech_quote/static
-  <Directory /var/www/tq/tech_quote/static/>
-        Order allow,deny
-        Allow from all
-  </Directory>
   ErrorLog ${APACHE_LOG_DIR}/error.log
   LogLevel warn
   CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
+```
+
+```console
 grader@ip-10-20-26-132:/var/www/tq$ sudo a2ensite tq
 Enabling site tq.
 To activate the new configuration, you need to run:
