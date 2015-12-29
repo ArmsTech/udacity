@@ -16,6 +16,10 @@ Supporting Courses:
 Server Details
 --------------
 
+**Server IP:** 52.27.202.14  
+**SSH Port:** 2200  
+**Application URL:** http://52.27.202.14/  
+
 Server Configuration
 --------------------
 
