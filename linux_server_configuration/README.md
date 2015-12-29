@@ -21,7 +21,7 @@ Server Configuration
 
 Append the hostname to the localhost line in `/etc/hosts`.
 
-```bash
+```console
 root@ip-10-20-26-132:~# hostname
 ip-10-20-26-132
 root@ip-10-20-26-132:~# vi /etc/hosts
@@ -34,7 +34,7 @@ root@ip-10-20-26-132:~# vi /etc/hosts
 
 Add a user `grader` and give user sudo access. `grader` can run any command from any terminal as any user without providing a password. It is a best practice to use `visudo` to edit the sudoers file, but we are leveraging Ubuntu's include directive and we have root access without sudo.
 
-```bash
+```console
 root@ip-10-20-26-132:~# adduser grader
 root@ip-10-20-26-132:~# echo "grader ALL=(ALL) NOPASSWD:ALL" >/etc/sudoers.d/grader
 root@ip-10-20-26-132:~# chmod 0440 /etc/sudoers.d/grader
@@ -48,7 +48,7 @@ sudo ls -a /root
 
 Use `ssh-keygen` on host computer to generate private and public keys. Copy public key to the remote (AWS) server and include in `~/.ssh/authorized_keys` with the correct permissions, owner, and group.
 
-```bash
+```console
 brenj@ubuntu:~$ scp -i ~/.ssh/udacity_key.rsa /home/brenj/.ssh/id_rsa.pub root@52.27.202.14:/home/grader/
 brenj@ubuntu:~$ ssh -i ~/.ssh/udacity_key.rsa root@52.27.202.14
 root@ip-10-20-26-132:~# cd /home/grader/
@@ -72,7 +72,7 @@ grader
 
 Update the SSH daemon configuration to improve security. Change the default to SSH port, set `PasswordAuthentication` and `PermitRootLogin` to `no`, and use `AllowUsers` to create a white-list of who (only `grader`) can log into the server via SSH. Then restart the SSH service to use new config settings.
 
-```bash
+```console
 grader@ip-10-20-26-132:~$ sudo vi /etc/ssh/sshd_config
 ```
 
@@ -84,7 +84,7 @@ PermitRootLogin no
 AllowUsers grader
 ```
 
-```bash
+```console
 grader@ip-10-20-26-132:~$ sudo service ssh restart
 ssh stop/waiting
 ssh start/running, process 7251
@@ -100,7 +100,7 @@ grader
 
 Using `ufw`, the front-end to iptables on Ubuntu, configure the firewall to continue allowing remote administration as well as host a web server. All other incoming requests should be denied while still allowing all outgoing connections.
 
-```bash
+```console
 grader@ip-10-20-26-132:~$ sudo ufw status                                                                                   
 Status: inactive
 grader@ip-10-20-26-132:~$ sudo ufw default deny incoming
@@ -144,7 +144,7 @@ grader
 
 Server time is already set to UTC by default. Install NTP and verify that the default NTP configuration is working correctly. Note that to query NTP there is no need to add any firewall rules; requests to UDP port 123 are already allowed.
 
-```bash
+```console
 grader@ip-10-20-26-132:~$ date
 Sun Dec 27 22:41:13 UTC 2015
 grader@ip-10-20-26-132:~$ sudo apt-get install ntp
@@ -182,7 +182,7 @@ authdelay:            0.000000 s
 
 Update all of the installed packages and set up a Cron job to periodically update software (every Sunday).
 
-```bash
+```console
 grader@ip-10-20-26-132:~$ sudo apt-get update
 grader@ip-10-20-26-132:~$ sudo apt-get upgrade
 grader@ip-10-20-26-132:~$ sudo crontab -e
@@ -194,7 +194,7 @@ grader@ip-10-20-26-132:~$ sudo crontab -e
 
 Install `fail2ban` to monitor unsuccessful login attempts and ban IP addresses with too many failures.
 
-```bash
+```console
 grader@ip-10-20-26-132:~$ sudo apt-get install fail2ban
 grader@ip-10-20-26-132:~$ sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
 grader@ip-10-20-26-132:~$ sudo vi /etc/fail2ban/jail.local
@@ -211,7 +211,7 @@ logpath  = /var/log/auth.log
 maxretry = 6
 ```
 
-```bash
+```console
 grader@ip-10-20-26-132:~$ sudo service fail2ban restart
  * Restarting authentication failure monitor fail2ban
    ...done.
@@ -226,7 +226,7 @@ Application Configuration
 
 Install and configure `postgres` database. By creating a `postgres` user and database with the name `grader`, we provide authentication for any connections from the same machine (which is all we need for this application). Also, add a password so that Apache can connect by URI.
 
-```bash
+```console
 grader@ip-10-20-26-132:~$ sudo apt-get install postgresql
 grader@ip-10-20-26-132:~$ sudo -u postgres createuser --createdb grader
 grader@ip-10-20-26-132:~$ sudo -u postgres createdb grader
@@ -242,7 +242,7 @@ postgres=# \q
 
 Install `Apache` and `mod-wsgi`, ensure `mod-wsgi` is enabled, and verify that server is reachable at port 80.
 
-```bash
+```console
 grader@ip-10-20-26-132:~$ sudo apt-get install apache2 libapache2-mod-wsgi
 grader@ip-10-20-26-132:~$ sudo a2enmod wsgi 
 Module wsgi already enabled
@@ -263,7 +263,7 @@ Content-Type: text/html
 
 Install [Tech Quote](https://github.com/brenj/udacity/tree/master/item_catalog) dependencies and application on server.
 
-```bash
+```console
 grader@ip-10-20-26-132:~$ sudo apt-get install git python-pip libpq-dev python-dev
 grader@ip-10-20-26-132:~$ sudo pip install virtualenv
 Downloading/unpacking virtualenv
@@ -300,7 +300,7 @@ GITHUB_SECRET='<secret>'
 TQ_SECRET='<secret>'
 ```
 
-```bash
+```console
 (venv)grader@ip-10-20-26-132:/var/www/tq$ . bin/set-env-vars.sh
 (venv)grader@ip-10-20-26-132:/var/www/tq$ echo $APP_SETTINGS
 tech_quote.config.ProductionConfig
@@ -343,7 +343,7 @@ ult in the future.  Set it to True to suppress this warning.')
 
 Add and enable a new `Apache` virtual host.
 
-```bash
+```console
 (venv)grader@ip-10-20-26-132:/var/www/tq$ sudo vi /etc/apache2/sites-available/tq.conf
 ```
 
@@ -374,7 +374,7 @@ To activate the new configuration, you need to run:
 
 Add WSGI application file. Include the `tech_quote` package, environment variables, secret key, and add reference to site packages directory for the virtual environment.
 
-```bash
+```console
 grader@ip-10-20-26-132:/var/www/tq$ vi tq.wsgi
 ```
 
@@ -406,14 +406,14 @@ application.secret_key = 'secret'
 
 Allow Apache to write to static directory and image uploads directory.
 
-```bash
+```console
 grader@ip-10-20-26-132:/var/www/tq$ sudo chmod -R 775 tech_quote/static/
 grader@ip-10-20-26-132:/var/www/tq$ sudo chown -R grader:www-data tech_quote/static/
 ```
 
 Update the Authorization callback URL on GitHub, restart the Apache server, and validate site is up.
 
-```bash
+```console
 grader@ip-10-20-26-132:/var/www/tq$ sudo service apache2 restart
  * Restarting web server apache2
 AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 127.0.0.1. Set the 'ServerName' directive globally to suppress this message
