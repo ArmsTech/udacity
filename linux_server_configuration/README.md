@@ -146,7 +146,7 @@ grader
 
 > Amazon Linux instances are set to the UTC (Coordinated Universal Time) time zone by default ...
 
-Server time is already set to UTC by default. Install NTP and verify that the default NTP configuration is working correctly. Note that to query NTP there is no need to add any firewall rules; requests to UDP port 123 are already allowed.
+Server time is already set to UTC by default. Install NTP and verify that the default NTP configuration is working correctly. Note that to query NTP there is no need to add any firewall rules; requests from UDP port 123 are already allowed.
 
 ```console
 grader@ip-10-20-26-132:~$ date
