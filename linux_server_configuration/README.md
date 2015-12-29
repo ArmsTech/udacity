@@ -27,8 +27,8 @@ ip-10-20-26-132
 root@ip-10-20-26-132:~# vi /etc/hosts
 ```
 
+**/etc/hosts**
 ```bash
-# /etc/hosts
 127.0.0.1 localhost ip-10-20-26-132
 ```
 
@@ -76,8 +76,8 @@ Update the SSH daemon configuration to improve security. Change the default to S
 grader@ip-10-20-26-132:~$ sudo vi /etc/ssh/sshd_config
 ```
 
+**/etc/ssh/sshd_config**
 ```bash
-# /etc/ssh/sshd_config updates
 Port 2200
 PasswordAuthentication no
 PermitRootLogin no
@@ -189,7 +189,6 @@ grader@ip-10-20-26-132:~$ sudo crontab -e
 ```
 
 ```bash
-# root crontab
 0 0 * * 0 apt-get update && { date; apt-get -qy upgrade; } >>/var/log/apt/auto-updates.log
 ```
 
@@ -201,8 +200,8 @@ grader@ip-10-20-26-132:~$ sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.loc
 grader@ip-10-20-26-132:~$ sudo vi /etc/fail2ban/jail.local
 ```
 
+**/etc/fail2ban/jail.local**
 ```bash
-# /etc/fail2ban/jail.local updates
 [ssh]
 
 enabled  = true
@@ -262,7 +261,7 @@ Vary: Accept-Encoding
 Content-Type: text/html
 ```
 
-Install [TechQuote](https://github.com/brenj/udacity/tree/master/item_catalog) dependencies and application on server.
+Install [Tech Quote](https://github.com/brenj/udacity/tree/master/item_catalog) dependencies and application on server.
 
 ```bash
 grader@ip-10-20-26-132:~$ sudo apt-get install git python-pip libpq-dev python-dev
@@ -292,8 +291,8 @@ Installing setuptools, pip, wheel...done.
 grader@ip-10-20-26-132:/var/www/tq$ vi .env 
 ```
 
+**/var/www/tq/.env**
 ```bash
-# /var/www/tq/.env
 APP_SETTINGS=tech_quote.config.ProductionConfig
 DATABASE_URI=postgresql+psycopg2:///tq
 GITHUB_ID='<id>'
@@ -346,7 +345,10 @@ Add and enable a new `Apache` virtual host.
 
 ```bash
 (venv)grader@ip-10-20-26-132:/var/www/tq$ sudo vi /etc/apache2/sites-available/tq.conf
-(venv)grader@ip-10-20-26-132:/var/www/tq$ cat /etc/apache2/sites-available/tq.conf
+```
+
+**/etc/apache2/sites-available/tq.conf**
+```apache
 <VirtualHost *:80>
   ServerName 52.27.202.14
   ServerAdmin grader@52.27.202.14
@@ -374,7 +376,10 @@ Add WSGI application file. Include the `tech_quote` package, environment variabl
 
 ```bash
 grader@ip-10-20-26-132:/var/www/tq$ vi tq.wsgi
-grader@ip-10-20-26-132:/var/www/tq$ cat tq.wsgi 
+```
+
+```python
+# /var/www/tq/tq.wsgi 
 import logging
 import os
 import site
