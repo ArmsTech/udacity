@@ -409,6 +409,9 @@ Allow Apache to write to static directory and image uploads directory.
 ```console
 grader@ip-10-20-26-132:/var/www/tq$ sudo chmod -R 775 tech_quote/static/
 grader@ip-10-20-26-132:/var/www/tq$ sudo chown -R grader:www-data tech_quote/static/
+grader@ip-10-20-26-132:/var/www/tq$ sudo mkdir /var/uploads                                                                 
+grader@ip-10-20-26-132:/var/www/tq$ sudo chown grader:www-data /var/uploads/
+grader@ip-10-20-26-132:/var/www/tq$ sudo chmod 775 /var/uploads/
 ```
 
 Update the Authorization callback URL on GitHub, restart the Apache server, and validate site is up.
@@ -418,6 +421,26 @@ grader@ip-10-20-26-132:/var/www/tq$ sudo service apache2 restart
  * Restarting web server apache2
 AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 127.0.0.1. Set the 'ServerName' directive globally to suppress this message
    ...done.
+grader@ip-10-20-26-132:/var/www/tq$ exit
+logout
+Connection to 52.27.202.14 closed.
+brenj@ubuntu:~$ curl http://52.27.202.14 |head -13
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  2147  100  2147    0     0  14941      0 --:--:-- --:--:-- --:--:-- 15013
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>
+    
+      Tech Quote
+    
+  </title>
 ```
 
 Resources
