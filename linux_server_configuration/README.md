@@ -228,20 +228,12 @@ grader@ip-10-20-26-132:~$ sudo iptables -S |grep fail2ban
 Application Configuration
 -------------------------
 
-Install and configure `postgres` database. By creating a `postgres` user and database with the name `grader`, we provide authentication for any connections from the same machine (which is all we need for this application). Also, add a password so that Apache can connect by URI.
+Install and configure `postgres` database. By creating a `postgres` user and database with the name `grader`, we provide authentication for any connections from the same machine (which is all we need to setup this application).
 
 ```console
 grader@ip-10-20-26-132:~$ sudo apt-get install postgresql
 grader@ip-10-20-26-132:~$ sudo -u postgres createuser --createdb grader
 grader@ip-10-20-26-132:~$ sudo -u postgres createdb grader
-grader@ip-10-20-26-132:~$ sudo -u postgres psql
-psql (9.3.10)
-Type "help" for help.
-
-postgres=# \password grader
-Enter new password: 
-Enter it again: 
-postgres=# \q
 ```
 
 Install `Apache` and `mod-wsgi`, ensure `mod-wsgi` is enabled, and verify that server is reachable at port 80.
@@ -345,7 +337,7 @@ ult in the future.  Set it to True to suppress this warning.')
 (venv)grader@ip-10-20-26-132:/var/www/tq$ deactivate
 ```
 
-Add a catalog user with limited access to the `tq` database
+Add a basic postgres user (with associated Linux account) named `catalog` with limited access to the `tq` database. Also, add a password so that Apache can connect by URI.
 
 ```console
 grader@ip-10-20-26-132:~$ sudo adduser catalog
