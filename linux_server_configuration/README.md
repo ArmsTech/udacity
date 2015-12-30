@@ -345,6 +345,53 @@ ult in the future.  Set it to True to suppress this warning.')
 (venv)grader@ip-10-20-26-132:/var/www/tq$ deactivate
 ```
 
+Add a catalog user with limited access to the `tq` database
+
+```console
+grader@ip-10-20-26-132:~$ sudo adduser catalog
+grader@ip-10-20-26-132:~$ sudo -u postgres createuser catalog
+grader@ip-10-20-26-132:~$ sudo -u postgres createdb catalog
+grader@ip-10-20-26-132:~$ sudo -u postgres psql
+psql (9.3.10)
+Type "help" for help.
+
+postgres=# \password catalog
+Enter new password: 
+Enter it again: 
+postgres=# \c tq
+tq=# GRANT SELECT, INSERT, UPDATE ON author, category, tq_user TO catalog;
+GRANT
+tq=# GRANT SELECT, INSERT, UPDATE, DELETE ON quote TO catalog;
+GRANT
+tq=# GRANT SELECT, UPDATE ON author_author_id_seq, category_category_id_seq, quote_quote_id_seq, tq_user_user_id_seq TO catalog;
+tq=# \z
+                                        Access privileges
+ Schema |           Name           |   Type   |   Access privileges   | Column access privileges 
+--------+--------------------------+----------+-----------------------+--------------------------
+ public | alembic_version          | table    |                       | 
+ public | author                   | table    | grader=arwdDxt/grader+| 
+        |                          |          | catalog=arw/grader    | 
+ public | author_author_id_seq     | sequence | grader=rwU/grader    +| 
+        |                          |          | catalog=rw/grader     | 
+ public | category                 | table    | grader=arwdDxt/grader+| 
+        |                          |          | catalog=arw/grader    | 
+ public | category_category_id_seq | sequence | grader=rwU/grader    +| 
+        |                          |          | catalog=rw/grader     | 
+ public | quote                    | table    | grader=arwdDxt/grader+| 
+        |                          |          | catalog=arwd/grader   | 
+ public | quote_quote_id_seq       | sequence | grader=rwU/grader    +| 
+        |                          |          | catalog=rw/grader     | 
+ public | role                     | table    |                       | 
+ public | role_role_id_seq         | sequence |                       | 
+ public | tq_user                  | table    | grader=arwdDxt/grader+| 
+        |                          |          | catalog=arw/grader    | 
+ public | tq_user_user_id_seq      | sequence | grader=rwU/grader    +| 
+        |                          |          | catalog=rw/grader     | 
+(11 rows)
+
+tq=# \q
+```
+
 Add and enable a new `Apache` virtual host. Do not allow directory indexes and do not allow configuration to be overridden by `.htaccess` files.
 
 ```console
@@ -377,7 +424,7 @@ To activate the new configuration, you need to run:
   service apache2 reload
 ```
 
-Add WSGI application file. Include the `tech_quote` package, environment variables, secret key, and add reference to site packages directory for the virtual environment.
+Add WSGI application file. Include the `tech_quote` package, environment variables, secret key, and add reference to site packages directory for the virtual environment. Use the `catalog` user to connect to the database.
 
 ```console
 grader@ip-10-20-26-132:/var/www/tq$ vi tq.wsgi
@@ -398,7 +445,7 @@ site.addsitedir(
     os.path.join(VIRTUAL_ENVIRONMENT, 'lib/python2.7/site-packages'))
 
 os.environ['APP_SETTINGS'] = 'tech_quote.config.ProductionConfig'
-os.environ['DATABASE_URI'] = 'postgresql+psycopg2://grader:<password>@localhost/tq'
+os.environ['DATABASE_URI'] = 'postgresql+psycopg2://catalog:<password>@localhost/tq'
 os.environ['GITHUB_ID'] = '<id>'
 os.environ['GITHUB_SECRET'] = '<secret>'
 os.environ['TQ_SECRET'] = '<secret>'
