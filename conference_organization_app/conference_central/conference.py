@@ -588,10 +588,7 @@ class ConferenceApi(remote.Service):
         if not user:
             raise endpoints.UnauthorizedException("Authorization required.")
 
-        allocated_id = ndb.Model.allocate_ids(size=1)[0]
-        speaker_key = ndb.Key(Speaker, allocated_id)
-
-        speaker = Speaker(key=speaker_key, name=request.name)
+        speaker = Speaker(name=request.name)
         speaker.put()
 
         return speaker.to_message()
