@@ -723,7 +723,7 @@ class ConferenceApi(remote.Service):
         return self._get_wishlist_sessions_as_message(profile)
 
     @endpoints.method(
-        SESSION_REQUEST, SessionsResponseMessage,
+        containers.SESSION_REQUEST, SessionsResponseMessage,
         http_method='DELETE', path='profile/wish/{session}',
         name='deleteSessionInWishlist')
     def delete_session_in_wishlist(self, request):
