@@ -647,7 +647,7 @@ class ConferenceApi(remote.Service):
 
     @endpoints.method(
         containers.SESSIONS_BY_TYPE_REQUEST, SessionsResponseMessage,
-        path='conference/{conference}/sessions/{type_of_session}',
+        path='conference/{conference}/sessions/type/{type_of_session}',
         name='getConferenceSessionsByType', http_method='GET')
     def get_conference_sessions_by_type(self, request):
         """Get all sessions for a conference by the specified type."""
@@ -662,7 +662,7 @@ class ConferenceApi(remote.Service):
 
     @endpoints.method(
         containers.SESSIONS_BY_SPEAKER_REQUEST, SessionsResponseMessage,
-        path='sessions/{speaker_key}', name='getSessionsBySpeaker',
+        path='sessions/speaker/{speaker_key}', name='getSessionsBySpeaker',
         http_method='GET')
     def get_sessions_by_speaker(self, request):
         """Get all sessions for a specified speaker."""
@@ -739,8 +739,8 @@ class ConferenceApi(remote.Service):
 
     @endpoints.method(
         message_types.VoidMessage, SessionsResponseMessage,
-        path='sessions/filter', name='getSessionsNonWorkshopBefore7pm',
-        http_method='GET')
+        path='sessions/non-workshop-before-seven',
+        name='getSessionsNonWorkshopBefore7pm', http_method='GET')
     def get_sessions_nonworkshop_before_7pm(self, request):
         """Get all non-workshop sessions occurring before or at 7PM."""
         # Ideally we would hard-code a list of supported session types
