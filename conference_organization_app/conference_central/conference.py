@@ -681,15 +681,14 @@ class ConferenceApi(remote.Service):
     def add_session_to_wishlist(self, request):
         """Add a session to a user's wishlist."""
         profile = self._getProfileFromUser()
-
         session = self._get_entity_by_key(request.session)
 
         # Make sure session hasn't already been added
-        if session.key.urlsafe() in profile.sessions_wishlist:
+        if session.key in profile.sessions_wishlist:
             raise ConflictException(
                 "You have already added this session to your wishlist.")
 
-        profile.sessions_wishlist.append(session.key.urlsafe())
+        profile.sessions_wishlist.append(session.key)
         profile.put()
 
         # Return the new, complete wishlist
@@ -697,11 +696,7 @@ class ConferenceApi(remote.Service):
 
     def _get_wishlist_sessions(self, profile):
         """Get the wishlist sessions for a specified user (profile)."""
-        session_wishlist_keys = [
-            ndb.Key(urlsafe=urlsafe_session_key) for
-            urlsafe_session_key in profile.sessions_wishlist]
-
-        return ndb.get_multi(session_wishlist_keys)
+        return ndb.get_multi([key for key in profile.sessions_wishlist])
 
     def _get_wishlist_sessions_as_message(self, profile):
         """Get the wishlist sessions as a SessionsResponseMessage."""
@@ -729,10 +724,9 @@ class ConferenceApi(remote.Service):
     def delete_session_in_wishlist(self, request):
         """Delete a session from a user's wishlist."""
         profile = self._getProfileFromUser()
-
         session = self._get_entity_by_key(request.session)
 
-        profile.sessions_wishlist.remove(session.key.urlsafe())
+        profile.sessions_wishlist.remove(session.key)
         profile.put()
 
         return self._get_wishlist_sessions_as_message(profile)
