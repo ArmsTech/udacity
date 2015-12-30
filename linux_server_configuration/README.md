@@ -23,6 +23,16 @@ Server Details
 Server Configuration
 --------------------
 
+Log into the server via SSH using the private key provided by Udacity.
+
+```console
+brenj@ubuntu:~$ mv ~/Downloads/udacity_key.rsa .ssh/
+brenj@ubuntu:~$ chmod 600 .ssh/udacity_key.rsa
+brenj@ubuntu:~$ ssh -i .ssh/udacity_key.rsa root@52.27.202.14
+root@ip-10-20-26-132:~$ whoami
+root
+```
+
 Append the hostname to the localhost line in `/etc/hosts` to fix sudo error: `sudo: unable to resolve host (none)`.
 
 ```console
@@ -50,9 +60,10 @@ sudo ls -a /root
 .  ..  .bash_history  .bashrc  .cache  .profile  .ssh  .viminfo
 ```
 
-Use `ssh-keygen` on host computer to generate private and public keys. Copy public key to the remote (AWS) server and include in `~/.ssh/authorized_keys` with the correct permissions, owner, and group.
+Use `ssh-keygen` on host computer to generate private and public keys. Copy public key to the remote (AWS) server and include in `~/.ssh/authorized_keys` with the correct permissions, owner, and group. Finally, cache key for reuse using `ssh-add`.
 
 ```console
+brenj@ubuntu:~$ ssh-keygen
 brenj@ubuntu:~$ scp -i ~/.ssh/udacity_key.rsa /home/brenj/.ssh/id_rsa.pub root@52.27.202.14:/home/grader/
 brenj@ubuntu:~$ ssh -i ~/.ssh/udacity_key.rsa root@52.27.202.14
 root@ip-10-20-26-132:~# cd /home/grader/
@@ -72,6 +83,9 @@ Connection to 52.27.202.14 closed.
 brenj@ubuntu:~$ ssh -i ~/.ssh/id_rsa grader@52.27.202.14
 grader@ip-10-20-26-132:~$ whoami
 grader
+grader@ip-10-20-26-132:~$ exit
+logout
+brenj@ubuntu:~$ ssh-add .ssh/id_rsa
 ```
 
 Update the SSH daemon configuration to improve security. Change the default to SSH port, set `PasswordAuthentication` and `PermitRootLogin` to `no`, and use `AllowUsers` to create a white-list of who (only `grader`) can log into the server via SSH. Then restart the SSH service to use new config settings.
@@ -95,9 +109,7 @@ ssh start/running, process 7251
 grader@ip-10-20-26-132:~$ exit
 logout
 Connection to 52.27.202.14 closed.
-brenj@ubuntu:~$ ssh -p 2200 -i ~/.ssh/udacity_key.rsa root@52.27.202.14
-Permission denied (publickey).
-brenj@ubuntu:~$ ssh -p 2200 -i ~/.ssh/udacity_key.rsa grader@52.27.202.14
+brenj@ubuntu:~$ ssh -p 2200 grader@52.27.202.14
 grader@ip-10-20-26-132:~$ whoami
 grader
 ```
@@ -139,7 +151,7 @@ To                         Action      From
 grader@ip-10-20-26-132:~$ exit
 logout
 Connection to 52.27.202.14 closed.
-brenj@ubuntu:~$ ssh -p 2200 -i ~/.ssh/udacity_key.rsa grader@52.27.202.14
+brenj@ubuntu:~$ ssh -p 2200 grader@52.27.202.14
 grader@ip-10-20-26-132:~$ whoami
 grader
 ```
