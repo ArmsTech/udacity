@@ -109,6 +109,8 @@ ssh start/running, process 7251
 grader@ip-10-20-26-132:~$ exit
 logout
 Connection to 52.27.202.14 closed.
+brenj@ubuntu:~$ ssh -p 2200 -o "IdentitiesOnly yes" -i ~/.ssh/udacity_key.rsa root@52.27.202.14
+Permission denied (publickey).
 brenj@ubuntu:~$ ssh -p 2200 grader@52.27.202.14
 grader@ip-10-20-26-132:~$ whoami
 grader
