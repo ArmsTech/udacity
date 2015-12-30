@@ -640,7 +640,7 @@ class ConferenceApi(remote.Service):
     def get_conference_sessions(self, request):
         """Get all sessions for a specified conference."""
         conference = self._get_entity_by_key(request.conference)
-        conference_sessions = Session.query(ancestor=conference.key).fetch()
+        conference_sessions = Session.query(ancestor=conference.key)
 
         return SessionsResponseMessage(
             sessions=[session.to_message() for session in conference_sessions])
