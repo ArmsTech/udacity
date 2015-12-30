@@ -23,7 +23,7 @@ Server Details
 Server Configuration
 --------------------
 
-Append the hostname to the localhost line in `/etc/hosts`.
+Append the hostname to the localhost line in `/etc/hosts` to fix sudo error: `sudo: unable to resolve host (none)`.
 
 ```console
 root@ip-10-20-26-132:~# hostname
