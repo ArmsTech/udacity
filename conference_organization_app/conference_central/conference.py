@@ -17,7 +17,6 @@ from datetime import datetime
 import logging
 
 import endpoints
-from protorpc import messages
 from protorpc import message_types
 from protorpc import remote
 
@@ -34,16 +33,16 @@ from models import BooleanMessage
 from models import Conference
 from models import ConferenceForm
 from models import ConferenceForms
-from models import ConferenceQueryForm
 from models import ConferenceQueryForms
 from models import TeeShirtSize
 from models import Session
-from models import SessionRequestMessage
 from models import SessionResponseMessage
 from models import SessionsResponseMessage
 from models import Speaker
 from models import SpeakerRequestMessage
 from models import SpeakerResponseMessage
+
+import resource_containers as containers
 
 from settings import WEB_CLIENT_ID
 from settings import ANDROID_CLIENT_ID
@@ -82,16 +81,6 @@ FIELDS =    {
             'MONTH': 'month',
             'MAX_ATTENDEES': 'maxAttendees',
             }
-
-CONF_GET_REQUEST = endpoints.ResourceContainer(
-    message_types.VoidMessage,
-    websafeConferenceKey=messages.StringField(1),
-)
-
-CONF_POST_REQUEST = endpoints.ResourceContainer(
-    ConferenceForm,
-    websafeConferenceKey=messages.StringField(1),
-)
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -221,7 +210,7 @@ class ConferenceApi(remote.Service):
         return self._createConferenceObject(request)
 
 
-    @endpoints.method(CONF_POST_REQUEST, ConferenceForm,
+    @endpoints.method(containers.CONF_POST_REQUEST, ConferenceForm,
             path='conference/{websafeConferenceKey}',
             http_method='PUT', name='updateConference')
     def updateConference(self, request):
@@ -229,7 +218,7 @@ class ConferenceApi(remote.Service):
         return self._updateConferenceObject(request)
 
 
-    @endpoints.method(CONF_GET_REQUEST, ConferenceForm,
+    @endpoints.method(containers.CONF_GET_REQUEST, ConferenceForm,
             path='conference/{websafeConferenceKey}',
             http_method='GET', name='getConference')
     def getConference(self, request):
@@ -524,7 +513,7 @@ class ConferenceApi(remote.Service):
         )
 
 
-    @endpoints.method(CONF_GET_REQUEST, BooleanMessage,
+    @endpoints.method(containers.CONF_GET_REQUEST, BooleanMessage,
             path='conference/{websafeConferenceKey}',
             http_method='POST', name='registerForConference')
     def registerForConference(self, request):
@@ -532,7 +521,7 @@ class ConferenceApi(remote.Service):
         return self._conferenceRegistration(request)
 
 
-    @endpoints.method(CONF_GET_REQUEST, BooleanMessage,
+    @endpoints.method(containers.CONF_GET_REQUEST, BooleanMessage,
             path='conference/{websafeConferenceKey}',
             http_method='DELETE', name='unregisterFromConference')
     def unregisterFromConference(self, request):
@@ -593,12 +582,8 @@ class ConferenceApi(remote.Service):
 
         return speaker.to_message()
 
-    SESSION_CONFERENCE_REQUEST = endpoints.ResourceContainer(
-        SessionRequestMessage,
-        conference=messages.StringField(1))
-
     @endpoints.method(
-        SESSION_CONFERENCE_REQUEST, SessionResponseMessage,
+        containers.SESSION_CONFERENCE_REQUEST, SessionResponseMessage,
         path='conference/{conference}/session',
         http_method='POST', name='createSession')
     def create_session(self, request):
@@ -648,12 +633,8 @@ class ConferenceApi(remote.Service):
 
         return session.to_message()
 
-    CONFERENCE_REQUEST = endpoints.ResourceContainer(
-        message_types.VoidMessage,
-        conference=messages.StringField(1))
-
     @endpoints.method(
-        CONFERENCE_REQUEST, SessionsResponseMessage,
+        containers.CONFERENCE_REQUEST, SessionsResponseMessage,
         path='conference/{conference}/sessions', name='getConferenceSessions',
         http_method='GET')
     def get_conference_sessions(self, request):
@@ -664,13 +645,8 @@ class ConferenceApi(remote.Service):
         return SessionsResponseMessage(
             sessions=[session.to_message() for session in conference_sessions])
 
-    SESSIONS_BY_TYPE_REQUEST = endpoints.ResourceContainer(
-        message_types.VoidMessage,
-        conference=messages.StringField(1),
-        type_of_session=messages.StringField(2))
-
     @endpoints.method(
-        SESSIONS_BY_TYPE_REQUEST, SessionsResponseMessage,
+        containers.SESSIONS_BY_TYPE_REQUEST, SessionsResponseMessage,
         path='conference/{conference}/sessions/{type_of_session}',
         name='getConferenceSessionsByType', http_method='GET')
     def get_conference_sessions_by_type(self, request):
@@ -684,12 +660,8 @@ class ConferenceApi(remote.Service):
             sessions=[session.to_message() for
                       session in conference_sessions_by_type])
 
-    SESSIONS_BY_SPEAKER_REQUEST = endpoints.ResourceContainer(
-        message_types.VoidMessage,
-        speaker_key=messages.StringField(1))
-
     @endpoints.method(
-        SESSIONS_BY_SPEAKER_REQUEST, SessionsResponseMessage,
+        containers.SESSIONS_BY_SPEAKER_REQUEST, SessionsResponseMessage,
         path='sessions/{speaker_key}', name='getSessionsBySpeaker',
         http_method='GET')
     def get_sessions_by_speaker(self, request):
@@ -702,12 +674,8 @@ class ConferenceApi(remote.Service):
         return SessionsResponseMessage(
             sessions=[session.to_message() for session in sessions])
 
-    SESSION_REQUEST = endpoints.ResourceContainer(
-        message_types.VoidMessage,
-        session=messages.StringField(1))
-
     @endpoints.method(
-        SESSION_REQUEST, SessionsResponseMessage,
+        containers.SESSION_REQUEST, SessionsResponseMessage,
         http_method='POST', path='profile/wish/{session}',
         name='addSessionToWishlist')
     def add_session_to_wishlist(self, request):
