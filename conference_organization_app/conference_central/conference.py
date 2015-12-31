@@ -82,6 +82,7 @@ FIELDS =    {
             'MAX_ATTENDEES': 'maxAttendees',
             }
 
+INTERACTIVE_SESSION_TYPES = ('workshop', 'hackathon', 'lab')
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
@@ -770,6 +771,20 @@ class ConferenceApi(remote.Service):
         conference = self._get_entity_by_key(request.conference)
         sessions = Session.query(ancestor=conference.key).filter(
             Session.date == date).order(Session.start_time).fetch()
+
+        return SessionsResponseMessage(
+            sessions=[session.to_message() for session in sessions])
+
+    @endpoints.method(
+        containers.CONFERENCE_REQUEST, SessionsResponseMessage,
+        path='conference/{conference}/sessions/interactive',
+        name='getInteractiveConferenceSessions', http_method='GET')
+    def get_interactive_conference_sessions(self, request):
+        """Get all conference sessions that are interactive."""
+        conference = self._get_entity_by_key(request.conference)
+
+        sessions = Session.query(ancestor=conference.key).filter(
+            Session.type_of_session.IN(INTERACTIVE_SESSION_TYPES)).fetch()
 
         return SessionsResponseMessage(
             sessions=[session.to_message() for session in sessions])
