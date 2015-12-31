@@ -9,7 +9,7 @@ From Udacity:
 > data as a web page allowing visitors to review their movies and watch the
 > trailers.
 
-Supporting Courses:
+Supporting Course:
 
 * [Programming Foundations with Python](https://www.udacity.com/course/programming-foundations-with-python--ud036)
 
