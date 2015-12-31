@@ -9,6 +9,11 @@ From Udacity:
 > authentication system. Registered users will have the ability to post,
 > edit, and delete their own items.
 
+Supporting courses:
+
+* [Full Stack Foundations](https://www.udacity.com/course/full-stack-foundations--ud088)
+* [Authentication & Authorization: OAuth](https://www.udacity.com/course/authentication-authorization-oauth--ud330)
+
 Tech Quote (TQ) hosts technology-related quotes, specifically quotes relating
 to programming languages. The TQ application meets all requirements for
 the [Item Catalog](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004) 
