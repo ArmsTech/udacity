@@ -38,8 +38,30 @@ Models and messages can be found in [models.py](https://github.com/brenj/udacity
 
 Sessions, in the context of this project, are blocks of time at a conference for a speaker to discuss a topic, run a workshop, etc… In a traditional RDBMS the relationship between session and conference would be one-to-many, where many sessions would relate to one, and only one, conference. To model this relationship in Google’s `Datastore` I chose to use the ancestor relationship (though other options are available e.g. `KeyProperty`). Entities can be given a hierarchical structure in `Datastore` by assigning a parent entity at the time of (child) entity creation. This allows corresponding entities to be retrieved from both sides of the relationship. So for a given session the conference that the session is scheduled in can be obtained, and similarly for a given conference, all sessions in that conference can be obtained.
 
+```python
+class Session(ndb.Model):
+
+    """A session (e.g. talk, workshop) given at a `Conference`."""
+
+    name = ndb.StringProperty(required=True)
+    highlights = ndb.StringProperty()
+    speaker_key = ndb.KeyProperty(kind='Speaker', required=True)
+    duration = ndb.IntegerProperty()
+    type_of_session = ndb.StringProperty(default='talk')
+    date = ndb.DateProperty(required=True)
+    start_time = ndb.TimeProperty(required=True)
+```
+
 A speaker is an individual who provides the content for a session at a conference. Rather than defining the speaker property as a `StringProperty`, I decided to use `KeyProperty` instead. The reason for this is that we may want to store more information about a speaker than just his or her name (e.g. for a speaker page on the `Conference Central` website), so Speaker should be defined as a separate model and associated with a session through it's unique key. 
 Modeling speaker this way also means that there is a way to identify a speaker, a speakers sessions, etc… without relying on a non-unique attribute (e.g. name).
+
+```python
+class Speaker(ndb.Model):
+
+    """A speaker at a conference session."""
+
+    name = ndb.StringProperty(required=True)
+```
 
 Please note that this means a new session requires a `speaker_key ` (url-safe key) to specify a speaker. To store a new speaker use the `create_speaker` endpoint (the speaker's key will be in the response).
 
@@ -164,6 +186,8 @@ This solution also requires an additional index:
 Install
 -------
 
+SDK install instructions above are for Linux. To install Google App Engine on another platform consult the following: https://cloud.google.com/appengine/downloads.
+
 1. `wget https://storage.googleapis.com/appengine-sdks/featured/google_appengine_1.9.30.zip`
 2. `sudo unzip google_appengine_1.9.30.zip -d /usr/local`
 3. `export PATH=$PATH:/usr/local/google_appengine/`
@@ -171,8 +195,6 @@ Install
 5. Update `application` to your project id in `app.yaml`
 6. Add client id to `settings.py` and `static/js/app.js`
 7. `appcfg.py -A <app-id> update .`
-
-SDK install instructions above are for Linux. To install Google App Engine on another platform consult the following: https://cloud.google.com/appengine/downloads
 
 APIs Explorer
 -------------
