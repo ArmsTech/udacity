@@ -10,6 +10,10 @@ From Udacity:
 > round: players are not eliminated, and each player should be paired with
 > another player with the same number of wins, or as close as possible.
 
+Supporting course:
+
+* [Intro to Relational Databases](https://www.udacity.com/course/intro-to-relational-databases--ud197)
+
 This tournament database meets (and exceeds) all requirements for the [Tournament Results](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004) project,
 and demonstrates familiarity with:
 
