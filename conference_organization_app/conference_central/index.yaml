@@ -105,3 +105,9 @@ indexes:
   properties:
   - name: speaker_key
   - name: name
+
+- kind: Session
+  ancestor: yes
+  properties:
+  - name: date
+  - name: start_time
