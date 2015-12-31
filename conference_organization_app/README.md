@@ -190,7 +190,7 @@ This solution also requires an additional index:
 Install
 -------
 
-SDK install instructions above are for Linux. To install Google App Engine on another platform consult the following: https://cloud.google.com/appengine/downloads.
+SDK install instructions below are for Linux. To install Google App Engine on another platform consult the following: https://cloud.google.com/appengine/downloads.
 
 1. `wget https://storage.googleapis.com/appengine-sdks/featured/google_appengine_1.9.30.zip`
 2. `sudo unzip google_appengine_1.9.30.zip -d /usr/local`
