@@ -76,6 +76,8 @@ This query would require the following entry in `index.yaml`:
   - name: date
   - name: start_time
 ```
+
+This query is implemented in the endpoint: `get_conference_sessions_by_date`
  
 Query 2:
 
@@ -84,10 +86,12 @@ Query 2:
 ```python
 # Assuming `workshop`, `hackathon`, and `lab` are the only interactive
 # session types
-sessions = Session.query(
-    Session.type_of_session.IN(
-        ('workshop', 'hackathon', 'lab'))).fetch()
+INTERACTIVE_SESSION_TYPES = ('workshop', 'hackathon', 'lab')
+sessions = Session.query(ancestor=conference.key).filter(¬             
+    Session.type_of_session.IN(INTERACTIVE_SESSION_TYPES)).fetch()
 ```
+
+This query is implemented in the endpoint: `get_interactive_conference_sessions`
 
 > Let’s say that you don't like workshops and you don't like sessions after 7 pm. How would you handle a query for all non-workshop sessions before 7 pm? What is the problem for implementing this query? What ways to solve it did you think of?
 
