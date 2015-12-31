@@ -164,6 +164,19 @@ This solution also requires an additional index:
 Install
 -------
 
+1. `wget https://storage.googleapis.com/appengine-sdks/featured/google_appengine_1.9.30.zip`
+2. `sudo unzip google_appengine_1.9.30.zip -d /usr/local`
+3. `export PATH=$PATH:/usr/local/google_appengine/`
+4. `git clone https://github.com/brenj/udacity.git && cd udacity/conference_organization_app/conference_central`
+5. Update `application` to your project id in `app.yaml`
+6. Add client id to `settings.py` and `static/js/app.js`
+7. `appcfg.py -A <app-id> update .`
+
+SDK install instructions above are for Linux. To install Google App Engine on another platform consult the following: https://cloud.google.com/appengine/downloads
+
+APIs Explorer
+-------------
+
 *  Navigate to [Conference Central](https://digital-splicer-114902.appspot.com/)
 *  Log into `Conference Central`
 *  Navigate to [Conference API v1](https://apis-explorer.appspot.com/apis-explorer/?base=https://digital-splicer-114902.appspot.com/_ah/api#p/conference/v1/)
