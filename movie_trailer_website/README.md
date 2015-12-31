@@ -9,6 +9,10 @@ From Udacity:
 > data as a web page allowing visitors to review their movies and watch the
 > trailers.
 
+Supporting Courses:
+
+* [Programming Foundations with Python](https://www.udacity.com/course/programming-foundations-with-python--ud036)
+
 This project ([Movie Trailer Website](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004))
 is intended to demonstrate an understanding of core programming 
 concepts, the Python programming language, and the typical role of a
