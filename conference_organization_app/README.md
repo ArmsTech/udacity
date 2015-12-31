@@ -185,6 +185,7 @@ Requirements
 ------------
 
 * [Google Account](https://accounts.google.com/SignUp?hl=en)
+* Python 2.7
 
 Grading (by Udacity)
 --------------------
