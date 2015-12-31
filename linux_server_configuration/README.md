@@ -516,3 +516,14 @@ Resources
 * [Fail2Ban](https://help.ubuntu.com/community/Fail2ban)
 * [Postgresql](https://help.ubuntu.com/community/PostgreSQL)
 * [Apache+WSGI](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps)
+
+Grading (by Udacity)
+--------------------
+
+Criteria       |Highest Grade Possible  |Grade Recieved
+---------------|------------------------|--------------
+User Management  |Meets Specifications  |Meets Specifications
+Security   |Exceeds Specifications  |Exceeds Specifications
+Application Functionality     |Exceeds Specifications  |Exceeds Specifications
+Configuration File Comments       |Meets Specifications  |Meets Specifications
+Documentation  |Meets Specifications    |Meets Specifications
