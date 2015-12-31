@@ -26,6 +26,11 @@ SESSIONS_BY_TYPE_REQUEST = endpoints.ResourceContainer(
     conference=messages.StringField(1),
     type_of_session=messages.StringField(2))
 
+SESSIONS_BY_DATE_REQUEST = endpoints.ResourceContainer(
+    message_types.VoidMessage,
+    conference=messages.StringField(1),
+    date=messages.StringField(2))
+
 SESSIONS_BY_SPEAKER_REQUEST = endpoints.ResourceContainer(
     message_types.VoidMessage,
     speaker_key=messages.StringField(1))

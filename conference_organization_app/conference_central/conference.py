@@ -756,6 +756,25 @@ class ConferenceApi(remote.Service):
             sessions=[session.to_message() for session in sessions])
 
     @endpoints.method(
+        containers.SESSIONS_BY_DATE_REQUEST, SessionsResponseMessage,
+        path='conference/{conference}/sessions/date/{date}',
+        name='getConferenceSessionsByDate', http_method='GET')
+    def get_conference_sessions_by_date(self, request):
+        """Get all conference sessions for a specified date."""
+        try:
+            date = datetime.strptime(request.date, "%Y-%m-%d").date()
+        except ValueError:
+            raise endpoints.BadRequestException(
+                "Date must be in format YYYY-MM-DD.")
+
+        conference = self._get_entity_by_key(request.conference)
+        sessions = Session.query(ancestor=conference.key).filter(
+            Session.date == date).order(Session.start_time).fetch()
+
+        return SessionsResponseMessage(
+            sessions=[session.to_message() for session in sessions])
+
+    @endpoints.method(
         message_types.VoidMessage, StringMessage,
         path='speaker/featured', name='getFeaturedSpeaker', http_method='GET')
     def get_featured_speaker(self, request):
