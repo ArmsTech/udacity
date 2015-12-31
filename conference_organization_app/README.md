@@ -38,6 +38,8 @@ Models and messages can be found in [models.py](https://github.com/brenj/udacity
 
 Sessions, in the context of this project, are blocks of time at a conference for a speaker to discuss a topic, run a workshop, etc… In a traditional RDBMS the relationship between session and conference would be one-to-many, where many sessions would relate to one, and only one, conference. To model this relationship in Google’s `Datastore` I chose to use the ancestor relationship (though other options are available e.g. `KeyProperty`). Entities can be given a hierarchical structure in `Datastore` by assigning a parent entity at the time of (child) entity creation. This allows corresponding entities to be retrieved from both sides of the relationship. So for a given session the conference that the session is scheduled in can be obtained, and similarly for a given conference, all sessions in that conference can be obtained.
 
+Session properties `name`, `speaker_key`, `date`, and `start_time` are required. These values are necessary to define a session at a conference. `StringProperty` was chosen for `name`, `highlights`, and `type_of_session` because these properties should be indexed for searching and should be limited in their length. `duration` is an `IntegerProperty` to simplify queries using ranges and equalities. `date` and `start_time` are date and time properties respectively so that querying and handling can be done using Python's `datetime` module. Finally, `speaker_key` is a `KeyProperty` that references a particular speaker entity and functions sort of like a foreign key in a typical RDBMS.
+
 ```python
 class Session(ndb.Model):
 
@@ -54,6 +56,8 @@ class Session(ndb.Model):
 
 A speaker is an individual who provides the content for a session at a conference. Rather than defining the speaker property as a `StringProperty`, I decided to use `KeyProperty` instead. The reason for this is that we may want to store more information about a speaker than just his or her name (e.g. for a speaker page on the `Conference Central` website), so Speaker should be defined as a separate model and associated with a session through it's unique key. 
 Modeling speaker this way also means that there is a way to identify a speaker, a speakers sessions, etc… without relying on a non-unique attribute (e.g. name).
+
+Though many other properties could be added in the future if needed, all that is required for a speaker entity is a speaker's name. Using a `StringProperty` for `name` ensures indexing for queries, limits the length, and minimizes storage requirements.
 
 ```python
 class Speaker(ndb.Model):
