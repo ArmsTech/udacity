@@ -218,13 +218,13 @@ Grading (by Udacity)
 
 Criteria       |Highest Grade Possible  |Grade Recieved
 ---------------|------------------------|--------------
-App Architecture  |Meets Specifications  |TBD
-Design Choices (Implementation)  |Exceeds Specifications  |TBD
-Design Choices (Response)  |Exceeds Specifications  |TBD
-Session Wishlist  |Meets Specifications  |TBD
-Additional Queries  |Meets Specifications  |TBD
-Query Problem  |Exceeds Specifications  |TBD
-Featured Speaker  |Meets Specifications  |TBD
-Code Quality   |Meets Specifications    |TBD
-Comments       |Exceeds Specifications  |TBD
-Documentation  |Meets Specifications    |TBD
+App Architecture  |Meets Specifications  |Meets Specifications
+Design Choices (Implementation)  |Exceeds Specifications  |Exceeds Specifications
+Design Choices (Response)  |Exceeds Specifications  |Exceeds Specifications
+Session Wishlist  |Meets Specifications  |Meets Specifications
+Additional Queries  |Meets Specifications  |Meets Specifications
+Query Problem  |Exceeds Specifications  |Exceeds Specifications
+Featured Speaker  |Meets Specifications  |Meets Specifications
+Code Quality   |Meets Specifications    |Meets Specifications
+Code Readability       |Meets Specifications  |Meets Specifications
+Documentation  |Meets Specifications    |Meets Specifications
