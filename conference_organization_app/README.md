@@ -196,7 +196,7 @@ SDK install instructions below are for Linux. To install Google App Engine on an
 2. `sudo unzip google_appengine_1.9.30.zip -d /usr/local`
 3. `export PATH=$PATH:/usr/local/google_appengine/`
 4. `git clone https://github.com/brenj/udacity.git && cd udacity/conference_organization_app/conference_central`
-5. Update `application` to your project id in `app.yaml` (optional)
+5. Update `application` to your app id (aka project id) in `app.yaml` (optional)
 6. Add client id to `settings.py` and `static/js/app.js`
 7. `appcfg.py -A <app-id> update .` or `appcfg.py update .` (if you performed step five)
 
