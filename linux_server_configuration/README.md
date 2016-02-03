@@ -18,7 +18,7 @@ Server Details
 
 Please note that the IP address and application URL below are no longer valid. The AWS server used for this project was deleted by Udacity upon graduation.
 
-**Server IP:** 52.27.202.14 
+**Server IP:** 52.27.202.14  
 **SSH Port:** 2200  
 **Application URL:** http://52.27.202.14/  
 
