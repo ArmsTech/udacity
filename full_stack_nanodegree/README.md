@@ -1,5 +1,7 @@
 # Full Stack Web Developer Nanodegree
 
+Date completed: `January 04, 2016`
+
 From `Udacity`:
 
 > This Nanodegree program is the most efficient curriculum to prepare you for a job as a Full Stack Web Developer. Participants in the program will learn to build complex server-side web applications that make use of powerful relational databases to persistently store data. You’ll then learn how to secure and configure your very own Linux-based server to host your applications. Finally, you’ll explore the challenges in horizontally scaling an application to support thousands of users with a cloud-based application hosting provider.
