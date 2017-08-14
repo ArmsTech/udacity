@@ -21,6 +21,14 @@ module.exports = {
         }
     ]
   },
+  resolve: {
+    extensions: [ '*', '.js', '.css' ],
+    modules: [
+      path.resolve('./src'),
+      path.resolve('./src/static'),
+      path.resolve('./node_modules')
+    ]
+  },
   devServer: {
     contentBase: [
       path.join(__dirname, "src")
