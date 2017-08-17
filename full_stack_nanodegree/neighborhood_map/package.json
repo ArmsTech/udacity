@@ -3,10 +3,6 @@
   "version": "1.0.0",
   "description": "A neighborhood map built with Knockout.js.",
   "main": "webpack.config.js",
-  "scripts": {
-    "webpack": "webpack",
-    "dev": "webpack-dev-server"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/brenj/udacity/tree/master/full_stack_nanodegree/neighborhood_map"
