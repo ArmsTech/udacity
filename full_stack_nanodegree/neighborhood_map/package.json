@@ -16,7 +16,10 @@
   "author": "brenj",
   "license": "ISC",
   "dependencies": {
+    "bootstrap": "^4.0.0-beta",
+    "jquery": ">=3.0.0",
     "knockout": "^3.4.2",
+    "popper.js": "^1.11.0",
     "webpack": "^3.5.3"
   },
   "devDependencies": {
