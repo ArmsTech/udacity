@@ -11,7 +11,7 @@
   </div>
 </form>
 <div data-bind="foreach: mapLocations" class="list-group">
-  <a data-bind="text: name, visible: visible" href="#" class="list-group-item list-group-item-action"></a>
+  <a data-bind="text: name, visible: visible, click: $parent.showMapLocationDetails" href="#" class="list-group-item list-group-item-action"></a>
 </div>
   <script type="text/javascript" src="app.bundle.js" charset="utf-8"></script>
 </body

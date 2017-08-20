@@ -11,6 +11,10 @@ export default function mapViewModel () {
     });
   };
 
+  this.showMapLocationDetails = function showLocationDetails() {
+    console.log(this);
+  };
+
   const $filterInput = $('#filterInput');
 
   $filterInput.keyup(() => {
