@@ -22,7 +22,6 @@ export default function mapViewModel () {
   const $filterInput = $('#filterInput');
 
   $filterInput.keyup(() => {
-    const inputText = $filterInput.val();
-    this.filterMapLocationsByText(inputText);
+    this.filterMapLocationsByText($filterInput.val());
   });
 }
