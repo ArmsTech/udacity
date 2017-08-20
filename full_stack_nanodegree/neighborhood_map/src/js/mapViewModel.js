@@ -8,7 +8,7 @@ export default function mapViewModel () {
   this.filterMapLocationsByText = function filterLocationsByText(text) {
     this.mapLocations.map((mapLocation) => {
       // Case-insensitive filtering
-      let [mapLocationName, filterText] = [
+      const [mapLocationName, filterText] = [
         mapLocation.name, text].map((item) => item.toLowerCase());
 
       mapLocation.visible(mapLocationName.startsWith(filterText));
