@@ -1,3 +1,8 @@
 body {
   background: yellow;
 }
+
+.list-map-locations {
+  max-height: 100px;
+  overflow-y: auto;
+}
