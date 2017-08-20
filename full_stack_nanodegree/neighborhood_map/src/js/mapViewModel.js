@@ -10,4 +10,11 @@ export default function mapViewModel () {
       mapLocation.visible(mapLocation.name.startsWith(text));
     });
   };
+
+  const $filterInput = $('#filterInput');
+
+  $filterInput.keyup(() => {
+    const inputText = $filterInput.val();
+    this.filterMapLocationsByText(inputText);
+  });
 }
