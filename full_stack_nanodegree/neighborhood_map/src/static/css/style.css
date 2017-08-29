@@ -1,8 +1,14 @@
-body {
-  background: yellow;
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
 
 .list-map-locations {
   max-height: 100px;
   overflow-y: auto;
+}
+
+#map {
+  height: 100%;
 }
