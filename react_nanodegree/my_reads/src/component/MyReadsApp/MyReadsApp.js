@@ -1,11 +1,11 @@
 import React from 'react';
 
-import './App.css';
+import './MyReadsApp.css';
 // import * as BooksAPI from './BooksAPI';
 
-class MyReads extends React.Component {
+class MyReadsApp extends React.Component {
   render() {
     return <p>MyReads</p>;
   }
 }
-export default MyReads;
+export default MyReadsApp;
