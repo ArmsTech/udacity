@@ -23,6 +23,17 @@ class App extends React.Component {
     );
   }
 }
+
+class BookSearch extends React.Component {
+  render() {
+    return (
+      <div>
+        <Link className='close-search' to='/'>Close</Link>
+        <form className='search-books'>
+          <div className='search-books-input-wrapper'>
+            <input type='text' placeholder='Search by title or author' />
+          </div>
+        </form>
       </div>
     );
   }
