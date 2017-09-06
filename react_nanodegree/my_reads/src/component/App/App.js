@@ -2,8 +2,8 @@ import React from 'react';
 import { Link, Route } from 'react-router-dom'
 
 import './App.css';
-import Book from '../Book'
 import BookSearch from '../BookSearch'
+import BookList from '../BookList'
 
 class App extends React.Component {
   render() {
@@ -53,21 +53,6 @@ class Shelf extends React.Component {
         <h2 className="bookshelf-title">{name}</h2>
         <BookList books={books} />
       </div>
-    );
-  }
-}
-
-class BookList extends React.Component {
-  render() {
-    const books = this.props.books;
-
-    return (
-      <ul className="books-grid">
-        {books.map(book => (
-          <li key={book.id} className="books-grid">
-            <Book book={book} />
-          </li>))}
-      </ul>
     );
   }
 }
