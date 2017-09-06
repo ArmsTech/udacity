@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link, Route } from 'react-router-dom'
 
 import './App.css';
 
@@ -8,11 +9,20 @@ class App extends React.Component {
 
     return (
       <div>
-        <Header />
-        <Shelf books={books.currentlyReading} name='Currently Reading' />
-        <Shelf books={books.wantToRead} name='Want to Read' />
-        <Shelf books={books.read} name='Read' />
-        <Footer />
+        <Route exact path='/' render={() => (
+          <div>
+            <Header />
+            <Shelf books={books.currentlyReading} name='Currently Reading' />
+            <Shelf books={books.wantToRead} name='Want to Read' />
+            <Shelf books={books.read} name='Read' />
+            <Footer />
+          </div>
+        )} />
+        <Route exact path='/search' component={BookSearch} />
+      </div>
+    );
+  }
+}
       </div>
     );
   }
@@ -30,7 +40,7 @@ function Header() {
 function Footer() {
   return (
     <div className="open-search">
-      <a onClick={() => null}>Add a book</a>
+      <Link to='/search'>Add a book</Link>
     </div>
     );
 }
