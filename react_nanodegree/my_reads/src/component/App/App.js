@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, Route } from 'react-router-dom'
 
 import './App.css';
+import BookSearch from '../BookSearch'
 
 class App extends React.Component {
   render() {
@@ -19,21 +20,6 @@ class App extends React.Component {
           </div>
         )} />
         <Route exact path='/search' component={BookSearch} />
-      </div>
-    );
-  }
-}
-
-class BookSearch extends React.Component {
-  render() {
-    return (
-      <div>
-        <Link className='close-search' to='/'>Close</Link>
-        <form className='search-books'>
-          <div className='search-books-input-wrapper'>
-            <input type='text' placeholder='Search by title or author' />
-          </div>
-        </form>
       </div>
     );
   }
