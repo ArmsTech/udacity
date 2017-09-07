@@ -2,10 +2,10 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 
 import './App.css';
-import BookSearch from '../BookSearch';
-import Footer from '../Footer';
-import Header from '../Header';
-import Shelf from '../Shelf';
+import BookSearch from './component/BookSearch';
+import Footer from './component/Footer';
+import Header from './component/Header';
+import Shelf from './component/Shelf';
 
 class App extends React.Component {
   render() {

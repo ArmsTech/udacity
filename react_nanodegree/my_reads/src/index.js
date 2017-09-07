@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter  } from 'react-router-dom'
 
 import './index.css';
-import App from './component/App';
+import App from './App';
 import * as booksAPI from './api/books-api';
 import registerServiceWorker from './registerServiceWorker';
 
