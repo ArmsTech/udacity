@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import './BookSearch.css';
+import './book-search.css';
 
 class BookSearch extends React.Component {
   render() {
