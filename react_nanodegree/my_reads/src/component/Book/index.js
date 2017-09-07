@@ -1,8 +1,9 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import './book.css';
 
-export default function Book(props) {
+function Book(props) {
   const book = props.book;
 
   const authors = book.authors.join(', ');
@@ -30,3 +31,14 @@ export default function Book(props) {
     </div>
   );
 }
+
+Book.propTypes = {
+  book: PropTypes.shape({
+    authors: PropTypes.array.isRequired,
+    imageLinks: PropTypes.shape({
+      thumbnail: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
+};
+
+export default Book;

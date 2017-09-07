@@ -1,10 +1,11 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import './book-list.css';
 import Book from '../Book';
 
-export default function BookList(props) {
-  const books =props.books;
+function BookList(props) {
+  const books = props.books;
 
   return (
     <ul className="books-grid">
@@ -15,3 +16,13 @@ export default function BookList(props) {
     </ul>
   );
 }
+
+BookList.propTypes = {
+  books: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    }).isRequired,
+  ).isRequired,
+};
+
+export default BookList;
