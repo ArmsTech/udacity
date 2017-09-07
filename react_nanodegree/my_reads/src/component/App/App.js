@@ -1,9 +1,10 @@
 import React from 'react';
-import { Link, Route } from 'react-router-dom'
+import { Link, Route } from 'react-router-dom';
 
 import './App.css';
-import BookSearch from '../BookSearch'
-import Shelf from '../Shelf'
+import BookSearch from '../BookSearch';
+import Header from '../Header';
+import Shelf from '../Shelf';
 
 class App extends React.Component {
   render() {
@@ -24,15 +25,6 @@ class App extends React.Component {
       </div>
     );
   }
-}
-
-function Header() {
-  return (
-    <div>
-      <h1>MyReads</h1>
-      <hr />
-    </div>
-    );
 }
 
 function Footer() {
