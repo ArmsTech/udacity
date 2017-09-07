@@ -3,7 +3,7 @@ import { Link, Route } from 'react-router-dom'
 
 import './App.css';
 import BookSearch from '../BookSearch'
-import BookList from '../BookList'
+import Shelf from '../Shelf'
 
 class App extends React.Component {
   render() {
@@ -41,20 +41,6 @@ function Footer() {
       <Link to='/search'>Add a book</Link>
     </div>
     );
-}
-
-class Shelf extends React.Component {
-  render() {
-    const books = this.props.books;
-    const name = this.props.name;
-
-    return (
-      <div>
-        <h2 className="bookshelf-title">{name}</h2>
-        <BookList books={books} />
-      </div>
-    );
-  }
 }
 
 export default App;
