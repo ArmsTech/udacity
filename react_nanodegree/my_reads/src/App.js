@@ -8,8 +8,15 @@ import Header from './component/Header';
 import Shelf from './component/Shelf';
 
 class App extends React.Component {
+  state = {
+    books: {
+      currentlyReading: [],
+      read: [],
+      wantToRead: [],
+    },
+  };
   render() {
-    const books = this.props.books;
+    const books = this.state.books;
 
     return (
       <div>
