@@ -53,8 +53,9 @@ class App extends React.Component {
           bookOnFromShelf => bookOnFromShelf.id !== specifiedBook.id);
       }
     });
-  };
 
+    booksAPI.update(specifiedBook, toShelf);
+  }
 
   render() {
     const books = this.state.books;
