@@ -11,7 +11,7 @@ function Shelf(props) {
   return (
     <div>
       <h2 className="bookshelf-title">{name}</h2>
-      <BookList books={books} />
+      <BookList books={books} onShelfChanged={props.onShelfChanged} />
     </div>
   );
 }

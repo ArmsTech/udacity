@@ -11,7 +11,7 @@ function BookList(props) {
     <ul className="books-grid">
       {books.map(book => (
         <li key={book.id} className="books-grid">
-          <Book book={book} />
+          <Book book={book} onShelfChanged={props.onShelfChanged} />
         </li>))}
     </ul>
   );
