@@ -27,9 +27,7 @@ class App extends React.Component {
       booksData.forEach((bookData) => {
         books[bookData.shelf].push(bookData);
       });
-      this.setState({
-        books,
-      });
+      this.setState({ books });
       console.log(books);
     });
   }
