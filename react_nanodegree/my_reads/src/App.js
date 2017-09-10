@@ -34,6 +34,28 @@ class App extends React.Component {
     });
   }
 
+  onShelfChanged = (book, toShelf) => {
+    const fromShelf = book.shelf;
+    const specifiedBook = { ...book, shelf: toShelf };
+
+    this.setState((prevState) => {
+      const newState = { ...prevState };
+
+      // Add specified book to new, valid shelf
+      if (toShelf !== 'none') {
+        newState.books[toShelf] = [
+          ...newState.books[toShelf], specifiedBook];
+      }
+
+      // Remove specified book from old, valid shelf
+      if (fromShelf !== 'none') {
+        newState.books[fromShelf] = newState.books[fromShelf].filter(
+          bookOnFromShelf => bookOnFromShelf.id !== specifiedBook.id);
+      }
+    });
+  };
+
+
   render() {
     const books = this.state.books;
 
