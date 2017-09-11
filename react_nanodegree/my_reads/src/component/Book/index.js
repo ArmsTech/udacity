@@ -22,7 +22,10 @@ class Book extends React.Component {
   render() {
     const book = this.props.book;
 
-    const authors = book.authors.join(', ');
+    let authors = 'Not Available';
+    if ('authors' in book) {
+      authors = book.authors.join(', ');
+    }
     const thumbnail = book.imageLinks.thumbnail;
 
     return (
