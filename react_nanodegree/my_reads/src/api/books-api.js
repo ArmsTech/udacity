@@ -15,7 +15,15 @@ const headers = {
 const cleanBooksData = (booksData) => {
   // Fix inconsistencies in book data returned by API
   return booksData.map((bookData) => {
-    return { authors: [], shelf: 'none', ...bookData }
+    return {
+      authors: [],
+      shelf: 'none',
+      imageLinks: {
+        thumbnail: '',
+        smallThumbnail: '',
+      },
+      ...bookData,
+    }
   })
 }
 
