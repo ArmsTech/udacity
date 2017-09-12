@@ -9,7 +9,7 @@ class Book extends React.Component {
   };
 
   componentWillMount() {
-    this.setState({ shelf: this.props.book.shelf });
+    this.setState({ shelf: this.props.book.shelf  });
   }
 
   handleChange = (event) => {
@@ -22,10 +22,7 @@ class Book extends React.Component {
   render() {
     const book = this.props.book;
 
-    let authors = 'Not Available';
-    if ('authors' in book) {
-      authors = book.authors.join(', ');
-    }
+    const authors = book.authors.join(', ');
     const thumbnail = book.imageLinks.thumbnail;
 
     return (
