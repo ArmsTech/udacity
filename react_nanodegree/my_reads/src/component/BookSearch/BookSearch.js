@@ -9,14 +9,14 @@ class BookSearch extends React.Component {
   state = { query: '', books: [] };
 
   handleChange = (event) => {
-    this.setState({ query: event.target.value });
+    const query = event.target.value;
+
+    this.setState({ query });
+    this.searchBooks(query);
   };
 
   handleSubmit = (event) => {
-    booksAPI.search(this.state.query).then((booksData) => {
-      console.log(booksData);
-      this.setState({ books: booksData });
-    });
+    this.searchBooks(this.state.query);
     event.preventDefault();
   };
 
