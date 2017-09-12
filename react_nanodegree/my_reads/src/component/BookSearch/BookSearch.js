@@ -20,6 +20,15 @@ class BookSearch extends React.Component {
     event.preventDefault();
   };
 
+  searchBooks = (query) => {
+    if (query) {
+      booksAPI.search(query).then((booksData) => {
+        console.log(booksData);
+        this.setState({ books: booksData });
+      });
+    }
+  };
+
   render() {
     return (
       <div>
