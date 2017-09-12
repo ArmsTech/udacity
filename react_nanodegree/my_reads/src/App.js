@@ -85,7 +85,13 @@ class App extends React.Component {
             </div>
           )}
         />
-        <Route exact path="/search" component={BookSearch} />
+        <Route
+          exact
+          path="/search"
+          render={() => (
+            <BookSearch onShelfChanged={this.onShelfChanged} />
+          )}
+        />
       </div>
     );
   }
