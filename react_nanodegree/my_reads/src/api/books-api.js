@@ -41,5 +41,17 @@ export const search = (query, maxResults) =>
     },
     body: JSON.stringify({ query, maxResults })
   }).then(res => res.json())
-    .then(data => data.books.slice(0, maxResults))
+    .then(data => {
+      // Honor maxResults parameter because API doesn't
+      const results = data.books.slice(0, maxResults);
+      // Fix inconsistencies in book data returned by API
+      return results.map((result) => {
+        return {
+          authors: [],
+          shelf: 'none',
+          ...result,
+        };
+      });
+    })
+    // No search results shouldn't be an error
     .catch(error => [])
