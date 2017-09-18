@@ -6,7 +6,7 @@ import './App.css';
 import * as booksAPI from './api/books-api';
 import BookSearch from './component/BookSearch';
 import Footer from './component/Footer';
-import Header from './component/Header';
+import NavBar from './component/NavBar';
 import Shelf from './component/Shelf';
 
 class App extends React.Component {
