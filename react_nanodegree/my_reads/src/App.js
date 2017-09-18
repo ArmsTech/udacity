@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
+import { Container } from 'semantic-ui-react';
 
 import './App.css';
 import * as booksAPI from './api/books-api';
@@ -60,28 +61,30 @@ class App extends React.Component {
 
     return (
       <div>
+        <NavBar />
         <Route
           exact
           path="/"
           render={() => (
             <div>
-              <Header />
-              <Shelf
-                books={books.currentlyReading}
-                name="Currently Reading"
-                onShelfChanged={this.onShelfChanged}
-              />
-              <Shelf
-                books={books.wantToRead}
-                name="Want to Read"
-                onShelfChanged={this.onShelfChanged}
-              />
-              <Shelf
-                books={books.read}
-                name="Read"
-                onShelfChanged={this.onShelfChanged}
-              />
-              <Footer />
+              <Container>
+                  <Shelf
+                    books={books.currentlyReading}
+                    name="Currently Reading"
+                    onShelfChanged={this.onShelfChanged}
+                  />
+                  <Shelf
+                    books={books.wantToRead}
+                    name="Want to Read"
+                    onShelfChanged={this.onShelfChanged}
+                  />
+                  <Shelf
+                    books={books.read}
+                    name="Read"
+                    onShelfChanged={this.onShelfChanged}
+                  />
+                  <Footer />
+              </Container>
             </div>
           )}
         />
