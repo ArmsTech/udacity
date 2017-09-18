@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { Segment } from 'semantic-ui-react';
 
 import './shelf.css';
 import BookList from '../BookList';
@@ -10,7 +11,7 @@ function Shelf(props) {
 
   return (
     <div>
-      <h2 className="bookshelf-title">{name}</h2>
+      <Segment basic size='massive'>{name}</Segment>
       <BookList books={books} onShelfChanged={props.onShelfChanged} />
     </div>
   );
