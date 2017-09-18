@@ -14,45 +14,45 @@ export default class NavBar extends React.Component {
 
     return (
       <div>
-        <Menu pointing size='small'>
+        <Menu pointing size="small">
           <Menu.Item>
             <Menu.Item header>MyReads</Menu.Item>
           </Menu.Item>
           <Menu.Item
-            name='home'
+            name="home"
             as={Link}
-            to='/'
+            to="/"
             active={activeItem === 'home'}
             onClick={this.handleItemClick}
           />
           <Menu.Item
-            name='search'
+            name="search"
             as={Link}
-            to='/search'
+            to="/search"
             active={activeItem === 'search'}
             onClick={this.handleItemClick}
           />
-          <Menu.Menu position='right'>
-            <Dropdown item text='About'>
+          <Menu.Menu position="right">
+            <Dropdown item text="About">
               <Dropdown.Menu>
                 <Dropdown.Item>
-                  <a href='https://www.udacity.com/course/react-nanodegree--nd019'>Project</a>
+                  <a href="https://www.udacity.com/course/react-nanodegree--nd019">Project</a>
                 </Dropdown.Item>
                 <Dropdown.Item>
-                  <a href='https://github.com/brenj'>Source</a>
+                  <a href="https://github.com/brenj">Source</a>
                 </Dropdown.Item>
                 <Dropdown.Item>
-                  <a href='https://www.linkedin.com/in/brenj/'>Connect</a>
+                  <a href="https://www.linkedin.com/in/brenj/">Connect</a>
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
             <Menu.Item>
               <Button
-                name='search'
+                name="search"
                 primary
-                content='Add Book'
+                content="Add Book"
                 as={Link}
-                to='/search'
+                to="/search"
                 onClick={this.handleItemClick}
               />
             </Menu.Item>

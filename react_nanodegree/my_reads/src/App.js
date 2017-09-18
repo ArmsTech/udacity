@@ -68,22 +68,22 @@ class App extends React.Component {
           render={() => (
             <div>
               <Container>
-                  <Shelf
-                    books={books.currentlyReading}
-                    name="Currently Reading"
-                    onShelfChanged={this.onShelfChanged}
-                  />
-                  <Shelf
-                    books={books.wantToRead}
-                    name="Want to Read"
-                    onShelfChanged={this.onShelfChanged}
-                  />
-                  <Shelf
-                    books={books.read}
-                    name="Read"
-                    onShelfChanged={this.onShelfChanged}
-                  />
-                  <Footer />
+                <Shelf
+                  books={books.currentlyReading}
+                  name="Currently Reading"
+                  onShelfChanged={this.onShelfChanged}
+                />
+                <Shelf
+                  books={books.wantToRead}
+                  name="Want to Read"
+                  onShelfChanged={this.onShelfChanged}
+                />
+                <Shelf
+                  books={books.read}
+                  name="Read"
+                  onShelfChanged={this.onShelfChanged}
+                />
+                <Footer />
               </Container>
             </div>
           )}

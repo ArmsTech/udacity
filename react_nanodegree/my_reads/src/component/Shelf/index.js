@@ -11,7 +11,7 @@ function Shelf(props) {
 
   return (
     <div>
-      <Segment basic size='massive'>{name}</Segment>
+      <Segment basic size="massive">{name}</Segment>
       <BookList books={books} onShelfChanged={props.onShelfChanged} />
     </div>
   );

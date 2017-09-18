@@ -9,7 +9,7 @@ class Book extends React.Component {
   };
 
   componentWillMount() {
-    this.setState({ shelf: this.props.book.shelf  });
+    this.setState({ shelf: this.props.book.shelf });
   }
 
   handleChange = (event) => {

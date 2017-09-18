@@ -4,7 +4,6 @@ import './footer.css';
 
 export default function Footer() {
   return (
-    <div className="open-search">
-    </div>
+    <div className="open-search" />
   );
 }
