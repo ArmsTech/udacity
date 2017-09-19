@@ -76,17 +76,17 @@ class App extends React.Component {
                 />
                 <Shelf
                   books={books.currentlyReading}
-                  name="Currently Reading"
+                  name="Books you're currently reading"
                   onShelfChanged={this.onShelfChanged}
                 />
                 <Shelf
                   books={books.wantToRead}
-                  name="Want to Read"
+                  name="Books you want to read"
                   onShelfChanged={this.onShelfChanged}
                 />
                 <Shelf
                   books={books.read}
-                  name="Read"
+                  name="Books you've finished reading"
                   onShelfChanged={this.onShelfChanged}
                 />
                 <Footer />
