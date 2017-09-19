@@ -1,17 +1,21 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Input, Message } from 'semantic-ui-react';
 
 import './book-search.css';
 import * as booksAPI from '../../api/books-api';
 import BookList from '../BookList';
 
 class BookSearch extends React.Component {
-  state = { query: '', books: [] };
+  state = {
+    books: [],
+    loading: false,
+    query: '',
+  };
 
   handleChange = (event) => {
     const query = event.target.value;
 
-    this.setState({ query });
+    this.setState({ query, loading: true });
     this.searchBooks(query);
   };
 
@@ -21,30 +25,33 @@ class BookSearch extends React.Component {
   };
 
   searchBooks = (query) => {
-    if (query) {
-      booksAPI.search(query).then((booksData) => {
-        console.log(booksData);
-        this.setState({ books: booksData });
-      });
-    }
+    booksAPI.search(query).then((booksData) => {
+      console.log(booksData);
+      this.setState({ books: booksData, loading: false });
+    });
   };
 
   render() {
+    const { books, loading, query } = this.state;
     return (
       <div>
-        <Link className="close-search" to="/">Close</Link>
         <form onSubmit={this.handleSubmit}>
-          <div className="search-books-input-wrapper">
-            <input
+          <div className="book-search">
+            <Input
+              fluid
+              loading={loading}
+              icon='search'
+              iconPosition='left'
               type="text"
-              value={this.state.query}
+              value={query}
               onChange={this.handleChange}
-              placeholder="Search by title or author"
+              placeholder="Search books by keyword (e.g. react, javascript)"
+              size="huge"
             />
           </div>
         </form>
         <BookList
-          books={this.state.books}
+          books={books}
           onShelfChanged={this.props.onShelfChanged}
         />
       </div>
