@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { Card } from 'semantic-ui-react';
 
 import './book-list.css';
 import Book from '../Book';
@@ -8,12 +9,15 @@ function BookList(props) {
   const books = props.books;
 
   return (
-    <ul className="books-grid">
+    <Card.Group>
       {books.map(book => (
-        <li key={book.id} className="books-grid">
-          <Book book={book} onShelfChanged={props.onShelfChanged} />
-        </li>))}
-    </ul>
+        <Book
+          book={book}
+          onShelfChanged={props.onShelfChanged}
+          key={book.id}
+        />
+      ))}
+    </Card.Group>
   );
 }
 
