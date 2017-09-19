@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import { Container } from 'semantic-ui-react';
+import { Container, Message } from 'semantic-ui-react';
 
 import './App.css';
 import * as booksAPI from './api/books-api';
@@ -68,6 +68,12 @@ class App extends React.Component {
           render={() => (
             <div>
               <Container>
+                <Message
+                  header='Welcome to Udacity MyReads!'
+                  content='A bookshelf app for finding and organizing your favorite books.'
+                  size="big"
+                  color="blue"
+                />
                 <Shelf
                   books={books.currentlyReading}
                   name="Currently Reading"
