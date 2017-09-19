@@ -33,6 +33,18 @@ class BookSearch extends React.Component {
 
   render() {
     const { books, loading, query } = this.state;
+
+    let noBooksFoundMessage = <Message hidden />;
+    if (query && !loading && books.length <= 0) {
+      noBooksFoundMessage = (
+        <Message
+          info
+          size='small'
+          content={`No books were found for the keyword: ${query}`}
+        />
+      );
+    }
+
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
@@ -50,6 +62,9 @@ class BookSearch extends React.Component {
             />
           </div>
         </form>
+        <div className="book-search-message">
+          {noBooksFoundMessage}
+        </div>
         <BookList
           books={books}
           onShelfChanged={this.props.onShelfChanged}
