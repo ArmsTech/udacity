@@ -1,3 +1,7 @@
-.bookshelf-title {
-  border-bottom: 1px solid #dedede;
+.shelf {
+  margin: 0 0 0 10px;
+}
+
+.light-text {
+  color: #999;
 }
