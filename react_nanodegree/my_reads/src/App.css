@@ -10,6 +10,11 @@ body, .app {
 
 /* main page */
 
+.message-welcome {
+  margin: auto;
+  width: 95%;
+}
+
 .list-books-title {
   padding: 10px 0;
   background: #2e7c31;

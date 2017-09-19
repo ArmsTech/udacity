@@ -68,12 +68,14 @@ class App extends React.Component {
           render={() => (
             <div>
               <Container>
-                <Message
-                  header='Welcome to Udacity MyReads!'
-                  content='A bookshelf app for finding and organizing your favorite books.'
-                  size="big"
-                  color="blue"
-                />
+                <div className="message-welcome">
+                  <Message
+                    header='Welcome to Udacity MyReads!'
+                    content='A bookshelf app for finding and organizing your favorite books.'
+                    size="big"
+                    color="blue"
+                  />
+                </div>
                 <Shelf
                   books={books.currentlyReading}
                   name="Books you're currently reading"

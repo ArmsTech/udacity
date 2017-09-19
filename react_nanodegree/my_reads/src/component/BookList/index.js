@@ -10,7 +10,7 @@ function BookList(props) {
 
   return (
     <div className="book-list">
-      <Card.Group>
+      <Card.Group itemsPerRow="4">
         {books.map(book => (
           <Book
             book={book}
