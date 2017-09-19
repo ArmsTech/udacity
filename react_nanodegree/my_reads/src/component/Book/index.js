@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { Card, Image } from 'semantic-ui-react';
 
 import './book.css';
 
@@ -27,23 +28,28 @@ class Book extends React.Component {
 
     return (
       <div className="book">
-        <div className="book-top">
-          <div
-            className="book-cover"
-            style={{ backgroundImage: `url(${thumbnail})` }}
+        <Card fluid>
+          <Image
+            centered
+            shape="rounded"
+            src={thumbnail}
+            width="220"
+            height="220"
           />
-          <div className="book-shelf-changer">
-            <select value={this.state.shelf} onChange={this.handleChange}>
-              <option value="move" disabled>Move to shelf ...</option>
+          <Card.Content extra textAlign="center">
+            <select
+              className="ui dropdown"
+              value={this.state.shelf}
+              onChange={this.handleChange}
+            >
+              <option value="move" disabled>Choose a shelf ...</option>
               <option value="currentlyReading">Currently Reading</option>
               <option value="wantToRead">Want to Read</option>
               <option value="read">Finished Reading</option>
               <option value="none">No shelf</option>
             </select>
-          </div>
-        </div>
-        <div className="book-title">{book.title}</div>
-        <div className="book-authors">{authors}</div>
+          </Card.Content>
+        </Card>
       </div>
     );
   }
