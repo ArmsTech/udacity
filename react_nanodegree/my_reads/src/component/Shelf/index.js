@@ -10,8 +10,8 @@ function Shelf(props) {
   const name = props.name;
 
   return (
-    <div>
-      <Segment basic size="massive">{name}</Segment>
+    <div className="shelf">
+      <Segment basic size="big" className="light-text">{name}</Segment>
       <BookList books={books} onShelfChanged={props.onShelfChanged} />
     </div>
   );
