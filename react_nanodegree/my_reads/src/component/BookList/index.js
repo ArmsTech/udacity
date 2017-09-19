@@ -9,15 +9,17 @@ function BookList(props) {
   const books = props.books;
 
   return (
-    <Card.Group>
-      {books.map(book => (
-        <Book
-          book={book}
-          onShelfChanged={props.onShelfChanged}
-          key={book.id}
-        />
-      ))}
-    </Card.Group>
+    <div className="book-list">
+      <Card.Group>
+        {books.map(book => (
+          <Book
+            book={book}
+            onShelfChanged={props.onShelfChanged}
+            key={book.id}
+          />
+        ))}
+      </Card.Group>
+    </div>
   );
 }
 
