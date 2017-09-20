@@ -66,45 +66,43 @@ class App extends React.Component {
           exact
           path="/"
           render={() => (
-            <div>
-              <Container>
-                <div className="message-welcome">
-                  <Message
-                    header='Welcome to Udacity MyReads!'
-                    content='A bookshelf app for finding and organizing your favorite books.'
-                    size="big"
-                    color="blue"
-                  />
-                </div>
-                <Shelf
-                  books={books.currentlyReading}
-                  name="Books you're currently reading"
-                  onShelfChanged={this.onShelfChanged}
+            <Container>
+              <div className="welcome-message">
+                <Message
+                  header='Welcome to Udacity MyReads!'
+                  content='A bookshelf app for finding and organizing your favorite books.'
+                  size="big"
+                  color="blue"
                 />
-                <Shelf
-                  books={books.wantToRead}
-                  name="Books you want to read"
-                  onShelfChanged={this.onShelfChanged}
-                />
-                <Shelf
-                  books={books.read}
-                  name="Books you've finished reading"
-                  onShelfChanged={this.onShelfChanged}
-                />
-                <Footer />
-              </Container>
-            </div>
+              </div>
+              <Shelf
+                books={books.currentlyReading}
+                name="Books you're currently reading"
+                onShelfChanged={this.onShelfChanged}
+              />
+              <Shelf
+                books={books.wantToRead}
+                name="Books you want to read"
+                onShelfChanged={this.onShelfChanged}
+              />
+              <Shelf
+                books={books.read}
+                name="Books you've finished reading"
+                onShelfChanged={this.onShelfChanged}
+              />
+              <Footer />
+            </Container>
           )}
         />
-        <Container>
-          <Route
-            exact
-            path="/search"
-            render={() => (
+        <Route
+          exact
+          path="/search"
+          render={() => (
+            <Container>
               <BookSearch onShelfChanged={this.onShelfChanged} />
-            )}
-          />
-        </Container>
+            </Container>
+          )}
+        />
       </div>
     );
   }
