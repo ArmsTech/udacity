@@ -1,7 +1,5 @@
-html, body, .root {
-  background: #f7f9f9;
-  height: 100%;
-  overflow-y: scroll;
+#root {
+  margin: 0 0 100px 0;
 }
 
 .welcome-message {

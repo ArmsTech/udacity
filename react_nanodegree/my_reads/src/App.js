@@ -90,7 +90,6 @@ class App extends React.Component {
                 name="Books you've finished reading"
                 onShelfChanged={this.onShelfChanged}
               />
-              <Footer />
             </Container>
           )}
         />
@@ -103,6 +102,7 @@ class App extends React.Component {
             </Container>
           )}
         />
+        <Footer />
       </div>
     );
   }

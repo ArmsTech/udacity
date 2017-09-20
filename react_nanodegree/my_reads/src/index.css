@@ -1,5 +1,8 @@
-body {
+html, body {
   margin: 0;
   padding: 0;
+  height: 100%;
   font-family: sans-serif;
+  background: #f7f9f9;
+  overflow-y: scroll;
 }
