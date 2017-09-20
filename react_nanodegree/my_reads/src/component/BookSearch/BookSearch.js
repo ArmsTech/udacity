@@ -50,6 +50,7 @@ class BookSearch extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <div className="book-search">
             <Input
+              autoFocus
               fluid
               loading={loading}
               icon='search'
