@@ -1,16 +1,12 @@
 html, body, .root {
+  background: #f7f9f9;
   height: 100%;
+  overflow-y: scroll;
 }
-body {
-  line-height: 1.5;
-}
-body, .app {
-  background: white;
-}
-
 /* main page */
 
-.message-welcome {
+.welcome-message {
+  padding: 25px 0 0 0;
   margin: auto;
   width: 95%;
 }
