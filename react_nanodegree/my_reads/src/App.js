@@ -61,45 +61,50 @@ class App extends React.Component {
 
     return (
       <div>
-        <NavBar />
         <Route
           exact
           path="/"
           render={() => (
-            <Container>
-              <div className="welcome-message">
-                <Message
-                  header="Welcome to Udacity MyReads!"
-                  content="A bookshelf app for finding and organizing your favorite books."
-                  size="big"
-                  color="blue"
+            <div>
+              <NavBar activeMenuItem="home" />
+              <Container>
+                <div className="welcome-message">
+                  <Message
+                    header="Welcome to Udacity MyReads!"
+                    content="A bookshelf app for finding and organizing your favorite books."
+                    size="big"
+                    color="blue"
+                  />
+                </div>
+                <Shelf
+                  books={books.currentlyReading}
+                  name="Books you're currently reading"
+                  onShelfChanged={this.onShelfChanged}
                 />
-              </div>
-              <Shelf
-                books={books.currentlyReading}
-                name="Books you're currently reading"
-                onShelfChanged={this.onShelfChanged}
-              />
-              <Shelf
-                books={books.wantToRead}
-                name="Books you want to read"
-                onShelfChanged={this.onShelfChanged}
-              />
-              <Shelf
-                books={books.read}
-                name="Books you've finished reading"
-                onShelfChanged={this.onShelfChanged}
-              />
-            </Container>
+                <Shelf
+                  books={books.wantToRead}
+                  name="Books you want to read"
+                  onShelfChanged={this.onShelfChanged}
+                />
+                <Shelf
+                  books={books.read}
+                  name="Books you've finished reading"
+                  onShelfChanged={this.onShelfChanged}
+                />
+              </Container>
+            </div>
           )}
         />
         <Route
           exact
           path="/search"
           render={() => (
-            <Container>
-              <BookSearch onShelfChanged={this.onShelfChanged} />
-            </Container>
+            <div>
+              <NavBar activeMenuItem="search" />
+              <Container>
+                <BookSearch onShelfChanged={this.onShelfChanged} />
+              </Container>
+            </div>
           )}
         />
         <Footer />
