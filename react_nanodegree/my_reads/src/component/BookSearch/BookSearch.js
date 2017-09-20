@@ -39,7 +39,7 @@ class BookSearch extends React.Component {
       noBooksFoundMessage = (
         <Message
           info
-          size='small'
+          size="small"
           content={`No books were found for the keyword: ${query}`}
         />
       );
@@ -53,8 +53,8 @@ class BookSearch extends React.Component {
               autoFocus
               fluid
               loading={loading}
-              icon='search'
-              iconPosition='left'
+              icon="search"
+              iconPosition="left"
               type="text"
               value={query}
               onChange={this.handleChange}

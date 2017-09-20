@@ -22,10 +22,10 @@ export default class NavBar extends React.Component {
     return (
       <div className="navbar">
         <Menu pointing inverted size="small">
-            <Container>
-              <Menu.Item>
+          <Container>
+            <Menu.Item>
               <Menu.Item header>
-                <Icon name='book' size="big" color="blue" />
+                <Icon name="book" size="big" color="blue" />
                 MyReads
               </Menu.Item>
             </Menu.Item>
@@ -46,25 +46,31 @@ export default class NavBar extends React.Component {
             <Menu.Menu position="right">
               <Dropdown
                 item
-                icon={<Icon name='ellipsis horizontal' size="big" />}
+                icon={<Icon name="ellipsis horizontal" size="big" />}
               >
                 <Dropdown.Menu>
                   <Dropdown.Item
-                    onClick={() => window.location = UDACITY_URL}
+                    onClick={() => {
+                      window.location = UDACITY_URL;
+                    }}
                   >
-                    <Icon name='info circle' />
+                    <Icon name="info circle" />
                     React Nanodegree
                   </Dropdown.Item>
                   <Dropdown.Item
-                    onClick={() => window.location = GITHUB_URL}
+                    onClick={() => {
+                      window.location = GITHUB_URL;
+                    }}
                   >
-                    <Icon name='github alternate' />
+                    <Icon name="github alternate" />
                     Source Code
                   </Dropdown.Item>
                   <Dropdown.Item
-                    onClick={() => window.location = LINKEDIN_URL}
+                    onClick={() => {
+                      window.location = LINKEDIN_URL;
+                    }}
                   >
-                    <Icon name='linkedin square' />
+                    <Icon name="linkedin square" />
                     Connect on LinkedIn
                   </Dropdown.Item>
                 </Dropdown.Menu>

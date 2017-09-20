@@ -69,8 +69,8 @@ class App extends React.Component {
             <Container>
               <div className="welcome-message">
                 <Message
-                  header='Welcome to Udacity MyReads!'
-                  content='A bookshelf app for finding and organizing your favorite books.'
+                  header="Welcome to Udacity MyReads!"
+                  content="A bookshelf app for finding and organizing your favorite books."
                   size="big"
                   color="blue"
                 />
