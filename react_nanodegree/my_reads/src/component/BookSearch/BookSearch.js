@@ -1,9 +1,14 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Input, Message } from 'semantic-ui-react';
 
 import './book-search.css';
 import * as booksAPI from '../../api/books-api';
 import BookList from '../BookList';
+
+const propTypes = {
+  onShelfChanged: PropTypes.func.isRequired,
+};
 
 class BookSearch extends React.Component {
   state = {
@@ -74,5 +79,7 @@ class BookSearch extends React.Component {
     );
   }
 }
+
+BookSearch.propTypes = propTypes;
 
 export default BookSearch;

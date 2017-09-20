@@ -4,6 +4,17 @@ import { Card, Image } from 'semantic-ui-react';
 
 import './book.css';
 
+const propTypes = {
+  book: PropTypes.shape({
+    authors: PropTypes.array.isRequired,
+    imageLinks: PropTypes.shape({
+      thumbnail: PropTypes.string.isRequired,
+    }).isRequired,
+    shelf: PropTypes.string.isRequired,
+  }).isRequired,
+  onShelfChanged: PropTypes.func.isRequired,
+};
+
 class Book extends React.Component {
   state = {
     shelf: 'none',
@@ -55,13 +66,6 @@ class Book extends React.Component {
   }
 }
 
-Book.propTypes = {
-  book: PropTypes.shape({
-    authors: PropTypes.array.isRequired,
-    imageLinks: PropTypes.shape({
-      thumbnail: PropTypes.string.isRequired,
-    }).isRequired,
-  }).isRequired,
-};
+Book.propTypes = propTypes;
 
 export default Book;

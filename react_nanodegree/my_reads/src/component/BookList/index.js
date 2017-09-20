@@ -5,6 +5,15 @@ import { Card } from 'semantic-ui-react';
 import './book-list.css';
 import Book from '../Book';
 
+const propTypes = {
+  books: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    }).isRequired,
+  ).isRequired,
+  onShelfChanged: PropTypes.func.isRequired,
+};
+
 function BookList(props) {
   const books = props.books;
 
@@ -23,12 +32,6 @@ function BookList(props) {
   );
 }
 
-BookList.propTypes = {
-  books: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-    }).isRequired,
-  ).isRequired,
-};
+BookList.propTypes = propTypes;
 
 export default BookList;
