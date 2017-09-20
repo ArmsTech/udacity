@@ -15,9 +15,13 @@
 }
 
 .book-search {
-  margin: 0 0 10px 0;
+  padding: 25px 0 0 0;
+  margin: auto;
+  width: 95%;
 }
 
 .book-search-message {
-  margin: 0 0 50px 0;
+  padding: 10px 0 40px 0;
+  margin: auto;
+  width: 95%;
 }
