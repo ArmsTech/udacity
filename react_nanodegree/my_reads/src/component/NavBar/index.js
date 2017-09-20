@@ -17,9 +17,12 @@ export default class NavBar extends React.Component {
     return (
       <div className="navbar">
         <Menu pointing inverted size="small">
-          <Container>
-            <Menu.Item>
-              <Menu.Item header>MyReads</Menu.Item>
+            <Container>
+              <Menu.Item>
+              <Menu.Item header>
+                <Icon name='book' size="big" color="blue" />
+                MyReads
+              </Menu.Item>
             </Menu.Item>
             <Menu.Item
               name="home"
