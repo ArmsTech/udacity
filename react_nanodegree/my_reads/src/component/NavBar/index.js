@@ -1,8 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Container, Dropdown, Menu } from 'semantic-ui-react';
+import { Button, Container, Dropdown, Icon, Menu } from 'semantic-ui-react';
 
 import './navbar.css';
+
+const UDACITY_URL = 'https://www.udacity.com/course/react-nanodegree--nd019';
+const GITHUB_URL = (
+  'https://github.com/brenj/udacity/tree/master/react_nanodegree/my_reads');
+const LINKEDIN_URL = 'https://www.linkedin.com/in/brenj';
 
 export default class NavBar extends React.Component {
   state = { activeItem: 'home' };
@@ -39,16 +44,28 @@ export default class NavBar extends React.Component {
               onClick={this.handleItemClick}
             />
             <Menu.Menu position="right">
-              <Dropdown item text="About">
+              <Dropdown
+                item
+                icon={<Icon name='ellipsis horizontal' size="big" />}
+              >
                 <Dropdown.Menu>
-                  <Dropdown.Item>
-                    <a href="https://www.udacity.com/course/react-nanodegree--nd019">Project</a>
+                  <Dropdown.Item
+                    onClick={() => window.location = UDACITY_URL}
+                  >
+                    <Icon name='info circle' />
+                    React Nanodegree
                   </Dropdown.Item>
-                  <Dropdown.Item>
-                    <a href="https://github.com/brenj">Source</a>
+                  <Dropdown.Item
+                    onClick={() => window.location = GITHUB_URL}
+                  >
+                    <Icon name='github alternate' />
+                    Source Code
                   </Dropdown.Item>
-                  <Dropdown.Item>
-                    <a href="https://www.linkedin.com/in/brenj/">Connect</a>
+                  <Dropdown.Item
+                    onClick={() => window.location = LINKEDIN_URL}
+                  >
+                    <Icon name='linkedin square' />
+                    Connect on LinkedIn
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
