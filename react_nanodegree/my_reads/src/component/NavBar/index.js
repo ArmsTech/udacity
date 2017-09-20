@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Container, Dropdown, Icon, Menu } from 'semantic-ui-react';
@@ -9,8 +10,9 @@ const GITHUB_URL = (
   'https://github.com/brenj/udacity/tree/master/react_nanodegree/my_reads');
 const LINKEDIN_URL = 'https://www.linkedin.com/in/brenj';
 
-export default class NavBar extends React.Component {
-  state = { activeItem: 'home' };
+const propTypes = {
+  activeMenuItem: PropTypes.string.isRequired,
+};
 
 function NavBar(props) {
   const { activeMenuItem } = props;
@@ -83,5 +85,7 @@ function NavBar(props) {
     </div>
   );
 }
+
+NavBar.propTypes = propTypes;
 
 export default NavBar;
