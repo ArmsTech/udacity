@@ -3,6 +3,7 @@ import React from 'react';
 import { Card, Image } from 'semantic-ui-react';
 
 import './book.css';
+import BookDetails from '../BookDetails';
 
 const propTypes = {
   book: PropTypes.shape({
@@ -32,9 +33,7 @@ class Book extends React.Component {
   };
 
   render() {
-    const book = this.props.book;
-
-    const authors = book.authors.join(', ');
+    const { book } = this.props;
     const thumbnail = book.imageLinks.thumbnail;
 
     return (
@@ -59,6 +58,7 @@ class Book extends React.Component {
               <option value="read">Finished Reading</option>
               <option value="none">No shelf</option>
             </select>
+            <BookDetails book={book} thumbnail={thumbnail} />
           </Card.Content>
         </Card>
       </div>
