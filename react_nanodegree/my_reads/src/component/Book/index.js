@@ -5,6 +5,10 @@ import { Card, Image } from 'semantic-ui-react';
 import './book.css';
 import BookDetails from '../BookDetails';
 
+const NO_COVER_IMAGE = (
+  'http://via.placeholder.com/220x220?text=No%20Cover%20Image'
+);
+
 const propTypes = {
   book: PropTypes.shape({
     authors: PropTypes.array.isRequired,
@@ -34,7 +38,7 @@ class Book extends React.Component {
 
   render() {
     const { book } = this.props;
-    const thumbnail = book.imageLinks.thumbnail;
+    const thumbnail = book.imageLinks.thumbnail || NO_COVER_IMAGE;
 
     return (
       <div className="book">
