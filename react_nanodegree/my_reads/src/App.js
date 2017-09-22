@@ -1,6 +1,6 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
-import { Container, Message } from 'semantic-ui-react';
+import { Route, Switch } from 'react-router-dom';
+import { Container, Header, Message } from 'semantic-ui-react';
 
 import './App.css';
 import * as booksAPI from './api/books-api';
@@ -8,6 +8,17 @@ import BookSearch from './component/BookSearch';
 import Footer from './component/Footer';
 import NavBar from './component/NavBar';
 import Shelf from './component/Shelf';
+
+const PageNotFound = ({ location }) => (
+  <div>
+    <NavBar />
+    <Container textAlign="center" className="not-found-message">
+      <Header content="404" size="huge" />
+      <Header size="big">Page Not Found:  {location.pathname}</Header>
+    </Container>
+    <Footer />
+  </div>
+);
 
 class App extends React.Component {
   state = {
@@ -66,10 +77,8 @@ class App extends React.Component {
 
     return (
       <div>
-        <Route
-          exact
-          path="/"
-          render={() => (
+        <Switch>
+          <Route exact path="/" render={() => (
             <div>
               <NavBar activeMenuItem="home" />
               <Container>
@@ -103,20 +112,19 @@ class App extends React.Component {
             </div>
           )}
         />
-        <Route
-          exact
-          path="/search"
-          render={() => (
-            <div>
-              <NavBar activeMenuItem="search" />
-              <Container>
-                <BookSearch onShelfChanged={this.onShelfChanged} />
-              </Container>
-            </div>
+        <Route exact path="/search" render={() => (
+          <div>
+            <NavBar activeMenuItem="search" />
+            <Container>
+              <BookSearch onShelfChanged={this.onShelfChanged} />
+            </Container>
+          </div>
           )}
         />
-        <Footer />
-      </div>
+        <Route component={PageNotFound} />
+      </Switch>
+      <Footer />
+    </div>
     );
   }
 }
