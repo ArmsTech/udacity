@@ -1,9 +1,8 @@
 import React from 'react';
 import { Button, Header, Icon, Modal } from 'semantic-ui-react';
 
-const bookDetailsIcon = <Icon name="info" size="big" />;
 const bookDetailsButton = (
-  <Button circular color="blue" icon={bookDetailsIcon} />
+    <Button attached="right" color="blue" icon={<Icon name="info" />} />
 );
 
 function BookDetails(props) {
