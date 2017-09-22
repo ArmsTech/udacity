@@ -16,6 +16,7 @@ class App extends React.Component {
       read: [],
       wantToRead: [],
     },
+    welcomeVisible: true,
   };
 
   componentDidMount() {
@@ -56,6 +57,10 @@ class App extends React.Component {
     booksAPI.update(specifiedBook, toShelf);
   }
 
+  handleDismissWelcome = () => {
+    this.setState({ welcomeVisible: false });
+  }
+
   render() {
     const books = this.state.books;
 
@@ -68,14 +73,17 @@ class App extends React.Component {
             <div>
               <NavBar activeMenuItem="home" />
               <Container>
-                <div className="welcome-message">
-                  <Message
-                    header="Welcome to Udacity MyReads!"
-                    content="A bookshelf app for finding and organizing your favorite books."
-                    size="big"
-                    color="blue"
-                  />
-                </div>
+                {this.state.welcomeVisible &&
+                  <div className="welcome-message">
+                    <Message
+                      onDismiss={this.handleDismissWelcome}
+                      header="Welcome to Udacity MyReads!"
+                      content="A bookshelf app for finding and organizing your favorite books."
+                      size="big"
+                      color="blue"
+                    />
+                  </div>
+                }
                 <Shelf
                   books={books.currentlyReading}
                   name="Books you're currently reading"
