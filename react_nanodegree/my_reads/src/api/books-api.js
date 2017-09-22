@@ -17,7 +17,9 @@ const cleanBooksData = (booksData) => {
   return booksData.map((bookData) => {
     return {
       authors: [],
+      description: '',
       shelf: 'none',
+      subtitle: '',
       imageLinks: {
         thumbnail: '',
         smallThumbnail: '',
