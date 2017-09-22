@@ -9,12 +9,12 @@ import Footer from './component/Footer';
 import NavBar from './component/NavBar';
 import Shelf from './component/Shelf';
 
-const PageNotFound = ({ location }) => (
+const PageNotFound = () => (
   <div>
-    <NavBar />
+    <NavBar activeMenuItem='none' />
     <Container textAlign="center" className="not-found-message">
       <Header content="404" size="huge" />
-      <Header size="big">Page Not Found:  {location.pathname}</Header>
+      <Header size="large">Page Not Found</Header>
     </Container>
     <Footer />
   </div>
@@ -78,53 +78,59 @@ class App extends React.Component {
     return (
       <div>
         <Switch>
-          <Route exact path="/" render={() => (
-            <div>
-              <NavBar activeMenuItem="home" />
-              <Container>
-                {this.state.welcomeVisible &&
-                  <div className="welcome-message">
-                    <Message
-                      onDismiss={this.handleDismissWelcome}
-                      header="Welcome to Udacity MyReads!"
-                      content="A bookshelf app for finding and organizing your favorite books."
-                      size="big"
-                      color="blue"
-                    />
-                  </div>
-                }
-                <Shelf
-                  books={books.currentlyReading}
-                  name="Books you're currently reading"
-                  onShelfChanged={this.onShelfChanged}
-                />
-                <Shelf
-                  books={books.wantToRead}
-                  name="Books you want to read"
-                  onShelfChanged={this.onShelfChanged}
-                />
-                <Shelf
-                  books={books.read}
-                  name="Books you've finished reading"
-                  onShelfChanged={this.onShelfChanged}
-                />
-              </Container>
-            </div>
-          )}
-        />
-        <Route exact path="/search" render={() => (
-          <div>
-            <NavBar activeMenuItem="search" />
-            <Container>
-              <BookSearch onShelfChanged={this.onShelfChanged} />
-            </Container>
-          </div>
-          )}
-        />
-        <Route component={PageNotFound} />
-      </Switch>
-      <Footer />
-    </div>
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <div>
+                <NavBar activeMenuItem="home" />
+                <Container>
+                  {this.state.welcomeVisible &&
+                    <div className="welcome-message">
+                      <Message
+                        onDismiss={this.handleDismissWelcome}
+                        header="Welcome to Udacity MyReads!"
+                        content="A bookshelf app for finding and organizing your favorite books."
+                        size="big"
+                        color="blue"
+                      />
+                    </div>
+                  }
+                  <Shelf
+                    books={books.currentlyReading}
+                    name="Books you're currently reading"
+                    onShelfChanged={this.onShelfChanged}
+                  />
+                  <Shelf
+                    books={books.wantToRead}
+                    name="Books you want to read"
+                    onShelfChanged={this.onShelfChanged}
+                  />
+                  <Shelf
+                    books={books.read}
+                    name="Books you've finished reading"
+                    onShelfChanged={this.onShelfChanged}
+                  />
+                </Container>
+              </div>
+            )}
+          />
+          <Route
+            exact
+            path="/search"
+            render={() => (
+              <div>
+                <NavBar activeMenuItem="search" />
+                <Container>
+                  <BookSearch onShelfChanged={this.onShelfChanged} />
+                </Container>
+              </div>
+            )}
+          />
+          <Route component={PageNotFound} />
+        </Switch>
+        <Footer />
+      </div>
     );
   }
 }

@@ -1,9 +1,19 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Button, Header, Icon, Modal } from 'semantic-ui-react';
 
 const bookDetailsButton = (
-    <Button attached="right" color="blue" icon={<Icon name="info" />} />
+  <Button attached="right" color="blue" icon={<Icon name="info" />} />
 );
+
+const propTypes = {
+  book: PropTypes.shape({
+    authors: PropTypes.array.isRequired,
+    description: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    subtitle: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 function BookDetails(props) {
   const { book } = props;
@@ -27,5 +37,7 @@ function BookDetails(props) {
     </Modal>
   );
 }
+
+BookDetails.propTypes = propTypes;
 
 export default BookDetails;

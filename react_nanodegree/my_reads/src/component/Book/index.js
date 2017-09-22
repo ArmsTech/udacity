@@ -11,7 +11,6 @@ const NO_COVER_IMAGE = (
 
 const propTypes = {
   book: PropTypes.shape({
-    authors: PropTypes.array.isRequired,
     imageLinks: PropTypes.shape({
       thumbnail: PropTypes.string.isRequired,
     }).isRequired,
