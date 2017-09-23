@@ -11,7 +11,7 @@ import Shelf from './component/Shelf';
 
 const PageNotFound = () => (
   <div>
-    <NavBar activeMenuItem='none' />
+    <NavBar activeMenuItem="none" />
     <Container textAlign="center" className="not-found-message">
       <Header content="404" size="huge" />
       <Header size="large">Page Not Found</Header>
@@ -41,7 +41,6 @@ class App extends React.Component {
         books[bookData.shelf].push(bookData);
       });
       this.setState({ books });
-      console.log(books);
     });
   }
 
