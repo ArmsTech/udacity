@@ -18,9 +18,6 @@ MyReads was created using `create-react-app`, and the only starter code provided
 was the interface to Udacity's books API. I chose to modify this interface
 slightly to fix some inconsistencies in the data.
 
-Supporting courses:
-* React Fundamentals
-
 Requirements
 ------------
 * Node
