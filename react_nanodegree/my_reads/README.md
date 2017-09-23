@@ -18,6 +18,9 @@ MyReads was created using `create-react-app`, and the only starter code provided
 was the interface to Udacity's books API. I chose to modify this interface
 slightly to fix some inconsistencies in the data.
 
+Supporting courses:
+* React Fundamentals
+
 Requirements
 ------------
 * Node
@@ -28,10 +31,43 @@ Install
 1. `npm install`
 2. `npm start`
 
-Lint
-----
-This code base adheres to the [Airbnb JavaScript/React/JSX Style Guide](https://github.com/airbnb/javascript)
+Code Quality
+------------
+This code base adheres to the [Airbnb JavaScript/React/JSX Style Guide](https://github.com/airbnb/javascript)  
 Use `npm run lint` to check syntax and style.
+
+Code Organization (src)
+-----------------------
+
+``` console
+├── App.css                                                                                      │
+├── App.js                                                                                       │
+├── api                                                                                          │
+│   └── books-api.js                                                                             │
+├── component                                                                                    │
+│   ├── Book                                                                                     │
+│   │   ├── book.css                                                                             │
+│   │   └── index.js                                                                             │
+│   ├── BookDetails                                                                              │
+│   │   └── index.js                                                                             │
+│   ├── BookList                                                                                 │
+│   │   ├── book-list.css                                                                        │
+│   │   └── index.js                                                                             │
+│   ├── BookSearch                                                                               │
+│   │   ├── book-search.css                                                                      │
+│   │   └── index.js                                                                             │
+│   ├── Footer                                                                                   │
+│   │   ├── footer.css                                                                           │
+│   │   └── index.js                                                                             │
+│   ├── NavBar                                                                                   │
+│   │   └── index.js                                                                             │
+│   └── Shelf                                                                                    │
+│       ├── index.js                                                                             │
+│       └── shelf.css                                                                            │
+├── index.css                                                                                    │
+├── index.js                                                                                     │
+└── registerServiceWorker.js
+```
 
 Grading (by Udacity)
 --------------------
