@@ -12,16 +12,26 @@ From Udacity:
 > another.
 
 Supporting courses:
-
 * React Fundamentals
+
+MyReads was created using `create-react-app`, and the only starter code provided
+was the interface to Udacity's books API. I chose to modify this interface
+slightly to fix some inconsistencies in the data.
+
+Requirements
+------------
+* Node
+* Node Package Manager (npm)
 
 Install
 -------
+1. `npm install`
+2. `npm start`
 
-1. TBD
-
-Documentation
--------------
+Lint
+----
+This code base adheres to the [Airbnb JavaScript/React/JSX Style Guide](https://github.com/airbnb/javascript)
+Use `npm run lint` to check syntax and style.
 
 Grading (by Udacity)
 --------------------
