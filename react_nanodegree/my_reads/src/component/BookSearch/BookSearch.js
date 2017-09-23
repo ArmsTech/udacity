@@ -25,14 +25,19 @@ class BookSearch extends React.Component {
   };
 
   handleSubmit = (event) => {
-    this.searchBooks(this.state.query);
     event.preventDefault();
   };
 
   searchBooks = (query) => {
+    if (!query) {
+      this.setState({ books: [], loading: false });
+      return;
+    }
+
     booksAPI.search(query).then((booksData) => {
-      console.log(booksData);
-      this.setState({ books: booksData, loading: false });
+      if (this.state.query === query) {
+        this.setState({ books: booksData, loading: false });
+      }
     });
   };
 
