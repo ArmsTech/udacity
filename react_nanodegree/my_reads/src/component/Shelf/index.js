@@ -20,8 +20,7 @@ const propTypes = {
 };
 
 function Shelf(props) {
-  const books = props.books;
-  const name = props.name;
+  const { books, name } = props;
 
   return (
     <div className="shelf">

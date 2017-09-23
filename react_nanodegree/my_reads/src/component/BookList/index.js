@@ -15,7 +15,7 @@ const propTypes = {
 };
 
 function BookList(props) {
-  const books = props.books;
+  const { books } = props;
 
   return (
     <div className="book-list">
