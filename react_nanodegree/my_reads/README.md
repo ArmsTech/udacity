@@ -10,9 +10,6 @@ From Udacity:
 > search for books and add them to a bookshelf as a React component. Use
 > React's setState to build the functionality to move books from one shelf to
 > another.
-
-Supporting courses:
-* React Fundamentals
-
+ 
 The source for this project can be found here:
   [brenj/my-reads](https://github.com/brenj/my-reads)
