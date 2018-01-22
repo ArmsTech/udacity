@@ -1,5 +1,5 @@
-Tournament Results
-==================
+Tournament Results: A tournament database
+=========================================
 
 About
 -----
@@ -41,7 +41,7 @@ practices.
 Model
 -----
 
-![ER Model](https://raw.githubusercontent.com/brenj/udacity/master/tournament_results/docs/erd.png)
+![ER Model](tournament-results/docs/erd.png)
 
 Install
 -------
