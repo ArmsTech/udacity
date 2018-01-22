@@ -1,9 +1,0 @@
-{% from 'components/error.html' import render_error_page %}
-
-{% extends "layout.html" %}
-
-{% block title %}Unauthorized{% endblock %}
-
-{% block content %}
-  {{ render_error_page("401 Unauthorized", "You're not allowed to do this.", "Go somewhere you belong?") }}
-{% endblock %}

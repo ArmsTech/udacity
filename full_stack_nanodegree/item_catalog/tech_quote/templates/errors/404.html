@@ -1,9 +1,0 @@
-{% from 'components/error.html' import render_error_page %}
-
-{% extends "layout.html" %}
-
-{% block title %}Page Not Found{% endblock %}
-
-{% block content %}
-  {{ render_error_page("404 Page Not Found", "What you were looking for is just not there.", "Go somewhere that exists?") }}
-{% endblock %}
