@@ -1,5 +1,5 @@
-Readable: A Content and Comment Web App
-=======================================
+Project: Readable
+=================
 
 About
 -----
