@@ -1,5 +1,5 @@
-Project: A Mobile App for Studying Flashcards
-=============================================
+Project: Mobile Flashcards
+==========================
 
 About
 -----
