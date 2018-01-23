@@ -1,5 +1,5 @@
-MyReads: A Book Lending App
-===========================
+Project: MyReads
+================
 
 About
 -----
@@ -11,5 +11,4 @@ From Udacity:
 > React's setState to build the functionality to move books from one shelf to
 > another.
  
-The source for this project can be found here:
-  [brenj/my-reads](https://github.com/brenj/my-reads)
+The source for this project can be found here: [brenj/my-reads](https://github.com/brenj/my-reads)
