@@ -1,20 +1,22 @@
 # Blockchain Developer Nanodegree
 
-This Nanodegree consists of two terms and seven projects.
+This Nanodegree consists of two terms and eight projects.
 
-Term 1: Fundamentals
+**Term 1: Fundamentals**
 
-  Projects:
+  * Managing Your Blockchain Identity
+  * Creating Your Own Private Blockchai
+  * Private Blockchain Web Service API
+  * Notarize Your Favorite Star
+  * Notarize Your Favorite Star on Ethereum
 
-    * Managing Your Blockchain Identity
-    * Creating Your Own Private Blockchain
-    * Private Blockchain Web Service API
-    * Notarize Your Favorite Star
-    * Notarize Your Favorite Star on Ethereum
+**Term 2: Architecture and Applications**
 
-Term 2: Architecture and Applications
+  * Introduce Blockchain Into Existing Supply Chain System
+  * Entire Supply Chain System on Blockchain
+  * Capstone: Supply Chain and Distribution of Products
 
-Term 1 completed: `November 07, 2018`
+Term 1 completed: `November 07, 2018`  
 Term 2 completed: `In progress`
 
 From `Udacity`:
