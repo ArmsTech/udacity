@@ -10,7 +10,7 @@ Supporting Courses:
 
  * Blockchain Identity
 
-There is no source for this project. Instead, we used a wallet to generate a new wallet address, used this address to securely sign a message with a private key, and then validated the message with a message signature.
+There is no source for this project. Instead, we used a wallet to generate a new wallet address, used this address to securely sign a message with a private key, and then validated the message using the signature.
 
 Wallet address: `1LqeNskSQCtyiwPx6fAdGXfzr8TfKxqT2v`  
 Message: `1LqeNskSQCtyiwPx6fAdGXfzr8TfKxqT2v: Udacity rocks!`  
