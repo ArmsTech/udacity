@@ -13,3 +13,8 @@ Supporting Courses:
 There is no source for this project. Instead, the requirement is to provide screenshots of the deployment process and a URL to the hosted content.
 
 Website URL: https://d1v0gw36u8w8fy.cloudfront.net/index.html
+
+Screenshots
+-----------
+
+![created s3 bucket](/screenshots/create_s3_bucket.png?raw=true "Create a S3 Bucket")
