@@ -34,3 +34,12 @@ Screenshots
 
 ##### Access Website in Web Browser
 ![accessed website in browser](screenshots/travel_blog.png?raw=true "Access Website in Web Browser")
+
+Grading (by Udacity)
+--------------------
+
+Criteria                              |Highest Grade Possible  |Grade Recieved
+--------------------------------------|------------------------|--------------------
+Website Files                         |Meets Specifications    |Meets Specifications
+Website Distribution                  |Meets Specifications    |Meets Specifications
+Web Browser Access                    |Meets Specifications    |Meets Specifications
