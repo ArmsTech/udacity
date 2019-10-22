@@ -16,8 +16,8 @@ This Nanodegree consists of two terms and eight projects.
   * Entire Supply Chain System on Blockchain
   * Capstone: Supply Chain and Distribution of Products
 
-Term 1 completed: `November 07, 2018`  
-Term 2 completed: `In progress`
+Term 1 completed: `November 07, 2018`
+Term 2 completed: `June 06, 2019`
 
 From `Udacity`:
 
