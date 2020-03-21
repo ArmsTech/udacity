@@ -1,6 +1,6 @@
 # Cloud DevOps Engineer Nanodegree
 
-Date completed: In progress
+Date completed: `March 21, 2020`
 
 From `Udacity`:
 
